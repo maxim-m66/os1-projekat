@@ -1,0 +1,8 @@
+//
+// Created by os on 9/13/23.
+//
+
+#ifndef PROJECT_BASE_IOSTREAM_HPP
+#define PROJECT_BASE_IOSTREAM_HPP
+
+#endif //PROJECT_BASE_IOSTREAM_HPP

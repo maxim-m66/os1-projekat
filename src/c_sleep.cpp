@@ -1,0 +1,61 @@
+#include "../h/c_sleep.hpp"
+#include "../h/c_thread.hpp"
+#include "../lib/console.h"
+
+
+Cradle::elem *Cradle::head = nullptr;
+Cradle::elem *Cradle::tail = nullptr;
+
+
+void Cradle::insert(TCB *thread, time_t time) {
+    if (head == nullptr) {
+        head = tail = new elem(thread, time);
+        return;
+    } else if (time < head->time_left) {
+        head = new elem(thread, time, head);
+        head->next->time_left -= time;
+        return;
+    }
+    for (elem *curr = head; curr->next; curr = curr->next) {
+        time -= curr->time_left;
+        if (time < curr->next->time_left) {
+            curr->next = new elem(thread, time, curr->next);
+            curr->next->next->time_left -= time;
+            return;
+        }
+    }
+    tail->next = new elem(thread, time);
+    tail = tail->next;
+}
+
+TCB *Cradle::remove() {
+    elem *old = head;
+    TCB *ret = old->handle;
+    head = head->next;
+    delete old;
+    return ret;
+}
+
+void Cradle::update() {
+    if (!head)
+        return;
+    head->time_left--;
+}
+
+int Cradle::peak() {
+    if (head)
+        return head->time_left;
+    else
+        return -1;
+}
+
+bool Cradle::is_empty() {
+    return head == nullptr;
+}
+
+int Cradle::_time_sleep(time_t ms) {
+    insert(TCB::running, ms);
+    TCB::running->sleep();
+    TCB::_thread_dispatch();
+    return 0;
+}
