@@ -95,6 +95,13 @@ int time_sleep(time_t ms) {
     return ret;
 }
 
+int thread_wake(thread_t handle) {
+    int volatile ret;
+    syscall(TIME_SLEEP, (uint64) handle);
+    __asm__ volatile ("mv %[ret], a0" : [ret] "=r"(ret));
+    return ret;
+}
+
 char getc() {
     char volatile ret;
     syscall(GETC);

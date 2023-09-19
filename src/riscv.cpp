@@ -52,6 +52,8 @@ void Riscv::handleSupervisorTrap() {
         case TIME_SLEEP:
             Cradle::_time_sleep((time_t) arg1);
             break;
+        case THREAD_WAKE:
+            Cradle::_thread_wake((thread_t)arg1);
         case GETC:
             IO::_getc();
             break;

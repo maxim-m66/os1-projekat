@@ -17,6 +17,7 @@ enum InterruptCode {
     SEM_WAIT = 0x23,
     SEM_SIGNAL = 0x24,
     TIME_SLEEP = 0x31,
+    THREAD_WAKE = 0x32,
     GETC = 0x41,
     PUTC = 0x42
 };
@@ -56,7 +57,10 @@ int sem_wait(sem_t id); //0x23
 
 int sem_signal(sem_t id); //0x24
 
+
 int time_sleep(time_t ms); //0x31
+
+int thread_wake(thread_t handle); //0x32
 
 const int EOF = -1;
 

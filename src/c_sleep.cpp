@@ -1,6 +1,7 @@
 #include "../h/c_sleep.hpp"
 #include "../h/c_thread.hpp"
 #include "../lib/console.h"
+#include "../h/scheduler.hpp"
 
 
 Cradle::elem *Cradle::head = nullptr;
@@ -57,5 +58,13 @@ int Cradle::_time_sleep(time_t ms) {
     insert(TCB::running, ms);
     TCB::running->sleep();
     TCB::_thread_dispatch();
+    return 0;
+}
+
+int Cradle::_thread_wake(thread_t thread) {
+    if(!thread->is_sleeping())
+        return -1;
+    thread->run();
+    Scheduler::put(thread);
     return 0;
 }

@@ -2,6 +2,7 @@
 #define PROJECT_BASE_RQUEUE_H
 
 #include "c_memory.hpp"
+#include "syscall_c.hpp"
 
 class TCB;
 
@@ -19,6 +20,8 @@ public:
     static bool is_empty();
 
     static int _time_sleep(time_t);
+
+    static int _thread_wake(thread_t);
 
 private:
     struct elem {
