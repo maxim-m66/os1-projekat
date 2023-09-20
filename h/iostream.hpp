@@ -1,8 +1,37 @@
-//
-// Created by os on 9/13/23.
-//
-
 #ifndef PROJECT_BASE_IOSTREAM_HPP
 #define PROJECT_BASE_IOSTREAM_HPP
 
-#endif //PROJECT_BASE_IOSTREAM_HPP
+#include "../lib/hw.h"
+#include "syscall_c.hpp"
+
+namespace stm {
+    class String;
+
+    class endline {
+
+    };
+
+    class istream final {
+    public:
+        const istream &operator<<(const char *string) const;
+
+        const istream &operator<<(const String &string) const;
+
+        const istream &operator<<(int number) const;
+
+        const istream &operator<<(uint64 number) const;
+
+        const istream &operator<<(void *pointer) const;
+
+        const istream &operator<<(bool truth) const;
+
+        const istream &operator<<(const endline &) const;
+    };
+
+    class ostream final {
+        void operator>>(const String &string);
+    };
+    extern const istream cout;
+    extern const endline endl;
+}
+#endif

@@ -8,11 +8,9 @@ extern OwnedMutex *printer;
 void IOBuffer::init() {
     this->buffer.init();
     sem_open(&this->empty, 0);
-    sem_open(&this->full, BUFF_SIZE - 1);
 }
 
 void IOBuffer::put(char c) {
-    Sem::_sem_wait(this->full);
     this->buffer.put(c);
     Sem::_sem_signal(this->empty);
 }
@@ -20,7 +18,6 @@ void IOBuffer::put(char c) {
 char IOBuffer::get() {
     Sem::_sem_wait(this->empty);
     char ret = this->buffer.get();
-    Sem::_sem_signal(this->full);
     return ret;
 }
 

@@ -1,4 +1,4 @@
-#include "../h/string.h"
+#include "../h/string.hpp"
 #include "../h/c_memory.hpp"
 
 int stm::strlen(const char *string) {
@@ -40,6 +40,51 @@ int stm::strcmp(const char *str1, const char *str2) { //negative means str1 < st
     else return -1;
 }
 
+char *stm::ntos(long long number, char *buffer, int radix) {
+    if (radix < 2 || radix > 16) {
+        buffer[0] = 0;
+        return buffer;
+    }
+    if (number == 0) {
+        buffer[0] = '0';
+        buffer[1] = 0;
+        return buffer;
+    }
+    char digits[100] = {};
+    int i = 98;
+    bool negative = number < 0;
+    if (negative) number = -number;
+    const char *av = "0123456789ABCDEF";
+    while (number > 0) {
+        digits[i--] = av[(number % radix)];
+        number /= radix;
+    }
+    if (negative) digits[i--] = '-';
+    strcpy(&digits[++i], buffer);
+    return buffer;
+}
+
+char *stm::utos(uint64 number, char *buffer, int radix) {
+    if (radix < 2 || radix > 16) {
+        buffer[0] = 0;
+        return buffer;
+    }
+    if (number == 0) {
+        buffer[0] = '0';
+        buffer[1] = 0;
+        return buffer;
+    }
+    char digits[100] = {};
+    int i = 98;
+    const char *av = "0123456789ABCDEF";
+    while (number > 0) {
+        digits[i--] = av[(number % radix)];
+        number /= radix;
+    }
+    strcpy(&digits[++i], buffer);
+    return buffer;
+}
+
 void stm::String::copy(const stm::String &string) {
     this->size = string.size;
     this->actual_string = new char[this->size];
@@ -55,6 +100,18 @@ void stm::String::move(stm::String &string) {
 stm::String::String(const char *string) : size(strlen(string)) {
     this->actual_string = new char[this->size + 1];
     strcpy(string, this->actual_string);
+}
+
+stm::String::String(long long number) {
+    char buff[25];
+    this->actual_string = ntos(number, buff, 10);
+    this->size = strlen(this->actual_string);
+}
+
+stm::String::String(uint64 number) {
+    char buff[25];
+    this->actual_string = utos(number, buff, 10);
+    this->size = strlen(this->actual_string);
 }
 
 stm::String &stm::String::operator=(const stm::String &string) {

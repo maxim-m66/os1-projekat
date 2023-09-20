@@ -6,7 +6,6 @@
 #include "c_semaphore.hpp"
 #include "riscv.hpp"
 
-constexpr int BUFF_SIZE = 1024;
 
 class IOBuffer final {
 public:
@@ -21,7 +20,6 @@ public:
 private:
     os::CircularBuffer<char> buffer;
     Sem *empty;
-    Sem *full;
 };
 
 class IO final {

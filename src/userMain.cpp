@@ -1,7 +1,9 @@
 #include "../h/syscall_c.hpp"
 #include "../h/c_console.hpp"
 #include "../h/syscall_cpp.hpp"
-#include "../h/string.h"
+#include "../h/string.hpp"
+#include "../h/c_thread.hpp"
+#include "../h/iostream.hpp"
 
 int constexpr CAP = 1000;
 
@@ -247,7 +249,8 @@ void test6(time_t time) {
     delete t1;
     delete t2;
 }
-#include "../h/c_thread.hpp"
+
+using namespace stm;
 int userMain() {
     dramatic_print("Hello There!! Welcome to my Operating System.\n");
     time_sleep(5);
@@ -260,7 +263,6 @@ int userMain() {
     test2();
     time_sleep(10);
     dramatic_print("\n\nNow we can see the classic Bees and Bear test:\n\n");
-    //time_sleep(10);
     test3();
     time_sleep(10);
     dramatic_print("\n\nNow you may see the echo of what you type in (20 characters):\n");
