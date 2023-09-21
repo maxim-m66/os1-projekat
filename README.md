@@ -4,7 +4,7 @@ It features the following OS functionalities in both C and C++ API:
 - HEAP MEMORY
 - allocation
 - deallocation
-
+-
 - THREADS
 - multithreading & scheduling
 - synchronous context switching
@@ -21,7 +21,7 @@ It features the following OS functionalities in both C and C++ API:
 -
 - CONSOLE
 - getc
-- putc
-There are also C++-like libraries implemented
+- putc;
+- IMPLEMENTED LIBRARIES
 - String (both C and C++ style)
 - istream (overloaded <<)
