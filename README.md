@@ -1,23 +1,23 @@
 # os1-projekat
 This is an operating system for a RiscV processor emulated by QEMU. The project uses no standard C or C++ libraries
 It features the following OS functionalities in both C and C++ API:
-- HEAP MEMORY
+- HEAP MEMORY:
 - allocation
 - deallocation
-- THREADS
+- THREADS:
 - multithreading & scheduling
 - synchronous context switching
 - asynchronous context swithcing
 - joining with and without max waiting time
-- SEMAPHORES
+- SEMAPHORES:
 - general purpose semaphores
 - owned semaphores
-- TIMER
+- TIMER:
 - threads sleeping
 - waking threads up
-- CONSOLE
+- CONSOLE:
 - getc
 - putc
-- IMPLEMENTED LIBRARIES
+- IMPLEMENTED LIBRARIES:
 - String (both C and C++ style)
-- istream (overloaded <<)
+- istream
