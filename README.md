@@ -4,7 +4,7 @@ It features the following OS functionalities in both C and C++ API:
 - HEAP MEMORY
 - allocation
 - deallocation
--
+
 - THREADS
 - multithreading & scheduling
 - synchronous context switching
