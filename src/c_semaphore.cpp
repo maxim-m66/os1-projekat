@@ -1,5 +1,6 @@
 #include "../h/c_semaphore.hpp"
 #include "../h/c_thread.hpp"
+#include "../h/scheduler.hpp"
 
 int Sem::_sem_open(sem_t *handle, unsigned init) {
     sem_t semaphore = (sem_t) Allocator::_mem_alloc(sizeof(Sem));

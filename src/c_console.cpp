@@ -1,3 +1,4 @@
+#include "../h/c_semaphore.hpp"
 #include "../h/c_console.hpp"
 #include "../h/cpp_semaphores.hpp"
 

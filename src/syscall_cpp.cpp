@@ -43,6 +43,10 @@ void Thread::join(time_t time) {
     thread_join(myHandle, time);
 }
 
+int Thread::kill(Thread *thread) {
+    return thread_kill(thread->myHandle);
+}
+
 void Thread::dispatch() {
     thread_dispatch();
 }

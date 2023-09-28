@@ -1,7 +1,3 @@
-//
-// Created by os on 8/29/23.
-//
-
 #include "../h/cpp_semaphores.hpp"
 #include "../h/c_thread.hpp"
 

@@ -1,12 +1,17 @@
 #include "../h/c_sleep.hpp"
 #include "../h/c_thread.hpp"
-#include "../lib/console.h"
 #include "../h/scheduler.hpp"
-
 
 Cradle::elem *Cradle::head = nullptr;
 Cradle::elem *Cradle::tail = nullptr;
 
+void *Cradle::elem::operator new(size_t size) {
+    return Allocator::_mem_alloc(size);
+}
+
+void Cradle::elem::operator delete(void *mem) {
+    Allocator::_mem_free(mem);
+}
 
 void Cradle::insert(TCB *thread, time_t time) {
     if (head == nullptr) {
@@ -62,7 +67,7 @@ int Cradle::_time_sleep(time_t ms) {
 }
 
 int Cradle::_thread_wake(thread_t thread) {
-    if(!thread->is_sleeping())
+    if (!thread->is_sleeping())
         return -1;
     thread->run();
     Scheduler::put(thread);

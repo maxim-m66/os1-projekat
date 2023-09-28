@@ -15,6 +15,11 @@ const stm::istream &stm::istream::operator<<(const stm::String &string) const {
     return *this;
 }
 
+const stm::istream &stm::istream::operator<<(long long number) const {
+    print_n(number);
+    return *this;
+}
+
 const stm::istream &stm::istream::operator<<(int number) const {
     print_n(number);
     return *this;

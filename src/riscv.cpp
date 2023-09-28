@@ -1,8 +1,11 @@
 #include "../lib/hw.h"
 #include "../h/c_thread.hpp"
+#include "../h/c_semaphore.hpp"
 #include "../h/riscv.hpp"
 #include "../h/c_console.hpp"
 #include "../h/c_sleep.hpp"
+#include "../h/scheduler.hpp"
+
 
 __attribute__((unused))
 void Riscv::handleSupervisorTrap() {
@@ -34,8 +37,11 @@ void Riscv::handleSupervisorTrap() {
         case THREAD_JOIN_TIME:
             TCB::_thread_join((thread_t) arg1, (time_t) arg2);
             break;
-        case FORK:
+        case THREAD_FORK:
             TCB::_fork();
+            break;
+        case THREAD_KILL:
+            TCB::_kill((thread_t) arg1);
             break;
         case SEM_OPEN:
             Sem::_sem_open((sem_t *) arg1, arg2);
@@ -53,7 +59,7 @@ void Riscv::handleSupervisorTrap() {
             Cradle::_time_sleep((time_t) arg1);
             break;
         case THREAD_WAKE:
-            Cradle::_thread_wake((thread_t)arg1);
+            Cradle::_thread_wake((thread_t) arg1);
         case GETC:
             IO::_getc();
             break;
@@ -100,6 +106,8 @@ void Riscv::handleConsoleTrap() {
 }
 
 void Riscv::popSppSpie() {
+    Riscv::mc_sstatus(Riscv::SSTATUS_SPP);
+    Riscv::ms_sstatus(Riscv::SSTATUS_SPIE);
     __asm__ volatile("csrw sepc, ra");
     __asm__ volatile("sret");
 }

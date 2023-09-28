@@ -108,6 +108,12 @@ stm::String::String(long long number) {
     this->size = strlen(this->actual_string);
 }
 
+stm::String::String(int number) {
+    char buff[25];
+    this->actual_string = ntos(number, buff, 10);
+    this->size = strlen(this->actual_string);
+}
+
 stm::String::String(uint64 number) {
     char buff[25];
     this->actual_string = utos(number, buff, 10);

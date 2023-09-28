@@ -43,12 +43,15 @@ void TCB::yield() {
     old->context.sepc = Riscv::r_sepc();
     if (old->is_runnable() && old != handle_bleya) {
         Scheduler::put(old);
-    } else if (old->is_finished() and old->stack) {
+    } else if (old->is_finished()) {
         Allocator::_mem_free(old->stack);
     }
     if (Scheduler::is_empty()) {
         TCB::running = handle_bleya;
     } else {
+        while (Scheduler::peek()->is_finished()) {
+            Allocator::_mem_free(TCB::destroy_thread(Scheduler::get())->stack);
+        }
         TCB::running = Scheduler::get();
     }
     Riscv::w_sstatus(TCB::running->context.sstatus);
@@ -62,16 +65,21 @@ void TCB::_thread_dispatch() {
     Riscv::pop();
 }
 
-void TCB::_thread_exit() {
-    TCB::running->finish();
-    while (!TCB::running->joiner.is_empty()) {
-        TCB *next = TCB::running->joiner.get();
+TCB *TCB::destroy_thread(TCB *thread) {
+    while (!thread->joiner.is_empty()) {
+        TCB *next = thread->joiner.get();
         if (next->is_joined()) {
             next->run();
             Scheduler::put(next);
         }
     }
-    TCB::running->joiner.destroy();
+    thread->joiner.destroy();
+    return thread;
+}
+
+void TCB::_thread_exit() {
+    TCB::running->finish();
+    TCB::destroy_thread(TCB::running);
     TCB::_thread_dispatch();
 }
 
@@ -112,11 +120,17 @@ int TCB::_fork() {
     if (TCB::running->t_id == id_parent) {
         Scheduler::put(handle);
         return handle->t_id;
-    }
-    else {
+    } else {
         print_n(TCB::running->t_id);
         return 0;
     }
+}
+
+int TCB::_kill(TCB* thread) {
+    if (!thread) return -1;
+    if (thread->is_finished()) return -2;
+    thread->finish();
+    return 0;
 }
 
 void TCB::thread_start() {

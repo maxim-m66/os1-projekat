@@ -1,6 +1,7 @@
 #include "../h/c_console.hpp"
 #include "../h/c_thread.hpp"
 #include "../h/cpp_semaphores.hpp"
+#include "../h/scheduler.hpp"
 
 [[noreturn]]
 void bleya_nit(void *) {
@@ -48,10 +49,6 @@ int end(int ret) {
     while (!IO::Output.is_empty());
     time_sleep(10);
     return 0;
-}
-
-void lol(void*) {
-
 }
 
 int main() {

@@ -54,7 +54,14 @@ void thread_join(thread_t handle, time_t time) {
 
 int fork() {
     int volatile ret;
-    syscall(FORK);
+    syscall(THREAD_FORK);
+    __asm__ volatile ("mv %[ret], a0" : [ret] "=r"(ret));
+    return ret;
+}
+
+int thread_kill(thread_t handle) {
+    int volatile ret;
+    syscall(THREAD_KILL, (uint64) handle);
     __asm__ volatile ("mv %[ret], a0" : [ret] "=r"(ret));
     return ret;
 }
