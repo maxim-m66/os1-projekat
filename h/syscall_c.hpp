@@ -11,7 +11,8 @@ enum InterruptCode {
     THREAD_DISPATCH = 0x13,
     THREAD_JOIN = 0x14,
     THREAD_JOIN_TIME = 0x15,
-    FORK = 0x16,
+    THREAD_FORK = 0x16,
+    THREAD_KILL = 0x17,
     SEM_OPEN = 0x21,
     SEM_CLOSE = 0x22,
     SEM_WAIT = 0x23,
@@ -40,7 +41,10 @@ void thread_join(thread_t handle); //0x14
 
 void thread_join(thread_t handle, time_t time); //0x15
 
+__attribute__ ((unused))
 int fork(); //0x16 NOT WORKING AS OF YET
+
+int thread_kill(thread_t handle);
 
 class Sem;
 

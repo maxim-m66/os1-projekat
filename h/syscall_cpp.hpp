@@ -21,6 +21,8 @@ public:
 
     void join(time_t);
 
+    static int kill(Thread *);
+
     static void dispatch();
 
     static int sleep(time_t);

@@ -1,7 +1,6 @@
 #ifndef PROJECT_BASE_RQUEUE_H
 #define PROJECT_BASE_RQUEUE_H
 
-#include "c_memory.hpp"
 #include "syscall_c.hpp"
 
 class TCB;
@@ -21,17 +20,13 @@ public:
 
     static int _time_sleep(time_t);
 
-    static int _thread_wake(thread_t);
+    static int _thread_wake(TCB *);
 
 private:
     struct elem {
-        void *operator new(size_t size) {
-            return Allocator::_mem_alloc(size);
-        }
+        void *operator new(size_t size);
 
-        void operator delete(void *mem) {
-            Allocator::_mem_free(mem);
-        }
+        void operator delete(void *mem);
 
         elem(TCB *handle, time_t time, elem *next = nullptr) : handle(handle), time_left(time), next(next) {}
 

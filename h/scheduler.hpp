@@ -15,6 +15,8 @@ public:
 
     static inline bool is_empty() { return runnable.is_empty(); }
 
+    static inline TCB *peek() { return runnable.peek(); }
+
 protected:
     Scheduler() = default;
 

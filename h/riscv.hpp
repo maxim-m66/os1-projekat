@@ -5,8 +5,6 @@
 
 extern "C" void supervisorTrap();
 
-/*staticke funckije koriscne za manipulaciju registrima i funkcije za promenu konteksta preuzete s vezbi*/
-
 class Riscv {
 public:
 

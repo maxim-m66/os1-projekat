@@ -15,6 +15,8 @@ namespace os {
 
         T get();
 
+        T &peek();
+
         inline bool is_empty() const { return this->size == 0; }
 
         void destroy();
@@ -57,6 +59,11 @@ T os::CircularBuffer<T>::get() {
     this->head = (this->head + 1) % this->capacity;
     this->size--;
     return ret;
+}
+
+template<typename T>
+T &os::CircularBuffer<T>::peek() {
+    return this->queue[this->head];
 }
 
 template<typename T>

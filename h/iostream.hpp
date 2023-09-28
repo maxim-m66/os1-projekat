@@ -17,6 +17,8 @@ namespace stm {
 
         const istream &operator<<(const String &string) const;
 
+        const istream &operator<<(long long number) const;
+
         const istream &operator<<(int number) const;
 
         const istream &operator<<(uint64 number) const;
@@ -31,6 +33,7 @@ namespace stm {
     class ostream final {
         void operator>>(const String &string);
     };
+
     extern const istream cout;
     extern const endline endl;
 }

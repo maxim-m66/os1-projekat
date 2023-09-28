@@ -32,11 +32,15 @@ public:
 
     static int _fork();
 
+    static int _kill(TCB *);
+
     static void thread_start();
 
     static void context_switch(Context *, Context *);
 
     static void yield();
+
+    static TCB *destroy_thread(TCB *);
 
     static void duplicate(TCB *, TCB *);
 

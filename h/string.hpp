@@ -16,9 +16,9 @@ namespace stm {
 
     int strcmp(const char *str1, const char *str2);
 
-    char *ntos(long long number, char* buffer, int radix);
+    char *ntos(long long number, char *buffer, int radix);
 
-    char *utos(uint64 number, char* buffer, int radix);
+    char *utos(uint64 number, char *buffer, int radix);
 
     class String;
 
@@ -41,6 +41,8 @@ namespace stm {
         String(const char *);
 
         explicit String(long long);
+
+        explicit String(int);
 
         explicit String(uint64);
 
@@ -83,6 +85,7 @@ namespace stm {
 
         int size;
         char *actual_string;
+
         friend class istream;
     };
 

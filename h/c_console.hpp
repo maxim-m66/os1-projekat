@@ -1,11 +1,9 @@
 #ifndef PROJECT_BASE_C_CONSOLE_HPP
 #define PROJECT_BASE_C_CONSOLE_HPP
-
-#include "../lib/hw.h"
-#include "../lib/console.h"
-#include "c_semaphore.hpp"
+#include "circular_buffer.hpp"
 #include "riscv.hpp"
 
+class Sem;
 
 class IOBuffer final {
 public:
@@ -45,4 +43,4 @@ void print_u(uint64 number);
 
 void print_h(uint64 number);
 
-#endif //PROJECT_BASE_C_CONSOLE_HPP
+#endif
