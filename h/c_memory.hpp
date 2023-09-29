@@ -19,16 +19,14 @@ public:
 
     __attribute__((unused)) static int mem_size();
 
-public:
+private:
 
     struct MemoryBlock {
         MemoryBlock *next;
         uint64 size;
     };
 
-    static bool adjacent(MemoryBlock *block1, MemoryBlock *block2) {
-        return (uint64) block1 + Allocator::HEADER_SIZE + block1->size == (uint64) block2;
-    }
+    static bool adjacent(MemoryBlock *block1, MemoryBlock *block2);
 
     static void merge(MemoryBlock *block1, MemoryBlock *block2);
 

@@ -42,7 +42,7 @@ namespace stm {
 
         explicit String(long long);
 
-        explicit String(int);
+        explicit String(int number) : String((long long) number) {}
 
         explicit String(uint64);
 

@@ -1,5 +1,6 @@
 #ifndef PROJECT_BASE_C_CONSOLE_HPP
 #define PROJECT_BASE_C_CONSOLE_HPP
+
 #include "circular_buffer.hpp"
 #include "riscv.hpp"
 
@@ -33,14 +34,16 @@ public:
     static IOBuffer Output;
 };
 
-void print_s(const char *str);
+void print(const char *str);
 
-void dramatic_print(const char *str);
+void print(long long number);
 
-void print_n(long long number);
+void print(int number);
 
-void print_u(uint64 number);
+void print(uint64 number);
 
 void print_h(uint64 number);
+
+void dramatic_print(const char *str);
 
 #endif
