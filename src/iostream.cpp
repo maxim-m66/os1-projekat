@@ -6,27 +6,27 @@ const stm::istream stm::cout;
 const stm::endline stm::endl;
 
 const stm::istream &stm::istream::operator<<(const char *string) const {
-    print_s(string);
+    print(string);
     return *this;
 }
 
 const stm::istream &stm::istream::operator<<(const stm::String &string) const {
-    print_s(string.actual_string);
+    print(string.actual_string);
     return *this;
 }
 
 const stm::istream &stm::istream::operator<<(long long number) const {
-    print_n(number);
+    print(number);
     return *this;
 }
 
 const stm::istream &stm::istream::operator<<(int number) const {
-    print_n(number);
+    print(number);
     return *this;
 }
 
 const stm::istream &stm::istream::operator<<(uint64 number) const {
-    print_u(number);
+    print(number);
     return *this;
 }
 
@@ -36,7 +36,7 @@ const stm::istream &stm::istream::operator<<(void *pointer) const {
 }
 
 const stm::istream &stm::istream::operator<<(bool truth) const {
-    print_s(truth ? "true" : "false");
+    print(truth ? "true" : "false");
     return *this;
 }
 

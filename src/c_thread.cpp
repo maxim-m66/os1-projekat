@@ -111,17 +111,17 @@ int TCB::_fork() {
     int id_parent = TCB::running->t_id;
     TCB *handle = new TCB(*TCB::running);
     TCB::duplicate(TCB::running, handle);
-    print_n(TCB::running->t_id);
+    print(TCB::running->t_id);
     putc(' ');
-    print_n(id_parent);
+    print(id_parent);
     putc(' ');
-    print_n(handle->t_id);
+    print(handle->t_id);
     putc('\n');
     if (TCB::running->t_id == id_parent) {
         Scheduler::put(handle);
         return handle->t_id;
     } else {
-        print_n(TCB::running->t_id);
+        print(TCB::running->t_id);
         return 0;
     }
 }

@@ -5,7 +5,8 @@ Allocator::MemoryBlock *Allocator::free_pointer = nullptr;
 
 void Allocator::mem_init() {
     Allocator::free_pointer = (Allocator::MemoryBlock *) HEAP_START_ADDR;
-    *Allocator::free_pointer = {nullptr, (uint64) HEAP_END_ADDR - (uint64) HEAP_START_ADDR - Allocator::HEADER_SIZE};
+    *Allocator::free_pointer = {nullptr, reinterpret_cast<uint64>(HEAP_END_ADDR) -
+                                         reinterpret_cast<uint64>(HEAP_START_ADDR) - Allocator::HEADER_SIZE};
 }
 
 void *Allocator::_mem_alloc(size_t size) {
@@ -18,13 +19,14 @@ void *Allocator::_mem_alloc(size_t size) {
     if (available->size > Allocator::HEADER_SIZE + size) {
         uint64 next_size = available->size - size - Allocator::HEADER_SIZE;
         available->size = size;
-        next_node = (Allocator::MemoryBlock *) ((uint64) available + Allocator::HEADER_SIZE + size);
+        next_node = reinterpret_cast<Allocator::MemoryBlock *>(reinterpret_cast<uint64>(available) +
+                                                               Allocator::HEADER_SIZE + size);
         next_node->next = available->next;
         next_node->size = next_size;
     } else {
         next_node = available->next;
     }
-    available->next = (MemoryBlock *) ((uint64) available ^ available->size);
+    available->next = reinterpret_cast<MemoryBlock *>(reinterpret_cast<uint64>(available) ^ available->size);
     if (previous) previous->next = next_node;
     else Allocator::free_pointer = next_node;
     return (void *) (available + 1);
@@ -33,7 +35,7 @@ void *Allocator::_mem_alloc(size_t size) {
 int Allocator::_mem_free(const void *pointer) {
     Allocator::MemoryBlock *freed = (Allocator::MemoryBlock *) pointer - 1;
     if (freed < HEAP_START_ADDR) return -1;
-    if (freed->next != (MemoryBlock *) ((uint64) freed ^ freed->size)) return -2;
+    if (freed->next != reinterpret_cast<MemoryBlock *>(reinterpret_cast<uint64>(freed) ^ freed->size)) return -2;
     Allocator::MemoryBlock *previous = Allocator::free_pointer, *next_node;
     if (freed < Allocator::free_pointer) {
         next_node = Allocator::free_pointer;
@@ -46,6 +48,10 @@ int Allocator::_mem_free(const void *pointer) {
     Allocator::merge(freed, next_node);
     Allocator::merge(previous, freed);
     return 0;
+}
+
+inline bool Allocator::adjacent(Allocator::MemoryBlock *block1, Allocator::MemoryBlock *block2) {
+    return reinterpret_cast<uint64>(block1) + Allocator::HEADER_SIZE + block1->size == reinterpret_cast<uint64>(block2);
 }
 
 inline void Allocator::merge(MemoryBlock *block1, MemoryBlock *block2) {

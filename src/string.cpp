@@ -108,12 +108,6 @@ stm::String::String(long long number) {
     this->size = strlen(this->actual_string);
 }
 
-stm::String::String(int number) {
-    char buff[25];
-    this->actual_string = ntos(number, buff, 10);
-    this->size = strlen(this->actual_string);
-}
-
 stm::String::String(uint64 number) {
     char buff[25];
     this->actual_string = utos(number, buff, 10);
@@ -139,18 +133,18 @@ stm::String &stm::String::operator+=(const stm::String &string) {
     return *this;
 }
 
-char &stm::String::operator[](int i) {
+inline char &stm::String::operator[](int i) {
     return this->actual_string[i];
 }
 
-stm::String &stm::operator+(const stm::String &string1, const stm::String &string2) {
+inline stm::String &stm::operator+(const stm::String &string1, const stm::String &string2) {
     return *(new stm::String(stm::strcat(string1.actual_string, string2.actual_string)));
 }
 
-bool stm::operator==(const stm::String &string1, const stm::String &string2) {
+inline bool stm::operator==(const stm::String &string1, const stm::String &string2) {
     return !stm::strcmp(string1.actual_string, string2.actual_string);
 }
 
-bool stm::operator<(const stm::String &string1, const stm::String &string2) {
+inline bool stm::operator<(const stm::String &string1, const stm::String &string2) {
     return stm::strcmp(string1.actual_string, string2.actual_string) < 0;
 }

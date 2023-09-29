@@ -74,7 +74,7 @@ void Riscv::handleSupervisorTrap() {
 
 __attribute__((unused))
 void Riscv::handleTimerTrap() {
-    while ((*((char *) CONSOLE_STATUS) & CONSOLE_TX_STATUS_BIT) and !IO::Output.is_empty()) {
+    while ((*((char *) CONSOLE_STATUS) & CONSOLE_TX_STATUS_BIT) && !IO::Output.is_empty()) {
         char c = IO::Output.get();
         *(volatile char *) CONSOLE_TX_DATA = c;
     }

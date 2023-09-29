@@ -32,7 +32,7 @@ protected:
     void run() override {
         for (int i = 0; i < 24 / seconds; i++) {
             Thread::sleep(seconds * 10);
-            print_n(seconds);
+            print(seconds);
             putc(' ');
         }
     }
@@ -43,7 +43,7 @@ private:
 
 void MyRun4(void *) {
     for (long i = 0; i < 10; i++) {
-        print_s("Now we shall test the resilience of the process Scheduler and the printing function. There are a 1000 threads running at once but each copy of this sentence should be printed in full. This is achieved via Semaphores\n");
+        print("Now we shall test the resilience of the process Scheduler and the printing function. There are a 1000 threads running at once but each copy of this sentence should be printed in full. This is achieved via Semaphores\n");
         thread_dispatch();
     }
 }
@@ -160,21 +160,21 @@ void test3() {
         bee->join();
     }
     bear->join();
-    print_s("Bees have made: ");
+    print("Bees have made: ");
     int honeyMade = 0;
     for (auto &bee: bees) {
         honeyMade += bee->getHoney();
     }
-    print_n(honeyMade);
+    print(honeyMade);
     putc('\n');
-    print_s("Bear has eaten: ");
-    print_n(bear->getHoney());
+    print("Bear has eaten: ");
+    print(bear->getHoney());
     putc('\n');
-    print_s("In Honeypot there is: ");
-    print_n(pot->getHoney());
+    print("In Honeypot there is: ");
+    print(pot->getHoney());
     putc('\n');
-    print_s("Pot + Bear: ");
-    print_n(bear->getHoney() + pot->getHoney());
+    print("Pot + Bear: ");
+    print(bear->getHoney() + pot->getHoney());
     delete pot;
     delete bear;
     for (auto &bee: bees) {
@@ -298,8 +298,7 @@ int constexpr TESTS = 8;
 int userMain() {
     dramatic_print("Hello There!! Welcome to my Operating System.\n");
     time_sleep(5);
-    dramatic_print(
-            "Now I am going to create 5 threads. Each will print 20 of its letter and busy wait in between letters. Threads will be swapped out asynchronously:\n\n");
+    dramatic_print("Now I am going to create 5 threads. Each will print 20 of its letter and busy wait in between letters. Threads will be swapped out asynchronously:\n\n");
     time_sleep(10);
     test1();
     time_sleep(10);

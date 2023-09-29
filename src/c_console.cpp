@@ -1,6 +1,7 @@
 #include "../h/c_semaphore.hpp"
 #include "../h/c_console.hpp"
 #include "../h/cpp_semaphores.hpp"
+#include "../h/string.hpp"
 
 IOBuffer IO::Input{};
 IOBuffer IO::Output{};
@@ -39,7 +40,7 @@ void IO::_putc(char c) {
     }
 }
 
-void print_s(const char *str) {
+void print(const char *str) {
     int i = 0;
     printer->wait();
     while (str[i]) {
@@ -58,50 +59,21 @@ void dramatic_print(const char *str) {
     printer->signal();
 }
 
-void print_n(long long number) {
-    if (number == 0) {
-        print_s("0");
-        return;
-    }
-    char digits[21] = {};
-    int i = 19;
-    bool negative = number < 0;
-    if (negative) number = -number;
-    const char *av = "0123456789";
-    while (number > 0) {
-        digits[i--] = av[(number % 10)];
-        number /= 10;
-    }
-    if (negative) digits[i--] = '-';
-    print_s(&digits[i + 1]);
+void print(long long number) {
+    char buff[25] = {};
+    print(stm::ntos(number, buff, 10));
 }
 
-void print_u(uint64 number) {
-    if (number == 0) {
-        print_s("0");
-        return;
-    }
-    char digits[21] = {};
-    int i = 19;
-    const char *av = "0123456789";
-    while (number > 0) {
-        digits[i--] = av[(number % 10)];
-        number /= 10;
-    }
-    print_s(&digits[i + 1]);
+void print(int number) {
+    print((long long) number);
+}
+
+void print(uint64 number) {
+    char buff[25] = {};
+    print(stm::utos(number, buff, 10));
 }
 
 void print_h(uint64 number) {
-    if (number == 0) {
-        print_s("0");
-        return;
-    }
-    char digits[21] = {};
-    int i = 19;
-    const char *av = "0123456789ABCDEF";
-    while (number > 0) {
-        digits[i--] = av[number % 16];
-        number /= 16;
-    }
-    print_s(&digits[i + 1]);
+    char buff[25] = {};
+    print(stm::utos(number, buff, 16));
 }

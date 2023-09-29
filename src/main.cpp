@@ -43,9 +43,9 @@ int call() {
 }
 
 int end(int ret) {
-    print_s("\n\nProcess finished with exit code ");
-    print_n(ret);
-    print_s("\n\n");
+    print("\n\nProcess finished with exit code ");
+    print(ret);
+    print("\n\n");
     while (!IO::Output.is_empty());
     time_sleep(10);
     return 0;
