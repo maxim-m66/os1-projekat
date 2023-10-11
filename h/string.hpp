@@ -8,7 +8,7 @@ namespace stm {
 
     int strlen(const char *string);
 
-    void strcpy(const char *src, char *dst);
+    char *strcpy(const char *src, char *dst);
 
     void strncpy(char *src, char *dst, int max_len);
 
@@ -42,7 +42,7 @@ namespace stm {
 
         explicit String(long long);
 
-        explicit String(int number) : String((long long) number) {}
+        explicit String(int);
 
         explicit String(uint64);
 
@@ -83,8 +83,13 @@ namespace stm {
 
         void unexist() { delete[] this->actual_string; }
 
+        static int write_and_count(const char *src, char *dst, int n);
+
+        static int constexpr SMALL_SIZE = 30;
+
         int size;
         char *actual_string;
+        char small_string[SMALL_SIZE + 1];
 
         friend class istream;
     };
