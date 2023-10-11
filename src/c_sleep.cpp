@@ -71,5 +71,6 @@ int Cradle::_thread_wake(thread_t thread) {
         return -1;
     thread->run();
     Scheduler::put(thread);
+    TCB::_thread_dispatch();
     return 0;
 }

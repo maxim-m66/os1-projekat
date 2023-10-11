@@ -47,6 +47,7 @@ int Sem::_sem_signal(sem_t id) {
         thread_t next = id->blocked.get();
         next->run();
         Scheduler::put(next);
+        TCB::_thread_dispatch();
     } else {
         id->count++;
     }
