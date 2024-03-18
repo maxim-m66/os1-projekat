@@ -72,4 +72,8 @@ char getc(); //0x41
 
 void putc(char c); //0x42
 
+bool is_user();
+
+uint64 scs();
+
 #endif

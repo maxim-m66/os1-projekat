@@ -40,6 +40,8 @@ namespace stm {
     public:
         String(const char *);
 
+        String(char);
+
         explicit String(long long);
 
         explicit String(int);
@@ -54,7 +56,15 @@ namespace stm {
 
         String &operator=(String &&) noexcept;
 
-        char &operator[](int i);
+        int length() const { return this->size; }
+
+        char &operator[](int i) {
+            return this->actual_string[i];
+        }
+
+        const char &operator[](int i) const{
+            return this->actual_string[i];
+        }
 
         friend String &operator+(const String &string1, const String &string2);
 

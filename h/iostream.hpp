@@ -13,6 +13,8 @@ namespace stm {
 
     class istream final {
     public:
+        const istream &operator<<(const char c) const;
+
         const istream &operator<<(const char *string) const;
 
         const istream &operator<<(const String &string) const;

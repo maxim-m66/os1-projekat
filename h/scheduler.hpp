@@ -7,21 +7,30 @@
 class Scheduler final {
 public:
 
-    static inline void init() { runnable.init(); }
+    static void init() { high_priority.init(); mid_priority.init(); low_priority.init(); }
 
-    static inline void put(TCB *thread) { runnable.put(thread); }
+    static void put(TCB *thread);
 
-    static inline TCB *get() { return runnable.get(); }
+    static TCB *get();
 
-    static inline bool is_empty() { return runnable.is_empty(); }
+    static inline bool is_empty() {
+        return high_priority.is_empty() && mid_priority.is_empty() && low_priority.is_empty();
+    }
 
-    static inline TCB *peek() { return runnable.peek(); }
-
-protected:
-    Scheduler() = default;
+    static TCB *peek();
 
 private:
-    static os::CircularBuffer<TCB *> runnable;
+    Scheduler() = default;
+
+    enum TimeSlice {
+        HIGH_PRIORITY = DEFAULT_TIME_SLICE,
+        MID_PRIORITY = 2 * DEFAULT_TIME_SLICE,
+        LOW_PRIORITY = 4 * DEFAULT_TIME_SLICE
+    };
+
+    static os::CircularBuffer<TCB *> high_priority;
+    static os::CircularBuffer<TCB *> mid_priority;
+    static os::CircularBuffer<TCB *> low_priority;
 };
 
 #endif

@@ -76,7 +76,15 @@ public:
 
     void finish() { this->status = FINISHED; }
 
+    bool was_preempted() const { return this->preempted; }
+
+    void set_preempted() { this->preempted = true; }
+
+    void reset_preempted() { this->preempted = false; }
+
     time_t get_time_slice() const { return this->time_slice; }
+
+    void set_time_slice(time_t time) { this->time_slice = time;}
 
     static int ID;
     static time_t timer_counter;
@@ -92,6 +100,7 @@ private:
     Context context;
     Status status;
     time_t time_slice;
+    bool preempted;
     os::CircularBuffer<TCB *> joiner;
 };
 
