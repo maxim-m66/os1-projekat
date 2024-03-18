@@ -1,5 +1,6 @@
 #include "../h/string.hpp"
 #include "../h/c_memory.hpp"
+#include "../h/iostream.hpp"
 
 int stm::strlen(const char *string) {
     int size;
@@ -7,8 +8,9 @@ int stm::strlen(const char *string) {
     return size;
 }
 
-void stm::strcpy(const char *const src, char *const dst) {
+char *stm::strcpy(const char *const src, char *const dst) {
     memcpy(src, dst, strlen(src) + 1);
+    return dst;
 }
 
 void stm::strncpy(char *const src, char *const dst, int max_len) {
@@ -86,31 +88,48 @@ char *stm::utos(uint64 number, char *buffer, int radix) {
 }
 
 void stm::String::copy(const stm::String &string) {
+    cout << 101;
     this->size = string.size;
-    this->actual_string = new char[this->size];
+    this->actual_string = this->size > String::SMALL_SIZE ? new char[this->size] : this->small_string;
     strcpy(string.actual_string, this->actual_string);
 }
 
 void stm::String::move(stm::String &string) {
     this->size = string.size;
-    this->actual_string = string.actual_string;
+    if(this->size > String::SMALL_SIZE)
+        this->actual_string = string.actual_string;
+    else
+        this->actual_string = strcpy(string.actual_string, this->small_string);
     string.actual_string = nullptr;
 }
 
-stm::String::String(const char *string) : size(strlen(string)) {
+stm::String::String(const char *string) {
+    this->size = String::write_and_count(string, this->small_string, SMALL_SIZE);
+    if (this->size != -1) {
+        this->actual_string = this->small_string;
+        return;
+    }
+    this->size = strlen(string);
     this->actual_string = new char[this->size + 1];
     strcpy(string, this->actual_string);
 }
 
+stm::String::String(char c) {
+    this->size = 1;
+    this->actual_string = this->small_string;
+    this->actual_string[0] = c;
+    this->actual_string[1] = 0;
+}
+
 stm::String::String(long long number) {
-    char buff[25];
-    this->actual_string = ntos(number, buff, 10);
+    this->actual_string = ntos(number, this->small_string, 10);
     this->size = strlen(this->actual_string);
 }
 
+stm::String::String(int number) : String((long long) number) {}
+
 stm::String::String(uint64 number) {
-    char buff[25];
-    this->actual_string = utos(number, buff, 10);
+    this->actual_string = utos(number, this->small_string, 10);
     this->size = strlen(this->actual_string);
 }
 
@@ -133,11 +152,7 @@ stm::String &stm::String::operator+=(const stm::String &string) {
     return *this;
 }
 
-inline char &stm::String::operator[](int i) {
-    return this->actual_string[i];
-}
-
-inline stm::String &stm::operator+(const stm::String &string1, const stm::String &string2) {
+stm::String &stm::operator+(const stm::String &string1, const stm::String &string2) {
     return *(new stm::String(stm::strcat(string1.actual_string, string2.actual_string)));
 }
 
@@ -147,4 +162,14 @@ inline bool stm::operator==(const stm::String &string1, const stm::String &strin
 
 inline bool stm::operator<(const stm::String &string1, const stm::String &string2) {
     return stm::strcmp(string1.actual_string, string2.actual_string) < 0;
+}
+
+int stm::String::write_and_count(const char *src, char *dst, int n) {
+    int i;
+    for (i = 0; src[i]; i++) {
+        if (i >= n) return -1;
+        dst[i] = src[i];
+    }
+    dst[i] = src[i];
+    return i;
 }

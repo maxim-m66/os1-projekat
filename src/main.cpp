@@ -2,6 +2,7 @@
 #include "../h/c_thread.hpp"
 #include "../h/cpp_semaphores.hpp"
 #include "../h/scheduler.hpp"
+#include "../h/iostream.hpp"
 
 [[noreturn]]
 void bleya_nit(void *) {
@@ -22,12 +23,12 @@ inline void init() {
     Allocator::mem_init();
     IO::init();
     Scheduler::init();
+    printer = new Semaphore();
     thread_t handle_main;
     thread_create(&handle_main, nullptr, nullptr);
     TCB::running = handle_main;
-    printer = new Semaphore();
-    Riscv::ms_sstatus(Riscv::SSTATUS_SIE);
     thread_create(&handle_bleya, &bleya_nit, nullptr);
+    Riscv::ms_sstatus(Riscv::SSTATUS_SIE);
 }
 
 void userWrapper(void *ret) {

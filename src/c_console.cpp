@@ -33,10 +33,12 @@ char IO::_getc() {
 }
 
 void IO::_putc(char c) {
-    Output.put(c);
-    if ((*((char *) CONSOLE_STATUS) & CONSOLE_TX_STATUS_BIT) and !IO::Output.is_empty()) {
-        char ch = IO::Output.get();
-        *(volatile char *) CONSOLE_TX_DATA = ch;
+    if (c == 127) {
+        Output.put(8);
+        Output.put(' ');
+        Output.put(8);
+    } else {
+        Output.put(c);
     }
 }
 

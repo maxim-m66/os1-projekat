@@ -10,13 +10,11 @@ time_t TCB::timer_counter = 0;
 typedef TCB *thread_t;
 extern thread_t handle_bleya;
 
-int i = DEFAULT_STACK_SIZE;
-
 TCB::TCB(run_t start_routine, void *arg, void *stack, Context context) :
         t_id(TCB::ID++), _run(start_routine), arg(arg),
         stack(stack), parent(TCB::running),
         context(context), status(RUNNABLE),
-        time_slice(DEFAULT_TIME_SLICE), joiner() {
+        time_slice(DEFAULT_TIME_SLICE), preempted(false), joiner() {
     this->joiner.init();
     if (TCB::running) {
 
@@ -27,7 +25,7 @@ TCB::TCB(TCB &parent) :
         t_id(TCB::ID++), _run(parent._run), arg(parent.arg),
         stack(Allocator::_mem_alloc(DEFAULT_STACK_SIZE)),
         parent(&parent), context(parent.context), status(RUNNABLE), time_slice(DEFAULT_TIME_SLICE),
-        joiner() {
+        preempted(false), joiner() {
     this->joiner.init();
 }
 
@@ -61,7 +59,7 @@ void TCB::yield() {
 
 void TCB::_thread_dispatch() {
     Riscv::push();
-    yield();
+    TCB::yield();
     Riscv::pop();
 }
 

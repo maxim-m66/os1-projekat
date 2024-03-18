@@ -4,6 +4,7 @@
 #include "../h/string.hpp"
 #include "../h/c_thread.hpp"
 #include "../h/iostream.hpp"
+#include "../h/smart_pointer.hpp"
 
 int constexpr CAP = 1000;
 using namespace stm;
@@ -295,7 +296,36 @@ void test7() {
 
 int constexpr TESTS = 8;
 
+Semaphore *s1, *s2;
+
+class ThreadBlocked : public Thread {
+public:
+    void run() override {
+        cout << "Hello from blocked thread\n";
+        getc();
+        cout << "Unblocked\n";
+    }
+};
+
+class ThreadRunning: public Thread {
+    void run() override {
+        cout << "Hello from nonBlocked Thread. I will calculate now\n";
+        for(int i = 0; i < 100000; i++) {
+            for(int j = 0; j < 10000; j++) {
+            }
+        }
+        cout << "1";
+    }
+};
+
 int userMain() {
+    s1 = new Semaphore();
+    Thread *t1 = new ThreadBlocked;
+    Thread *t2 = new ThreadRunning;
+    t1->start();
+    t2->start();
+    t1->join();
+    t2->join();
     dramatic_print("Hello There!! Welcome to my Operating System.\n");
     time_sleep(5);
     dramatic_print("Now I am going to create 5 threads. Each will print 20 of its letter and busy wait in between letters. Threads will be swapped out asynchronously:\n\n");

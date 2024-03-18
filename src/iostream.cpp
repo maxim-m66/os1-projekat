@@ -5,6 +5,11 @@
 const stm::istream stm::cout;
 const stm::endline stm::endl;
 
+const stm::istream &stm::istream::operator<<(const char c) const {
+    putc(c);
+    return *this;
+}
+
 const stm::istream &stm::istream::operator<<(const char *string) const {
     print(string);
     return *this;

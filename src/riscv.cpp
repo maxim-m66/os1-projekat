@@ -5,7 +5,16 @@
 #include "../h/c_console.hpp"
 #include "../h/c_sleep.hpp"
 #include "../h/scheduler.hpp"
+#include "../h/iostream.hpp"
+#include "../h/string.hpp"
 
+bool tru() {
+    return true;
+}
+
+uint64 rar() {
+    return Riscv::r_scause();
+}
 
 __attribute__((unused))
 void Riscv::handleSupervisorTrap() {
@@ -15,6 +24,10 @@ void Riscv::handleSupervisorTrap() {
     __asm__ volatile("mv %[arg2], a2" : [arg2] "=r"(arg2));
     __asm__ volatile("mv %[arg3], a3" : [arg3] "=r"(arg3));
     __asm__ volatile("mv %[arg4], a4" : [arg4] "=r"(arg4));
+    if (r_scause() == 2) {
+        tru();
+        return;
+    }
     switch (code) {
         case MEM_ALLOC:
             Allocator::_mem_alloc((int) arg1);
@@ -80,16 +93,17 @@ void Riscv::handleTimerTrap() {
     }
     mc_sip(SIP_SSIE);
     Cradle::update();
-    while (Cradle::peak() == 0 && !Cradle::is_empty()) {
+    while (!Cradle::is_empty() && Cradle::peak() == 0) {
         thread_t next = Cradle::remove();
-        if (next->is_joined() or next->is_sleeping()) {
+        if (next->is_joined() || next->is_sleeping()) {
             next->run();
             Scheduler::put(next);
         }
     }
     TCB::timer_counter++;
-    if ((time_t) TCB::timer_counter >= TCB::running->get_time_slice()) {
+    if ((time_t) TCB::timer_counter >= TCB::running->get_time_slice() && !Scheduler::is_empty()) {
         TCB::timer_counter = 0;
+        TCB::running->set_preempted();
         TCB::_thread_dispatch();
     }
 }
@@ -107,7 +121,6 @@ void Riscv::handleConsoleTrap() {
 
 void Riscv::popSppSpie() {
     Riscv::mc_sstatus(Riscv::SSTATUS_SPP);
-    Riscv::ms_sstatus(Riscv::SSTATUS_SPIE);
     __asm__ volatile("csrw sepc, ra");
     __asm__ volatile("sret");
 }

@@ -119,3 +119,17 @@ char getc() {
 void putc(char c) {
     syscall(PUTC, c);
 }
+
+bool is_user() {
+    bool volatile ret = false;
+    Riscv::r_stvec();
+    __asm__ volatile ("mv %[ret], a0" : [ret] "=r"(ret));
+    return ret;
+}
+
+uint64 scs() {
+    int volatile ret;
+    Riscv::r_stvec();
+    __asm__ volatile ("mv %[ret], a0" : [ret] "=r"(ret));
+    return ret;
+}
