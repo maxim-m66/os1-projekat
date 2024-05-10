@@ -5,6 +5,8 @@
 #include "../h/c_thread.hpp"
 #include "../h/iostream.hpp"
 #include "../h/smart_pointer.hpp"
+#include "../h/vector.hpp"
+
 
 int userMain() {
     dramatic_print("Hello There!! Welcome to my Operating System.");

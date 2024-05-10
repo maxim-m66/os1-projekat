@@ -2940,10 +2940,10 @@ int Cradle::_thread_wake(thread_t thread) {
     80002f38:	00008067          	ret
 
 0000000080002f3c <_Z8userMainv>:
-#include "../h/string.hpp"
-#include "../h/c_thread.hpp"
 #include "../h/iostream.hpp"
 #include "../h/smart_pointer.hpp"
+#include "../h/vector.hpp"
+
 
 int userMain() {
     80002f3c:	ff010113          	addi	sp,sp,-16
