@@ -5,8 +5,6 @@
 #include "../h/c_console.hpp"
 #include "../h/c_sleep.hpp"
 #include "../h/scheduler.hpp"
-#include "../h/iostream.hpp"
-#include "../h/string.hpp"
 
 bool tru() {
     return true;
@@ -25,8 +23,8 @@ void Riscv::handleSupervisorTrap() {
     __asm__ volatile("mv %[arg3], a3" : [arg3] "=r"(arg3));
     __asm__ volatile("mv %[arg4], a4" : [arg4] "=r"(arg4));
     if (r_scause() == 2) {
-        tru();
-        return;
+        print("Illegal Instruction\n");
+        TCB::_thread_exit();
     }
     switch (code) {
         case MEM_ALLOC:

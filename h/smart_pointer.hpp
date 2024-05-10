@@ -15,6 +15,14 @@ namespace stm {
 
         ~unique_pointer();
 
+        T *operator->() {
+            return this->pointer;
+        }
+
+        T &operator*() {
+            return *this->pointer;
+        }
+
     private:
         T *pointer;
     };

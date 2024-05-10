@@ -84,9 +84,17 @@ public:
     // write register sstatus
     static void w_sstatus(uint64 sstatus);
 
+    static uint64 r_sscratch();
+
 private:
 
 };
+
+inline uint64 Riscv::r_sscratch() {
+    uint64 volatile sscratch;
+    __asm__ volatile ("csrr %[scause], scause" : [scause] "=r"(sscratch));
+    return sscratch;
+}
 
 inline uint64 Riscv::r_scause() {
     uint64 volatile scause;

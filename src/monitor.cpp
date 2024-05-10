@@ -31,11 +31,11 @@ void Conditional::wait() {
 void Conditional::signal() {
     if (this->count == 0) return;
     this->blocker.signal();
-    this-count--;
+    this->count--;
 }
 
 void Conditional::signalAll() {
-    for (int i = 0; i < this->count; i++)
+    for (unsigned int i = 0; i < this->count; i++)
         this->blocker.signal();
     this->count = 0;
 }

@@ -19,6 +19,7 @@ ecallHandler:
     sd x\index, \index * 8(sp)
     .endr
 
+    csrw sscratch, ra
     csrr t0, sepc
     addi t0, t0, 4
     csrw sepc, t0

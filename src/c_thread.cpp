@@ -17,7 +17,7 @@ TCB::TCB(run_t start_routine, void *arg, void *stack, Context context) :
         time_slice(DEFAULT_TIME_SLICE), preempted(false), joiner() {
     this->joiner.init();
     if (TCB::running) {
-
+        this->parent = TCB::running;
     }
 }
 
@@ -127,6 +127,7 @@ int TCB::_fork() {
 int TCB::_kill(TCB* thread) {
     if (!thread) return -1;
     if (thread->is_finished()) return -2;
+    if (TCB::running != thread->parent) return -4;
     thread->finish();
     return 0;
 }

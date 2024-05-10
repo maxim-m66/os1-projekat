@@ -2,7 +2,7 @@
 #include "../h/c_console.hpp"
 
 
-void syscall(uint64 code, uint64 arg1 = 0, uint64 arg2 = 0, uint64 arg3 = 0, uint64 arg4 = 0) {
+void syscall(uint64 code, uint64 arg1, uint64 arg2, uint64 arg3, uint64 arg4) {
     __asm__ volatile("ecall");
 }
 
@@ -125,13 +125,6 @@ char getc() {
 
 void putc(char c) {
     syscall(PUTC, c);
-}
-
-bool is_user() {
-    bool volatile ret = false;
-    Riscv::r_stvec();
-    __asm__ volatile ("mv %[ret], a0" : [ret] "=r"(ret));
-    return ret;
 }
 
 uint64 scs() {

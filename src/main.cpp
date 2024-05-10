@@ -12,7 +12,7 @@ void bleya_nit(void *) {
 }
 
 thread_t handle_bleya = nullptr;
-Semaphore *printer;
+OwnedMutex *printer;
 
 int userMain();
 
@@ -23,7 +23,7 @@ inline void init() {
     Allocator::mem_init();
     IO::init();
     Scheduler::init();
-    printer = new Semaphore();
+    printer = new OwnedMutex();
     thread_t handle_main;
     thread_create(&handle_main, nullptr, nullptr);
     TCB::running = handle_main;
