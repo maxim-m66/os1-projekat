@@ -17,7 +17,7 @@ public:
     bool is_empty() const { return this->buffer.is_empty(); }
 
 private:
-    os::CircularBuffer<char> buffer;
+    stm::CircularBuffer<char> buffer;
     Sem *empty;
 };
 

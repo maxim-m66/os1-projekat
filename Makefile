@@ -131,6 +131,12 @@ qemu-gdb: ${KERNEL_IMG} .gdbinit
 	@echo "*** Now run 'gdb-multiarch' in another window with target remote args 'localhost:${GDBPORT}'." 1>&2
 	${QEMU} ${QEMUOPTS} -S ${QEMUGDB}
 
+
+git:
+	git add .
+	git commit -m ${MSG}
+	git push -u origin master
+
 # Prevent deletion of intermediate files, e.g. cat.o, after first build, so
 # that disk image changes after first build are persistent until clean.
 # http://www.gnu.org/software/make/manual/html_node/Chained-Rules.html

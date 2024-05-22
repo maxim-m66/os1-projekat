@@ -1,9 +1,9 @@
 #include "../h/scheduler.hpp"
 #include "../h/c_thread.hpp"
 
-os::CircularBuffer<TCB *> Scheduler::high_priority{};
-os::CircularBuffer<TCB *> Scheduler::mid_priority{};
-os::CircularBuffer<TCB *> Scheduler::low_priority{};
+stm::CircularBuffer<TCB *> Scheduler::high_priority{};
+stm::CircularBuffer<TCB *> Scheduler::mid_priority{};
+stm::CircularBuffer<TCB *> Scheduler::low_priority{};
 
 void Scheduler::put(TCB *thread) {
     if (!thread->was_preempted()) {

@@ -44,14 +44,6 @@ public:
 
     static void duplicate(TCB *, TCB *);
 
-    void *operator new(size_t size) { return Allocator::_mem_alloc(size); }
-
-    void operator delete(void *pointer) { Allocator::_mem_free(pointer); }
-
-    void *operator new[](size_t size) { return Allocator::_mem_alloc(size); }
-
-    void operator delete[](void *pointer) { Allocator::_mem_free(pointer); }
-
     TCB(run_t, void *, void *, Context);
 
     TCB(TCB &);
@@ -101,7 +93,7 @@ private:
     Status status;
     time_t time_slice;
     bool preempted;
-    os::CircularBuffer<TCB *> joiner;
+    stm::CircularBuffer<TCB *> joiner;
 };
 
 #endif

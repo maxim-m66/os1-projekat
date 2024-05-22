@@ -6,25 +6,19 @@
 #include "../h/c_sleep.hpp"
 #include "../h/scheduler.hpp"
 
-bool tru() {
-    return true;
-}
-
-uint64 rar() {
-    return Riscv::r_scause();
-}
-
 __attribute__((unused))
 void Riscv::handleSupervisorTrap() {
-    uint64 code, arg1, arg2, arg3, arg4;
+    uint64 code, arg1, arg2, arg3, arg4, sstatus, sepc;
     __asm__ volatile("mv %[code], a0" : [code] "=r"(code));
     __asm__ volatile("mv %[arg1], a1" : [arg1] "=r"(arg1));
     __asm__ volatile("mv %[arg2], a2" : [arg2] "=r"(arg2));
     __asm__ volatile("mv %[arg3], a3" : [arg3] "=r"(arg3));
     __asm__ volatile("mv %[arg4], a4" : [arg4] "=r"(arg4));
+    sstatus = r_sstatus();
+    sepc = r_sepc();
     if (r_scause() == 2) {
-        print("Illegal Instruction\n");
-        TCB::_thread_exit();
+        print("\nIllegal Instruction\n");
+        thread_exit();
     }
     switch (code) {
         case MEM_ALLOC:
@@ -69,11 +63,13 @@ void Riscv::handleSupervisorTrap() {
         case SIGNAL_WAIT:
             Sem::_sem_signal((sem_t) arg1);
             Sem::_sem_wait((sem_t) arg2);
+            break;
         case TIME_SLEEP:
             Cradle::_time_sleep((time_t) arg1);
             break;
         case THREAD_WAKE:
             Cradle::_thread_wake((thread_t) arg1);
+            break;
         case GETC:
             IO::_getc();
             break;
@@ -82,7 +78,10 @@ void Riscv::handleSupervisorTrap() {
             break;
         default:
             break;
+
     }
+    w_sepc(sepc + 4);
+    w_sstatus(sstatus);
 }
 
 

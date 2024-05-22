@@ -6,6 +6,7 @@
 #define PROJECT_BASE_VECTOR_HPP
 
 #include "../lib/hw.h"
+#include "syscall_c.hpp"
 
 namespace stm {
 
@@ -14,6 +15,8 @@ namespace stm {
     public:
 
         vector();
+
+        explicit vector(int init_size);
 
         void push_back(T const &value);
 
@@ -41,15 +44,18 @@ namespace stm {
     };
 
     template<typename T>
-    vector<T>::vector() : data(new T[DEFAULT_SIZE]), _size(0), front(DEFAULT_SIZE / 2),
-    back(DEFAULT_SIZE / 2), capacity(DEFAULT_SIZE) {}
+    vector<T>::vector(int init_size) : data(new T[init_size]), _size(0), front(init_size / 2),
+                                       back(init_size / 2), capacity(init_size) {}
+
+    template<typename T>
+    vector<T>::vector() : vector(DEFAULT_SIZE) {}
 
 
     template<typename T>
     void vector<T>::push_back(const T &value) {
         if (back == capacity - 1) {
-            //T *new_data = new T[capacity << 1];
-            //reallocate_back(new_data);
+            T *new_data = (T*) mem_alloc(capacity << 1);// new T[capacity << 1];
+            reallocate_back(new_data);
         }
         _size++;
         data[back++] = value;
@@ -58,8 +64,8 @@ namespace stm {
     template<typename T>
     void vector<T>::push_front(const T &value) {
         if (front == 0) {
-            //T *new_data = new T[capacity << 1];
-            //reallocate_front(new_data);
+            T *new_data = (T*) mem_alloc(capacity << 1);//new T[capacity << 1];
+            reallocate_front(new_data);
         }
         _size++;
         data[front--] = value;

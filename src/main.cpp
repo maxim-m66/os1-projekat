@@ -28,7 +28,6 @@ inline void init() {
     thread_create(&handle_main, nullptr, nullptr);
     TCB::running = handle_main;
     thread_create(&handle_bleya, &bleya_nit, nullptr);
-    Riscv::ms_sstatus(Riscv::SSTATUS_SIE);
 }
 
 void userWrapper(void *ret) {
@@ -44,6 +43,7 @@ int call() {
 }
 
 int end(int ret) {
+    Riscv::ms_sstatus(Riscv::SSTATUS_SIE);
     print("\n\nProcess finished with exit code ");
     print(ret);
     print("\n\n");

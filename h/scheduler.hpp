@@ -28,9 +28,9 @@ private:
         LOW_PRIORITY = 4 * DEFAULT_TIME_SLICE
     };
 
-    static os::CircularBuffer<TCB *> high_priority;
-    static os::CircularBuffer<TCB *> mid_priority;
-    static os::CircularBuffer<TCB *> low_priority;
+    static stm::CircularBuffer<TCB *> high_priority;
+    static stm::CircularBuffer<TCB *> mid_priority;
+    static stm::CircularBuffer<TCB *> low_priority;
 };
 
 #endif

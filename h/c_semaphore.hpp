@@ -16,7 +16,7 @@ public:
 
 private:
     unsigned count;
-    os::CircularBuffer<TCB *> blocked;
+    stm::CircularBuffer<TCB *> blocked;
 };
 
 
