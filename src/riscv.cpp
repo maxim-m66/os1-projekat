@@ -28,16 +28,9 @@ Riscv::syscall_f Riscv::syscall_table[SYSCALL_COUNT] = {
         reinterpret_cast<Riscv::syscall_f>(IO::_putc)
 };
 
-__attribute__((unused))
-void Riscv::handleSupervisorTrap() {
-    uint64 code, arg1, arg2, arg3, arg4, sstatus, sepc;
-    __asm__ volatile("mv %[code], a0" : [code] "=r"(code));
-    __asm__ volatile("mv %[arg1], a1" : [arg1] "=r"(arg1));
-    __asm__ volatile("mv %[arg2], a2" : [arg2] "=r"(arg2));
-    __asm__ volatile("mv %[arg3], a3" : [arg3] "=r"(arg3));
-    __asm__ volatile("mv %[arg4], a4" : [arg4] "=r"(arg4));
-    sstatus = r_sstatus();
-    sepc = r_sepc();
+void Riscv::handleSupervisorTrap(uint64 code, uint64 arg1, uint64 arg2, uint64 arg3, uint64 arg4) {
+    uint64 sstatus = r_sstatus();
+    uint64 sepc = r_sepc();
     if (r_scause() == ILLEGAL_INSTRUCTION) {
         print("\nIllegal Instruction\n");
         TCB::_thread_exit();
@@ -48,7 +41,6 @@ void Riscv::handleSupervisorTrap() {
 }
 
 
-__attribute__((unused))
 void Riscv::handleTimerTrap() {
     uint64 sstatus = r_sstatus();
     uint64 sepc = r_sepc();
@@ -75,15 +67,18 @@ void Riscv::handleTimerTrap() {
     w_sstatus(sstatus);
 }
 
-__attribute__((unused))
 void Riscv::handleConsoleTrap() {
+    uint64 sepc = r_sepc();
+    uint64 sstatuc = r_sstatus();
     if (plic_claim() == CONSOLE_IRQ) {
-        while ((*((char *) CONSOLE_STATUS) & CONSOLE_RX_STATUS_BIT)) {
+        if ((*((char *) CONSOLE_STATUS) & CONSOLE_RX_STATUS_BIT)) {
             volatile char c = *(char *) CONSOLE_RX_DATA;
             IO::Input.put(c);
         }
         plic_complete(CONSOLE_IRQ);
     }
+    w_sepc(sepc);
+    w_sstatus(sstatuc);
 }
 
 void Riscv::popSppSpie() {

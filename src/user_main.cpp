@@ -33,7 +33,7 @@ class SleeperThread : public Thread {
 public:
     explicit SleeperThread(int time) : time(time) {}
     void run() override {
-        for (int i = 0; i < 200 / time; i++) {
+        for (int i = 0; i < 100 / time; i++) {
             Thread::sleep(time);
             cout << "Hello thread " << time / 10 << "s!" <<  endl;
         }

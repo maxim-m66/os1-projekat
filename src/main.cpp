@@ -26,6 +26,7 @@ inline void init() {
     thread_t handle_main;
     thread_create(&handle_main, nullptr, nullptr);
     thread_create(&handle_bleya, &bleya_nit, nullptr);
+    Riscv::ms_sstatus(Riscv::SSTATUS_SIE);
 }
 
 void userWrapper(void *ret) {
@@ -37,15 +38,10 @@ int call() {
     int ret;
     thread_create(&userHandle, userWrapper, &ret);
     thread_join(userHandle);
-    while (!userHandle->is_finished()) {
-        stm::cout << 'e';
-        //thread_dispatch();
-    }
     return ret;
 }
 
 int end(int ret) {
-    Riscv::ms_sstatus(Riscv::SSTATUS_SIE);
     print("\n\nProcess finished with exit code ");
     print(ret);
     print("\n\n");

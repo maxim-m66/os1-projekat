@@ -87,24 +87,24 @@ char *stm::utos(uint64 number, char *buffer, int radix) {
     return buffer;
 }
 
-void stm::String::copy(const stm::String &string) {
+void stm::string::copy(const stm::string &string) {
     cout << 101;
     this->size = string.size;
-    this->actual_string = this->size > String::SMALL_SIZE ? new char[this->size] : this->small_string;
+    this->actual_string = this->size > string::SMALL_SIZE ? new char[this->size] : this->small_string;
     strcpy(string.actual_string, this->actual_string);
 }
 
-void stm::String::move(stm::String &string) {
+void stm::string::move(stm::string &string) {
     this->size = string.size;
-    if(this->size > String::SMALL_SIZE)
+    if(this->size > string::SMALL_SIZE)
         this->actual_string = string.actual_string;
     else
         this->actual_string = strcpy(string.actual_string, this->small_string);
     string.actual_string = nullptr;
 }
 
-stm::String::String(const char *string) {
-    this->size = String::write_and_count(string, this->small_string, SMALL_SIZE);
+stm::string::string(const char *string) {
+    this->size = string::write_and_count(string, this->small_string, SMALL_SIZE);
     if (this->size != -1) {
         this->actual_string = this->small_string;
         return;
@@ -114,57 +114,57 @@ stm::String::String(const char *string) {
     strcpy(string, this->actual_string);
 }
 
-stm::String::String(char c) {
+stm::string::string(char c) {
     this->size = 1;
     this->actual_string = this->small_string;
     this->actual_string[0] = c;
     this->actual_string[1] = 0;
 }
 
-stm::String::String(long long number) {
+stm::string::string(long long number) {
     this->actual_string = ntos(number, this->small_string, 10);
     this->size = strlen(this->actual_string);
 }
 
-stm::String::String(int number) : String((long long) number) {}
+stm::string::string(int number) : string((long long) number) {}
 
-stm::String::String(uint64 number) {
+stm::string::string(uint64 number) {
     this->actual_string = utos(number, this->small_string, 10);
     this->size = strlen(this->actual_string);
 }
 
-stm::String &stm::String::operator=(const stm::String &string) {
+stm::string &stm::string::operator=(const stm::string &string) {
     if (this == &string) return *this;
     this->unexist();
     this->copy(string);
     return *this;
 }
 
-stm::String &stm::String::operator=(stm::String &&string) noexcept {
+stm::string &stm::string::operator=(stm::string &&string) noexcept {
     if (this == &string) return *this;
     this->unexist();
     this->move(string);
     return *this;
 }
 
-stm::String &stm::String::operator+=(const stm::String &string) {
+stm::string &stm::string::operator+=(const stm::string &string) {
     *this = *this + string;
     return *this;
 }
 
-stm::String &stm::operator+(const stm::String &string1, const stm::String &string2) {
-    return *(new stm::String(stm::strcat(string1.actual_string, string2.actual_string)));
+stm::string &stm::operator+(const stm::string &string1, const stm::string &string2) {
+    return *(new stm::string(stm::strcat(string1.actual_string, string2.actual_string)));
 }
 
-bool stm::operator==(const stm::String &string1, const stm::String &string2) {
+inline bool stm::operator==(const stm::string &string1, const stm::string &string2) {
     return !stm::strcmp(string1.actual_string, string2.actual_string);
 }
 
-bool stm::operator<(const stm::String &string1, const stm::String &string2) {
+inline bool stm::operator<(const stm::string &string1, const stm::string &string2) {
     return stm::strcmp(string1.actual_string, string2.actual_string) < 0;
 }
 
-int stm::String::write_and_count(const char *src, char *dst, int n) {
+int stm::string::write_and_count(const char *src, char *dst, int n) {
     int i;
     for (i = 0; src[i]; i++) {
         if (i >= n) return -1;

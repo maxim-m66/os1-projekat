@@ -8,7 +8,7 @@ extern "C" void supervisorTrap();
 class Riscv {
 public:
 
-    __attribute__((unused)) static void handleSupervisorTrap();
+    static void handleSupervisorTrap(uint64, uint64, uint64, uint64, uint64);
 
     static void handleTimerTrap();
 

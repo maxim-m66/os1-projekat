@@ -5,7 +5,7 @@
 #include "syscall_c.hpp"
 
 namespace stm {
-    class String;
+    class string;
 
     class endline {
 
@@ -17,7 +17,7 @@ namespace stm {
 
         const istream &operator<<(const char *string) const;
 
-        const istream &operator<<(const String &string) const;
+        const istream &operator<<(const string &string) const;
 
         const istream &operator<<(long long number) const;
 
@@ -33,7 +33,7 @@ namespace stm {
     };
 
     class ostream final {
-        void operator>>(const String &string);
+        void operator>>(const string &string);
     };
 
     extern const istream cout;

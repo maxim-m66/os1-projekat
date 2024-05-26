@@ -15,7 +15,7 @@ const stm::istream &stm::istream::operator<<(const char *string) const {
     return *this;
 }
 
-const stm::istream &stm::istream::operator<<(const stm::String &string) const {
+const stm::istream &stm::istream::operator<<(const stm::string &string) const {
     print(string.actual_string);
     return *this;
 }

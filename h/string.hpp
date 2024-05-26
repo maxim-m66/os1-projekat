@@ -20,41 +20,43 @@ namespace stm {
 
     char *utos(uint64 number, char *buffer, int radix);
 
-    class String;
+    class string;
 
-    String &operator+(const String &string1, const String &string2);
+    string &operator+(const string &string1, const string &string2);
 
-    bool operator==(const String &string1, const String &string2);
+    bool operator==(const string &string1, const string &string2);
 
-    bool operator<(const String &string1, const String &string2);
+    bool operator<(const string &string1, const string &string2);
 
-    bool operator!=(const String &string1, const String &string2);
+    bool operator!=(const string &string1, const string &string2);
 
-    bool operator>(const String &string1, const String &string2);
+    bool operator>(const string &string1, const string &string2);
 
-    bool operator<=(const String &string1, const String &string2);
+    bool operator<=(const string &string1, const string &string2);
 
-    bool operator>=(const String &string1, const String &string2);
+    bool operator>=(const string &string1, const string &string2);
 
-    class String final {
+    class string final {
     public:
-        String(const char *);
+        string() = default;
 
-        String(char);
+        string(const char *);
 
-        explicit String(long long);
+        string(char);
 
-        explicit String(int);
+        explicit string(long long);
 
-        explicit String(uint64);
+        explicit string(int);
 
-        String(const String &string) { this->copy(string); }
+        explicit string(uint64);
 
-        String(String &&string) { this->move(string); }
+        string(const string &string) { this->copy(string); }
 
-        String &operator=(const String &);
+        string(string &&string) { this->move(string); }
 
-        String &operator=(String &&) noexcept;
+        string &operator=(const string &);
+
+        string &operator=(string &&) noexcept;
 
         int length() const { return this->size; }
 
@@ -66,30 +68,30 @@ namespace stm {
             return this->actual_string[i];
         }
 
-        friend String &operator+(const String &string1, const String &string2);
+        friend string &operator+(const string &string1, const string &string2);
 
-        String &operator+=(const String &string);
+        string &operator+=(const string &string);
 
-        friend bool operator==(const String &string1, const String &string2);
+        friend bool operator==(const string &string1, const string &string2);
 
-        friend bool operator<(const String &string1, const String &string2);
+        friend bool operator<(const string &string1, const string &string2);
 
-        friend bool operator!=(const String &string1, const String &string2) { return !(string1 == string2); }
+        friend bool operator!=(const string &string1, const string &string2) { return !(string1 == string2); }
 
-        friend bool operator>(const String &string1, const String &string2) {
+        friend bool operator>(const string &string1, const string &string2) {
             return string1 != string2 && !(string1 < string2);
         }
 
-        friend bool operator<=(const String &string1, const String &string2) { return !(string1 > string2); }
+        friend bool operator<=(const string &string1, const string &string2) { return !(string1 > string2); }
 
-        friend bool operator>=(const String &string1, const String &string2) { return !(string1 < string2); }
+        friend bool operator>=(const string &string1, const string &string2) { return !(string1 < string2); }
 
-        ~String() { this->unexist(); }
+        ~string() { this->unexist(); }
 
     private:
-        void copy(const String &);
+        void copy(const string &);
 
-        void move(String &);
+        void move(string &);
 
         void unexist() { delete[] this->actual_string; }
 
