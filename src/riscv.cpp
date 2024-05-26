@@ -6,6 +6,28 @@
 #include "../h/c_sleep.hpp"
 #include "../h/scheduler.hpp"
 
+Riscv::syscall_f Riscv::syscall_table[SYSCALL_COUNT] = {
+        reinterpret_cast<Riscv::syscall_f>(Allocator::_mem_alloc),
+        reinterpret_cast<Riscv::syscall_f>(Allocator::_mem_free),
+        reinterpret_cast<Riscv::syscall_f>(TCB::_thread_create),
+        reinterpret_cast<Riscv::syscall_f>(TCB::_thread_exit),
+        reinterpret_cast<Riscv::syscall_f>(TCB::_thread_dispatch),
+        reinterpret_cast<Riscv::syscall_f>(TCB::_thread_join),
+        reinterpret_cast<Riscv::syscall_f>(TCB::_thread_join_time),
+        reinterpret_cast<Riscv::syscall_f>(TCB::_fork),
+        reinterpret_cast<Riscv::syscall_f>(TCB::_kill),
+        reinterpret_cast<Riscv::syscall_f>(Sem::_sem_open),
+        reinterpret_cast<Riscv::syscall_f>(Sem::_sem_close),
+        reinterpret_cast<Riscv::syscall_f>(Sem::_sem_wait),
+        reinterpret_cast<Riscv::syscall_f>(Sem::_sem_signal),
+        reinterpret_cast<Riscv::syscall_f>(Sem::_sem_signal_all),
+        reinterpret_cast<Riscv::syscall_f>(Sem::_sem_signal_wait),
+        reinterpret_cast<Riscv::syscall_f>(Cradle::_time_sleep),
+        reinterpret_cast<Riscv::syscall_f>(Cradle::_thread_wake),
+        reinterpret_cast<Riscv::syscall_f>(IO::_getc),
+        reinterpret_cast<Riscv::syscall_f>(IO::_putc)
+};
+
 __attribute__((unused))
 void Riscv::handleSupervisorTrap() {
     uint64 code, arg1, arg2, arg3, arg4, sstatus, sepc;
@@ -16,70 +38,11 @@ void Riscv::handleSupervisorTrap() {
     __asm__ volatile("mv %[arg4], a4" : [arg4] "=r"(arg4));
     sstatus = r_sstatus();
     sepc = r_sepc();
-    if (r_scause() == 2) {
+    if (r_scause() == ILLEGAL_INSTRUCTION) {
         print("\nIllegal Instruction\n");
-        thread_exit();
+        TCB::_thread_exit();
     }
-    switch (code) {
-        case MEM_ALLOC:
-            Allocator::_mem_alloc((int) arg1);
-            break;
-        case MEM_FREE:
-            Allocator::_mem_free((void *) arg1);
-            break;
-        case THREAD_CREATE:
-            TCB::_thread_create((thread_t *) arg1, (run_t) arg2, (void *) arg3, (void *) arg4);
-            break;
-        case THREAD_EXIT:
-            TCB::_thread_exit();
-            break;
-        case THREAD_DISPATCH:
-            TCB::_thread_dispatch();
-            break;
-        case THREAD_JOIN:
-            TCB::_thread_join((thread_t) arg1);
-            break;
-        case THREAD_JOIN_TIME:
-            TCB::_thread_join((thread_t) arg1, (time_t) arg2);
-            break;
-        case THREAD_FORK:
-            TCB::_fork();
-            break;
-        case THREAD_KILL:
-            TCB::_kill((thread_t) arg1);
-            break;
-        case SEM_OPEN:
-            Sem::_sem_open((sem_t *) arg1, arg2);
-            break;
-        case SEM_CLOSE:
-            Sem::_sem_close((sem_t) arg1);
-            break;
-        case SEM_WAIT:
-            Sem::_sem_wait((sem_t) arg1);
-            break;
-        case SEM_SIGNAL:
-            Sem::_sem_signal((sem_t) arg1);
-            break;
-        case SIGNAL_WAIT:
-            Sem::_sem_signal((sem_t) arg1);
-            Sem::_sem_wait((sem_t) arg2);
-            break;
-        case TIME_SLEEP:
-            Cradle::_time_sleep((time_t) arg1);
-            break;
-        case THREAD_WAKE:
-            Cradle::_thread_wake((thread_t) arg1);
-            break;
-        case GETC:
-            IO::_getc();
-            break;
-        case PUTC:
-            IO::_putc((char) arg1);
-            break;
-        default:
-            break;
-
-    }
+    syscall_table[code](arg1, arg2, arg3, arg4);
     w_sepc(sepc + 4);
     w_sstatus(sstatus);
 }
@@ -87,6 +50,8 @@ void Riscv::handleSupervisorTrap() {
 
 __attribute__((unused))
 void Riscv::handleTimerTrap() {
+    uint64 sstatus = r_sstatus();
+    uint64 sepc = r_sepc();
     while ((*((char *) CONSOLE_STATUS) & CONSOLE_TX_STATUS_BIT) && !IO::Output.is_empty()) {
         char c = IO::Output.get();
         *(volatile char *) CONSOLE_TX_DATA = c;
@@ -106,6 +71,8 @@ void Riscv::handleTimerTrap() {
         TCB::running->set_preempted();
         TCB::_thread_dispatch();
     }
+    w_sepc(sepc);
+    w_sstatus(sstatus);
 }
 
 __attribute__((unused))

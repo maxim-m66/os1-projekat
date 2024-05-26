@@ -7,7 +7,6 @@
 [[noreturn]]
 void bleya_nit(void *) {
     while (true) {
-        thread_dispatch();
     }
 }
 
@@ -26,7 +25,6 @@ inline void init() {
     printer = new OwnedMutex();
     thread_t handle_main;
     thread_create(&handle_main, nullptr, nullptr);
-    TCB::running = handle_main;
     thread_create(&handle_bleya, &bleya_nit, nullptr);
 }
 
@@ -39,6 +37,10 @@ int call() {
     int ret;
     thread_create(&userHandle, userWrapper, &ret);
     thread_join(userHandle);
+    while (!userHandle->is_finished()) {
+        stm::cout << 'e';
+        //thread_dispatch();
+    }
     return ret;
 }
 

@@ -94,6 +94,13 @@ int sem_signal(sem_t id) {
     return ret;
 }
 
+int sem_signal_all(sem_t id) {
+    int volatile ret;
+    syscall(SIGNAL_ALL, (uint64) id);
+    __asm__ volatile ("mv %[ret], a0" : [ret] "=r"(ret));
+    return ret;
+}
+
 int signal_and_wait(sem_t signal, sem_t wait) {
     int volatile ret;
     syscall(SIGNAL_WAIT, (uint64) signal, (uint64) wait);

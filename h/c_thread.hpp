@@ -28,7 +28,7 @@ public:
 
     static void _thread_join(thread_t);
 
-    static void _thread_join(thread_t, time_t);
+    static void _thread_join_time(thread_t, time_t);
 
     static int _fork();
 

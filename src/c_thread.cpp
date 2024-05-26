@@ -30,13 +30,12 @@ TCB::TCB(TCB &parent) :
 int TCB::_thread_create(thread_t *handle, void(*start_routine)(void *), void *arg, void *stack) {
     *handle = new TCB(start_routine, arg, stack, {(uint64) thread_start, (uint64) stack + DEFAULT_STACK_SIZE - 1});
     if (start_routine) Scheduler::put(*handle);
+    else TCB::running = *handle;
     return (*handle)->t_id;
 }
 
 void TCB::yield() {
     thread_t old = TCB::running;
-    old->context.sstatus = Riscv::r_sstatus();
-    old->context.sepc = Riscv::r_sepc();
     if (old->is_runnable() && old != handle_bleya) {
         Scheduler::put(old);
     } else if (old->is_finished()) {
@@ -50,8 +49,6 @@ void TCB::yield() {
         }
         TCB::running = Scheduler::get();
     }
-    Riscv::w_sstatus(TCB::running->context.sstatus);
-    Riscv::w_sepc(TCB::running->context.sepc);
     TCB::context_switch(&old->context, &TCB::running->context);
 }
 
@@ -87,7 +84,7 @@ void TCB::_thread_join(thread_t handle) {
     TCB::_thread_dispatch();
 }
 
-void TCB::_thread_join(thread_t handle, time_t time) {
+void TCB::_thread_join_time(thread_t handle, time_t time) {
     if (handle->is_finished())
         return;
     TCB::running->enjoin();

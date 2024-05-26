@@ -156,11 +156,11 @@ stm::String &stm::operator+(const stm::String &string1, const stm::String &strin
     return *(new stm::String(stm::strcat(string1.actual_string, string2.actual_string)));
 }
 
-inline bool stm::operator==(const stm::String &string1, const stm::String &string2) {
+bool stm::operator==(const stm::String &string1, const stm::String &string2) {
     return !stm::strcmp(string1.actual_string, string2.actual_string);
 }
 
-inline bool stm::operator<(const stm::String &string1, const stm::String &string2) {
+bool stm::operator<(const stm::String &string1, const stm::String &string2) {
     return stm::strcmp(string1.actual_string, string2.actual_string) < 0;
 }
 

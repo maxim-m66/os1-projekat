@@ -88,6 +88,13 @@ public:
 
 private:
 
+    enum Scause {
+        ILLEGAL_INSTRUCTION = 2,
+    };
+
+    typedef uint64 (*syscall_f)(uint64, uint64, uint64, uint64);
+
+    static syscall_f syscall_table[SYSCALL_COUNT];
 };
 
 inline uint64 Riscv::r_sscratch() {

@@ -53,3 +53,18 @@ int Sem::_sem_signal(sem_t id) {
     }
     return 0;
 }
+
+int Sem::_sem_signal_all(Sem * id) {
+    if (!id) return 1;
+    while (!id->blocked.is_empty()) {
+        thread_t next = id->blocked.get();
+        Scheduler::put(next);
+        id->count++;
+    }
+    return 0;
+}
+
+int Sem::_sem_signal_wait(Sem *id1, Sem* id2) {
+    _sem_signal(id1);
+    return _sem_wait(id2);
+}
