@@ -87,15 +87,11 @@ void Riscv::popSppSpie() {
     __asm__ volatile("sret");
 }
 
-
-__attribute__((unused))
 void Riscv::handleReadTrap() {
     *(volatile char *) CONSOLE_TX_DATA = '!';
     *(volatile char *) CONSOLE_TX_DATA = 'r';
 }
 
-
-__attribute__((unused))
 void Riscv::handleWriteTrap() {
     *(volatile char *) CONSOLE_TX_DATA = '!';
     *(volatile char *) CONSOLE_TX_DATA = 'w';
