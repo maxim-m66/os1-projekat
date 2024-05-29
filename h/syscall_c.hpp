@@ -98,6 +98,8 @@ void putc(char c);
 
 uint64 scs();
 
+//extern uint64 syscall(uint64, uint64 = 0, uint64 = 0, uint64 = 0, uint64 = 0);
+
 uint64 syscall(uint64, uint64 = 0, uint64 = 0, uint64 = 0, uint64 = 0);
 
 #endif

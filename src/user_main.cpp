@@ -44,6 +44,14 @@ private:
 
 #define THRD 50
 
+class Pthread : public PeriodicThread {
+public:
+    explicit Pthread(int period) : PeriodicThread(period) {}
+    void periodicActivation() override {
+        cout << "Hello from periodic thread!" << endl;
+    }
+};
+
 int userMain() {
     dramatic_print("Hello There!! Welcome to my Operating System.\n");
     Thread *threads[THRD];
@@ -61,5 +69,10 @@ int userMain() {
     sleeper1->join();
     sleeper2->join();
     sleeper4->join();
+    Pthread *pthread = new Pthread(10);
+    pthread->start();
+    time_sleep(100);
+    pthread->terminate();
+    pthread->join();
     return 0;
 }

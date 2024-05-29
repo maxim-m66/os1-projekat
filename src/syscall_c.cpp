@@ -1,5 +1,4 @@
 #include "../h/syscall_c.hpp"
-#include "../h/c_console.hpp"
 
 
 uint64 syscall(uint64 code, uint64 arg1, uint64 arg2, uint64 arg3, uint64 arg4) {

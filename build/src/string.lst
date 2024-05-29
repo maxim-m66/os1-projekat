@@ -1,0 +1,2889 @@
+GAS LISTING /tmp/ccIcpaEL.s 			page 1
+
+
+   1              		.file	"string.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.text
+   5              	.Ltext0:
+   6              		.align	2
+   7              		.globl	_ZN3stm6strlenEPKc
+   9              	_ZN3stm6strlenEPKc:
+  10              	.LFB17:
+  11              		.file 1 "src/string.cpp"
+   1:src/string.cpp **** #include "../h/string.hpp"
+   2:src/string.cpp **** #include "../h/c_memory.hpp"
+   3:src/string.cpp **** #include "../h/iostream.hpp"
+   4:src/string.cpp **** 
+   5:src/string.cpp **** int stm::strlen(const char *string) {
+  12              		.loc 1 5 37
+  13              		.cfi_startproc
+  14              	.LVL0:
+  15 0000 130101FF 		addi	sp,sp,-16
+  16              		.cfi_def_cfa_offset 16
+  17 0004 23348100 		sd	s0,8(sp)
+  18              		.cfi_offset 8, -8
+  19 0008 13040101 		addi	s0,sp,16
+  20              		.cfi_def_cfa 8, 0
+  21 000c 13070500 		mv	a4,a0
+   6:src/string.cpp ****     int size;
+  22              		.loc 1 6 5
+   7:src/string.cpp ****     for (size = 0; string[size]; size++);
+  23              		.loc 1 7 5
+  24              	.LVL1:
+  25              		.loc 1 7 15 is_stmt 0
+  26 0010 13050000 		li	a0,0
+  27              	.LVL2:
+  28              	.L3:
+  29              		.loc 1 7 31 is_stmt 1 discriminator 3
+  30 0014 B307A700 		add	a5,a4,a0
+  31 0018 83C70700 		lbu	a5,0(a5)
+  32 001c 63860700 		beqz	a5,.L2
+  33              		.loc 1 7 5 discriminator 2
+  34 0020 1B051500 		addiw	a0,a0,1
+  35              	.LVL3:
+  36 0024 6FF01FFF 		j	.L3
+  37              	.LVL4:
+  38              	.L2:
+   8:src/string.cpp ****     return size;
+  39              		.loc 1 8 5
+   9:src/string.cpp **** }
+  40              		.loc 1 9 1 is_stmt 0
+  41 0028 03348100 		ld	s0,8(sp)
+  42              		.cfi_restore 8
+  43              		.cfi_def_cfa 2, 16
+  44 002c 13010101 		addi	sp,sp,16
+  45              		.cfi_def_cfa_offset 0
+  46 0030 67800000 		jr	ra
+  47              		.cfi_endproc
+  48              	.LFE17:
+  50              		.align	2
+GAS LISTING /tmp/ccIcpaEL.s 			page 2
+
+
+  51              		.globl	_ZN3stm6strcpyEPKcPc
+  53              	_ZN3stm6strcpyEPKcPc:
+  54              	.LFB18:
+  10:src/string.cpp **** 
+  11:src/string.cpp **** char *stm::strcpy(const char *const src, char *const dst) {
+  55              		.loc 1 11 59 is_stmt 1
+  56              		.cfi_startproc
+  57              	.LVL5:
+  58 0034 130101FE 		addi	sp,sp,-32
+  59              		.cfi_def_cfa_offset 32
+  60 0038 233C1100 		sd	ra,24(sp)
+  61 003c 23388100 		sd	s0,16(sp)
+  62 0040 23349100 		sd	s1,8(sp)
+  63 0044 23302101 		sd	s2,0(sp)
+  64              		.cfi_offset 1, -8
+  65              		.cfi_offset 8, -16
+  66              		.cfi_offset 9, -24
+  67              		.cfi_offset 18, -32
+  68 0048 13040102 		addi	s0,sp,32
+  69              		.cfi_def_cfa 8, 0
+  70 004c 13090500 		mv	s2,a0
+  71 0050 93840500 		mv	s1,a1
+  12:src/string.cpp ****     memcpy(src, dst, strlen(src) + 1);
+  72              		.loc 1 12 5
+  73              		.loc 1 12 28 is_stmt 0
+  74 0054 97000000 		call	_ZN3stm6strlenEPKc
+  74      E7800000 
+  75              	.LVL6:
+  76              		.loc 1 12 11
+  77 005c 1B061500 		addiw	a2,a0,1
+  78 0060 93850400 		mv	a1,s1
+  79 0064 13050900 		mv	a0,s2
+  80 0068 97000000 		call	_Z6memcpyPKvS0_i@plt
+  80      E7800000 
+  81              	.LVL7:
+  13:src/string.cpp ****     return dst;
+  82              		.loc 1 13 5 is_stmt 1
+  14:src/string.cpp **** }
+  83              		.loc 1 14 1 is_stmt 0
+  84 0070 13850400 		mv	a0,s1
+  85 0074 83308101 		ld	ra,24(sp)
+  86              		.cfi_restore 1
+  87 0078 03340101 		ld	s0,16(sp)
+  88              		.cfi_restore 8
+  89              		.cfi_def_cfa 2, 32
+  90 007c 83348100 		ld	s1,8(sp)
+  91              		.cfi_restore 9
+  92              	.LVL8:
+  93 0080 03390100 		ld	s2,0(sp)
+  94              		.cfi_restore 18
+  95              	.LVL9:
+  96 0084 13010102 		addi	sp,sp,32
+  97              		.cfi_def_cfa_offset 0
+  98 0088 67800000 		jr	ra
+  99              		.cfi_endproc
+ 100              	.LFE18:
+ 102              		.align	2
+GAS LISTING /tmp/ccIcpaEL.s 			page 3
+
+
+ 103              		.globl	_ZN3stm7strncpyEPcS0_i
+ 105              	_ZN3stm7strncpyEPcS0_i:
+ 106              	.LFB19:
+  15:src/string.cpp **** 
+  16:src/string.cpp **** void stm::strncpy(char *const src, char *const dst, int max_len) {
+ 107              		.loc 1 16 66 is_stmt 1
+ 108              		.cfi_startproc
+ 109              	.LVL10:
+ 110 008c 130101FD 		addi	sp,sp,-48
+ 111              		.cfi_def_cfa_offset 48
+ 112 0090 23341102 		sd	ra,40(sp)
+ 113 0094 23308102 		sd	s0,32(sp)
+ 114 0098 233C9100 		sd	s1,24(sp)
+ 115 009c 23382101 		sd	s2,16(sp)
+ 116 00a0 23343101 		sd	s3,8(sp)
+ 117 00a4 23304101 		sd	s4,0(sp)
+ 118              		.cfi_offset 1, -8
+ 119              		.cfi_offset 8, -16
+ 120              		.cfi_offset 9, -24
+ 121              		.cfi_offset 18, -32
+ 122              		.cfi_offset 19, -40
+ 123              		.cfi_offset 20, -48
+ 124 00a8 13040103 		addi	s0,sp,48
+ 125              		.cfi_def_cfa 8, 0
+ 126 00ac 13090500 		mv	s2,a0
+ 127 00b0 93890500 		mv	s3,a1
+ 128 00b4 130A0600 		mv	s4,a2
+  17:src/string.cpp ****     for (int i = 0; i < strlen(src) + 1; i++) {
+ 129              		.loc 1 17 5
+ 130              	.LVL11:
+ 131              	.LBB6:
+ 132              		.loc 1 17 14 is_stmt 0
+ 133 00b8 93040000 		li	s1,0
+ 134              	.LVL12:
+ 135              	.L10:
+ 136              		.loc 1 17 23 is_stmt 1 discriminator 1
+ 137              		.loc 1 17 31 is_stmt 0 discriminator 1
+ 138 00bc 13050900 		mv	a0,s2
+ 139 00c0 97000000 		call	_ZN3stm6strlenEPKc
+ 139      E7800000 
+ 140              	.LVL13:
+ 141              		.loc 1 17 23 discriminator 1
+ 142 00c8 63449502 		blt	a0,s1,.L7
+  18:src/string.cpp ****         if (i >= max_len) {
+ 143              		.loc 1 18 9 is_stmt 1
+ 144 00cc 63DE4401 		bge	s1,s4,.L12
+  19:src/string.cpp ****             dst[i] = '\0';
+  20:src/string.cpp ****             return;
+  21:src/string.cpp ****         }
+  22:src/string.cpp ****         dst[i] = src[i];
+ 145              		.loc 1 22 9 discriminator 2
+ 146              		.loc 1 22 14 is_stmt 0 discriminator 2
+ 147 00d0 B3879900 		add	a5,s3,s1
+ 148              		.loc 1 22 23 discriminator 2
+ 149 00d4 33079900 		add	a4,s2,s1
+ 150 00d8 03470700 		lbu	a4,0(a4)
+ 151              		.loc 1 22 16 discriminator 2
+GAS LISTING /tmp/ccIcpaEL.s 			page 4
+
+
+ 152 00dc 2380E700 		sb	a4,0(a5)
+  17:src/string.cpp ****         if (i >= max_len) {
+ 153              		.loc 1 17 5 is_stmt 1 discriminator 2
+ 154 00e0 9B841400 		addiw	s1,s1,1
+ 155              	.LVL14:
+ 156 00e4 6FF09FFD 		j	.L10
+ 157              	.LVL15:
+ 158              	.L12:
+  19:src/string.cpp ****             dst[i] = '\0';
+ 159              		.loc 1 19 13
+  19:src/string.cpp ****             dst[i] = '\0';
+ 160              		.loc 1 19 18 is_stmt 0
+ 161 00e8 B3849900 		add	s1,s3,s1
+ 162              	.LVL16:
+  19:src/string.cpp ****             dst[i] = '\0';
+ 163              		.loc 1 19 20
+ 164 00ec 23800400 		sb	zero,0(s1)
+  20:src/string.cpp ****         }
+ 165              		.loc 1 20 13 is_stmt 1
+ 166              	.L7:
+ 167              	.LBE6:
+  23:src/string.cpp ****     }
+  24:src/string.cpp **** }
+ 168              		.loc 1 24 1 is_stmt 0
+ 169 00f0 83308102 		ld	ra,40(sp)
+ 170              		.cfi_restore 1
+ 171 00f4 03340102 		ld	s0,32(sp)
+ 172              		.cfi_restore 8
+ 173              		.cfi_def_cfa 2, 48
+ 174 00f8 83348101 		ld	s1,24(sp)
+ 175              		.cfi_restore 9
+ 176 00fc 03390101 		ld	s2,16(sp)
+ 177              		.cfi_restore 18
+ 178              	.LVL17:
+ 179 0100 83398100 		ld	s3,8(sp)
+ 180              		.cfi_restore 19
+ 181              	.LVL18:
+ 182 0104 033A0100 		ld	s4,0(sp)
+ 183              		.cfi_restore 20
+ 184 0108 13010103 		addi	sp,sp,48
+ 185              		.cfi_def_cfa_offset 0
+ 186 010c 67800000 		jr	ra
+ 187              		.cfi_endproc
+ 188              	.LFE19:
+ 190              		.align	2
+ 191              		.globl	_ZN3stm6strcatEPKcS1_
+ 193              	_ZN3stm6strcatEPKcS1_:
+ 194              	.LFB20:
+  25:src/string.cpp **** 
+  26:src/string.cpp **** char *stm::strcat(const char *const base, const char *const tail) {
+ 195              		.loc 1 26 67 is_stmt 1
+ 196              		.cfi_startproc
+ 197              	.LVL19:
+ 198 0110 130101FD 		addi	sp,sp,-48
+ 199              		.cfi_def_cfa_offset 48
+ 200 0114 23341102 		sd	ra,40(sp)
+ 201 0118 23308102 		sd	s0,32(sp)
+GAS LISTING /tmp/ccIcpaEL.s 			page 5
+
+
+ 202 011c 233C9100 		sd	s1,24(sp)
+ 203 0120 23382101 		sd	s2,16(sp)
+ 204 0124 23343101 		sd	s3,8(sp)
+ 205 0128 23304101 		sd	s4,0(sp)
+ 206              		.cfi_offset 1, -8
+ 207              		.cfi_offset 8, -16
+ 208              		.cfi_offset 9, -24
+ 209              		.cfi_offset 18, -32
+ 210              		.cfi_offset 19, -40
+ 211              		.cfi_offset 20, -48
+ 212 012c 13040103 		addi	s0,sp,48
+ 213              		.cfi_def_cfa 8, 0
+ 214 0130 130A0500 		mv	s4,a0
+ 215 0134 13890500 		mv	s2,a1
+  27:src/string.cpp ****     int base_len = strlen(base);
+ 216              		.loc 1 27 5
+ 217              		.loc 1 27 26 is_stmt 0
+ 218 0138 97000000 		call	_ZN3stm6strlenEPKc
+ 218      E7800000 
+ 219              	.LVL20:
+ 220 0140 93090500 		mv	s3,a0
+ 221              	.LVL21:
+  28:src/string.cpp ****     char *new_base = new char[base_len + strlen(tail) + 1];
+ 222              		.loc 1 28 5 is_stmt 1
+ 223              		.loc 1 28 48 is_stmt 0
+ 224 0144 13050900 		mv	a0,s2
+ 225 0148 97000000 		call	_ZN3stm6strlenEPKc
+ 225      E7800000 
+ 226              	.LVL22:
+ 227              		.loc 1 28 40
+ 228 0150 3B053501 		addw	a0,a0,s3
+ 229              		.loc 1 28 58
+ 230 0154 1B051500 		addiw	a0,a0,1
+ 231 0158 97000000 		call	_Znam@plt
+ 231      E7800000 
+ 232              	.LVL23:
+ 233 0160 93040500 		mv	s1,a0
+ 234              	.LVL24:
+  29:src/string.cpp ****     strcpy(base, new_base);
+ 235              		.loc 1 29 5 is_stmt 1
+ 236              		.loc 1 29 11 is_stmt 0
+ 237 0164 93050500 		mv	a1,a0
+ 238 0168 13050A00 		mv	a0,s4
+ 239 016c 97000000 		call	_ZN3stm6strcpyEPKcPc
+ 239      E7800000 
+ 240              	.LVL25:
+  30:src/string.cpp ****     strcpy(tail, &new_base[base_len]);
+ 241              		.loc 1 30 5 is_stmt 1
+ 242              		.loc 1 30 11 is_stmt 0
+ 243 0174 B3853401 		add	a1,s1,s3
+ 244 0178 13050900 		mv	a0,s2
+ 245 017c 97000000 		call	_ZN3stm6strcpyEPKcPc
+ 245      E7800000 
+ 246              	.LVL26:
+  31:src/string.cpp ****     return new_base;
+ 247              		.loc 1 31 5 is_stmt 1
+  32:src/string.cpp **** }
+GAS LISTING /tmp/ccIcpaEL.s 			page 6
+
+
+ 248              		.loc 1 32 1 is_stmt 0
+ 249 0184 13850400 		mv	a0,s1
+ 250 0188 83308102 		ld	ra,40(sp)
+ 251              		.cfi_restore 1
+ 252 018c 03340102 		ld	s0,32(sp)
+ 253              		.cfi_restore 8
+ 254              		.cfi_def_cfa 2, 48
+ 255 0190 83348101 		ld	s1,24(sp)
+ 256              		.cfi_restore 9
+ 257              	.LVL27:
+ 258 0194 03390101 		ld	s2,16(sp)
+ 259              		.cfi_restore 18
+ 260              	.LVL28:
+ 261 0198 83398100 		ld	s3,8(sp)
+ 262              		.cfi_restore 19
+ 263              	.LVL29:
+ 264 019c 033A0100 		ld	s4,0(sp)
+ 265              		.cfi_restore 20
+ 266              	.LVL30:
+ 267 01a0 13010103 		addi	sp,sp,48
+ 268              		.cfi_def_cfa_offset 0
+ 269 01a4 67800000 		jr	ra
+ 270              		.cfi_endproc
+ 271              	.LFE20:
+ 273              		.align	2
+ 274              		.globl	_ZN3stm6strcmpEPKcS1_
+ 276              	_ZN3stm6strcmpEPKcS1_:
+ 277              	.LFB21:
+  33:src/string.cpp **** 
+  34:src/string.cpp **** int stm::strcmp(const char *str1, const char *str2) { //negative means str1 < str2 (a < b) (a < aa)
+ 278              		.loc 1 34 53 is_stmt 1
+ 279              		.cfi_startproc
+ 280              	.LVL31:
+ 281 01a8 130101FF 		addi	sp,sp,-16
+ 282              		.cfi_def_cfa_offset 16
+ 283 01ac 23348100 		sd	s0,8(sp)
+ 284              		.cfi_offset 8, -8
+ 285 01b0 13040101 		addi	s0,sp,16
+ 286              		.cfi_def_cfa 8, 0
+ 287 01b4 13060500 		mv	a2,a0
+  35:src/string.cpp ****     int i;
+ 288              		.loc 1 35 5
+  36:src/string.cpp ****     for (i = 0; str1[i] && str2[i]; i++) {
+ 289              		.loc 1 36 5
+ 290              	.LVL32:
+ 291              	.LBB7:
+ 292              		.loc 1 36 12 is_stmt 0
+ 293 01b8 93070000 		li	a5,0
+ 294 01bc 6F008000 		j	.L18
+ 295              	.LVL33:
+ 296              	.L23:
+ 297              		.loc 1 36 5 is_stmt 1 discriminator 3
+ 298 01c0 9B871700 		addiw	a5,a5,1
+ 299              	.LVL34:
+ 300              	.L18:
+ 301              		.loc 1 36 25 discriminator 1
+ 302              		.loc 1 36 22 is_stmt 0 discriminator 1
+GAS LISTING /tmp/ccIcpaEL.s 			page 7
+
+
+ 303 01c4 13850700 		mv	a0,a5
+ 304              		.loc 1 36 23 discriminator 1
+ 305 01c8 3307F600 		add	a4,a2,a5
+ 306 01cc 03470700 		lbu	a4,0(a4)
+ 307              		.loc 1 36 25 discriminator 1
+ 308 01d0 630E0700 		beqz	a4,.L16
+ 309              		.loc 1 36 34 discriminator 2
+ 310 01d4 B386F500 		add	a3,a1,a5
+ 311 01d8 83C60600 		lbu	a3,0(a3)
+ 312              		.loc 1 36 25 discriminator 2
+ 313 01dc 63880600 		beqz	a3,.L16
+ 314              	.LBB8:
+  37:src/string.cpp ****         int difference = str1[i] - str2[i];
+ 315              		.loc 1 37 9 is_stmt 1
+ 316              		.loc 1 37 13 is_stmt 0
+ 317 01e0 3B05D740 		subw	a0,a4,a3
+ 318              	.LVL35:
+  38:src/string.cpp ****         if (difference) return difference;
+ 319              		.loc 1 38 9 is_stmt 1
+ 320 01e4 E30ED7FC 		beq	a4,a3,.L23
+ 321 01e8 6F00C001 		j	.L17
+ 322              	.LVL36:
+ 323              	.L16:
+ 324              	.LBE8:
+ 325              	.LBE7:
+  39:src/string.cpp ****     }
+  40:src/string.cpp ****     if (!str1[i] && !str2[i]) return 0;
+ 326              		.loc 1 40 5
+ 327 01ec 63180700 		bnez	a4,.L19
+ 328              		.loc 1 40 28 is_stmt 0 discriminator 1
+ 329 01f0 B385A500 		add	a1,a1,a0
+ 330              	.LVL37:
+ 331 01f4 83C70500 		lbu	a5,0(a1)
+ 332              	.LVL38:
+ 333              		.loc 1 40 18 discriminator 1
+ 334 01f8 638C0700 		beqz	a5,.L20
+ 335              	.L19:
+  41:src/string.cpp ****     else if (str1[i]) return 1;
+ 336              		.loc 1 41 10 is_stmt 1
+ 337 01fc 630E0700 		beqz	a4,.L21
+ 338              		.loc 1 41 30 is_stmt 0
+ 339 0200 13051000 		li	a0,1
+ 340              	.L17:
+  42:src/string.cpp ****     else return -1;
+  43:src/string.cpp **** }
+ 341              		.loc 1 43 1
+ 342 0204 03348100 		ld	s0,8(sp)
+ 343              		.cfi_remember_state
+ 344              		.cfi_restore 8
+ 345              		.cfi_def_cfa 2, 16
+ 346 0208 13010101 		addi	sp,sp,16
+ 347              		.cfi_def_cfa_offset 0
+ 348 020c 67800000 		jr	ra
+ 349              	.L20:
+ 350              		.cfi_restore_state
+  40:src/string.cpp ****     else if (str1[i]) return 1;
+ 351              		.loc 1 40 38
+GAS LISTING /tmp/ccIcpaEL.s 			page 8
+
+
+ 352 0210 13050000 		li	a0,0
+ 353 0214 6FF01FFF 		j	.L17
+ 354              	.L21:
+  42:src/string.cpp ****     else return -1;
+ 355              		.loc 1 42 18
+ 356 0218 1305F0FF 		li	a0,-1
+ 357 021c 6FF09FFE 		j	.L17
+ 358              		.cfi_endproc
+ 359              	.LFE21:
+ 361              		.section	.rodata.str1.8,"aMS",@progbits,1
+ 362              		.align	3
+ 363              	.LC0:
+ 364 0000 30313233 		.string	"0123456789ABCDEF"
+ 364      34353637 
+ 364      38394142 
+ 364      43444546 
+ 364      00
+ 365              		.text
+ 366              		.align	2
+ 367              		.globl	_ZN3stm4ntosExPci
+ 369              	_ZN3stm4ntosExPci:
+ 370              	.LFB22:
+  44:src/string.cpp **** 
+  45:src/string.cpp **** char *stm::ntos(long long number, char *buffer, int radix) {
+ 371              		.loc 1 45 60 is_stmt 1
+ 372              		.cfi_startproc
+ 373              	.LVL39:
+ 374 0220 130101F7 		addi	sp,sp,-144
+ 375              		.cfi_def_cfa_offset 144
+ 376 0224 23341108 		sd	ra,136(sp)
+ 377 0228 23308108 		sd	s0,128(sp)
+ 378 022c 233C9106 		sd	s1,120(sp)
+ 379              		.cfi_offset 1, -8
+ 380              		.cfi_offset 8, -16
+ 381              		.cfi_offset 9, -24
+ 382 0230 13040109 		addi	s0,sp,144
+ 383              		.cfi_def_cfa 8, 0
+ 384 0234 93840500 		mv	s1,a1
+  46:src/string.cpp ****     if (radix < 2 || radix > 16) {
+ 385              		.loc 1 46 5
+ 386              		.loc 1 46 19 is_stmt 0
+ 387 0238 1B07E6FF 		addiw	a4,a2,-2
+ 388              		.loc 1 46 5
+ 389 023c 9307E000 		li	a5,14
+ 390 0240 63ECE706 		bgtu	a4,a5,.L34
+  47:src/string.cpp ****         buffer[0] = 0;
+  48:src/string.cpp ****         return buffer;
+  49:src/string.cpp ****     }
+  50:src/string.cpp ****     if (number == 0) {
+ 391              		.loc 1 50 5 is_stmt 1
+ 392 0244 630E0506 		beqz	a0,.L35
+  51:src/string.cpp ****         buffer[0] = '0';
+  52:src/string.cpp ****         buffer[1] = 0;
+  53:src/string.cpp ****         return buffer;
+  54:src/string.cpp ****     }
+  55:src/string.cpp ****     char digits[100] = {};
+ 393              		.loc 1 55 5
+GAS LISTING /tmp/ccIcpaEL.s 			page 9
+
+
+ 394              		.loc 1 55 10 is_stmt 0
+ 395 0248 233C04F6 		sd	zero,-136(s0)
+ 396 024c 233004F8 		sd	zero,-128(s0)
+ 397 0250 233404F8 		sd	zero,-120(s0)
+ 398 0254 233804F8 		sd	zero,-112(s0)
+ 399 0258 233C04F8 		sd	zero,-104(s0)
+ 400 025c 233004FA 		sd	zero,-96(s0)
+ 401 0260 233404FA 		sd	zero,-88(s0)
+ 402 0264 233804FA 		sd	zero,-80(s0)
+ 403 0268 233C04FA 		sd	zero,-72(s0)
+ 404 026c 233004FC 		sd	zero,-64(s0)
+ 405 0270 233404FC 		sd	zero,-56(s0)
+ 406 0274 233804FC 		sd	zero,-48(s0)
+ 407 0278 232C04FC 		sw	zero,-40(s0)
+  56:src/string.cpp ****     int i = 98;
+ 408              		.loc 1 56 5 is_stmt 1
+ 409              	.LVL40:
+  57:src/string.cpp ****     bool negative = number < 0;
+ 410              		.loc 1 57 5
+  58:src/string.cpp ****     if (negative) number = -number;
+ 411              		.loc 1 58 5
+ 412 027c 634A0504 		bltz	a0,.L36
+ 413 0280 93070500 		mv	a5,a0
+ 414              	.LVL41:
+ 415              	.L28:
+ 416 0284 93062006 		li	a3,98
+ 417              	.LVL42:
+ 418              	.L30:
+  59:src/string.cpp ****     const char *av = "0123456789ABCDEF";
+  60:src/string.cpp ****     while (number > 0) {
+ 419              		.loc 1 60 5
+ 420              		.loc 1 60 19
+ 421 0288 6358F004 		blez	a5,.L29
+  61:src/string.cpp ****         digits[i--] = av[(number % radix)];
+ 422              		.loc 1 61 9
+ 423              		.loc 1 61 34 is_stmt 0
+ 424 028c 33E7C702 		rem	a4,a5,a2
+ 425              	.LVL43:
+ 426              		.loc 1 61 42
+ 427 0290 17080000 		lla	a6,.LC0
+ 427      13080800 
+ 428 0298 33070701 		add	a4,a4,a6
+ 429 029c 03480700 		lbu	a6,0(a4)
+ 430              		.loc 1 61 21
+ 431 02a0 130704FE 		addi	a4,s0,-32
+ 432 02a4 3307D700 		add	a4,a4,a3
+ 433 02a8 230C07F9 		sb	a6,-104(a4)
+  62:src/string.cpp ****         number /= radix;
+ 434              		.loc 1 62 9 is_stmt 1
+ 435              		.loc 1 62 16 is_stmt 0
+ 436 02ac B3C7C702 		div	a5,a5,a2
+ 437              	.LVL44:
+  61:src/string.cpp ****         digits[i--] = av[(number % radix)];
+ 438              		.loc 1 61 17
+ 439 02b0 9B86F6FF 		addiw	a3,a3,-1
+ 440              	.LVL45:
+  60:src/string.cpp ****         digits[i--] = av[(number % radix)];
+GAS LISTING /tmp/ccIcpaEL.s 			page 10
+
+
+ 441              		.loc 1 60 5
+ 442 02b4 6FF05FFD 		j	.L30
+ 443              	.LVL46:
+ 444              	.L34:
+  47:src/string.cpp ****         return buffer;
+ 445              		.loc 1 47 9 is_stmt 1
+  47:src/string.cpp ****         return buffer;
+ 446              		.loc 1 47 19 is_stmt 0
+ 447 02b8 23800500 		sb	zero,0(a1)
+  48:src/string.cpp ****     }
+ 448              		.loc 1 48 9 is_stmt 1
+  48:src/string.cpp ****     }
+ 449              		.loc 1 48 16 is_stmt 0
+ 450 02bc 6F008003 		j	.L26
+ 451              	.LVL47:
+ 452              	.L35:
+  51:src/string.cpp ****         buffer[1] = 0;
+ 453              		.loc 1 51 9 is_stmt 1
+  51:src/string.cpp ****         buffer[1] = 0;
+ 454              		.loc 1 51 19 is_stmt 0
+ 455 02c0 93070003 		li	a5,48
+ 456 02c4 2380F500 		sb	a5,0(a1)
+  52:src/string.cpp ****         return buffer;
+ 457              		.loc 1 52 9 is_stmt 1
+  52:src/string.cpp ****         return buffer;
+ 458              		.loc 1 52 19 is_stmt 0
+ 459 02c8 A3800500 		sb	zero,1(a1)
+  53:src/string.cpp ****     }
+ 460              		.loc 1 53 9 is_stmt 1
+  53:src/string.cpp ****     }
+ 461              		.loc 1 53 16 is_stmt 0
+ 462 02cc 6F008002 		j	.L26
+ 463              	.LVL48:
+ 464              	.L36:
+  58:src/string.cpp ****     const char *av = "0123456789ABCDEF";
+ 465              		.loc 1 58 19 is_stmt 1 discriminator 1
+  58:src/string.cpp ****     const char *av = "0123456789ABCDEF";
+ 466              		.loc 1 58 26 is_stmt 0 discriminator 1
+ 467 02d0 B307A040 		neg	a5,a0
+ 468              	.LVL49:
+ 469 02d4 6FF01FFB 		j	.L28
+ 470              	.LVL50:
+ 471              	.L29:
+  63:src/string.cpp ****     }
+  64:src/string.cpp ****     if (negative) digits[i--] = '-';
+ 472              		.loc 1 64 5 is_stmt 1
+ 473 02d8 634A0502 		bltz	a0,.L37
+ 474              	.LVL51:
+ 475              	.L31:
+  65:src/string.cpp ****     strcpy(&digits[++i], buffer);
+ 476              		.loc 1 65 5
+ 477              		.loc 1 65 11 is_stmt 0
+ 478 02dc 9B861600 		addiw	a3,a3,1
+ 479              	.LVL52:
+ 480 02e0 93850400 		mv	a1,s1
+ 481 02e4 130584F7 		addi	a0,s0,-136
+ 482              	.LVL53:
+GAS LISTING /tmp/ccIcpaEL.s 			page 11
+
+
+ 483 02e8 3305D500 		add	a0,a0,a3
+ 484 02ec 97000000 		call	_ZN3stm6strcpyEPKcPc
+ 484      E7800000 
+ 485              	.LVL54:
+ 486              	.L26:
+  66:src/string.cpp ****     return buffer;
+  67:src/string.cpp **** }
+ 487              		.loc 1 67 1
+ 488 02f4 13850400 		mv	a0,s1
+ 489 02f8 83308108 		ld	ra,136(sp)
+ 490              		.cfi_remember_state
+ 491              		.cfi_restore 1
+ 492 02fc 03340108 		ld	s0,128(sp)
+ 493              		.cfi_restore 8
+ 494              		.cfi_def_cfa 2, 144
+ 495 0300 83348107 		ld	s1,120(sp)
+ 496              		.cfi_restore 9
+ 497              	.LVL55:
+ 498 0304 13010109 		addi	sp,sp,144
+ 499              		.cfi_def_cfa_offset 0
+ 500 0308 67800000 		jr	ra
+ 501              	.LVL56:
+ 502              	.L37:
+ 503              		.cfi_restore_state
+  64:src/string.cpp ****     strcpy(&digits[++i], buffer);
+ 504              		.loc 1 64 19 is_stmt 1 discriminator 1
+  64:src/string.cpp ****     strcpy(&digits[++i], buffer);
+ 505              		.loc 1 64 31 is_stmt 0 discriminator 1
+ 506 030c 930704FE 		addi	a5,s0,-32
+ 507              	.LVL57:
+ 508 0310 B387D700 		add	a5,a5,a3
+ 509 0314 1307D002 		li	a4,45
+ 510 0318 238CE7F8 		sb	a4,-104(a5)
+  64:src/string.cpp ****     strcpy(&digits[++i], buffer);
+ 511              		.loc 1 64 27 discriminator 1
+ 512 031c 9B86F6FF 		addiw	a3,a3,-1
+ 513              	.LVL58:
+ 514 0320 6FF0DFFB 		j	.L31
+ 515              		.cfi_endproc
+ 516              	.LFE22:
+ 518              		.align	2
+ 519              		.globl	_ZN3stm4utosEmPci
+ 521              	_ZN3stm4utosEmPci:
+ 522              	.LFB23:
+  68:src/string.cpp **** 
+  69:src/string.cpp **** char *stm::utos(uint64 number, char *buffer, int radix) {
+ 523              		.loc 1 69 57 is_stmt 1
+ 524              		.cfi_startproc
+ 525              	.LVL59:
+ 526 0324 130101F7 		addi	sp,sp,-144
+ 527              		.cfi_def_cfa_offset 144
+ 528 0328 23341108 		sd	ra,136(sp)
+ 529 032c 23308108 		sd	s0,128(sp)
+ 530 0330 233C9106 		sd	s1,120(sp)
+ 531              		.cfi_offset 1, -8
+ 532              		.cfi_offset 8, -16
+ 533              		.cfi_offset 9, -24
+GAS LISTING /tmp/ccIcpaEL.s 			page 12
+
+
+ 534 0334 13040109 		addi	s0,sp,144
+ 535              		.cfi_def_cfa 8, 0
+ 536 0338 93840500 		mv	s1,a1
+  70:src/string.cpp ****     if (radix < 2 || radix > 16) {
+ 537              		.loc 1 70 5
+ 538              		.loc 1 70 19 is_stmt 0
+ 539 033c 1B07E6FF 		addiw	a4,a2,-2
+ 540              		.loc 1 70 5
+ 541 0340 9307E000 		li	a5,14
+ 542 0344 63E2E704 		bgtu	a4,a5,.L45
+  71:src/string.cpp ****         buffer[0] = 0;
+  72:src/string.cpp ****         return buffer;
+  73:src/string.cpp ****     }
+  74:src/string.cpp ****     if (number == 0) {
+ 543              		.loc 1 74 5 is_stmt 1
+ 544 0348 63040504 		beqz	a0,.L46
+  75:src/string.cpp ****         buffer[0] = '0';
+  76:src/string.cpp ****         buffer[1] = 0;
+  77:src/string.cpp ****         return buffer;
+  78:src/string.cpp ****     }
+  79:src/string.cpp ****     char digits[100] = {};
+ 545              		.loc 1 79 5
+ 546              		.loc 1 79 10 is_stmt 0
+ 547 034c 233C04F6 		sd	zero,-136(s0)
+ 548 0350 233004F8 		sd	zero,-128(s0)
+ 549 0354 233404F8 		sd	zero,-120(s0)
+ 550 0358 233804F8 		sd	zero,-112(s0)
+ 551 035c 233C04F8 		sd	zero,-104(s0)
+ 552 0360 233004FA 		sd	zero,-96(s0)
+ 553 0364 233404FA 		sd	zero,-88(s0)
+ 554 0368 233804FA 		sd	zero,-80(s0)
+ 555 036c 233C04FA 		sd	zero,-72(s0)
+ 556 0370 233004FC 		sd	zero,-64(s0)
+ 557 0374 233404FC 		sd	zero,-56(s0)
+ 558 0378 233804FC 		sd	zero,-48(s0)
+ 559 037c 232C04FC 		sw	zero,-40(s0)
+  80:src/string.cpp ****     int i = 98;
+ 560              		.loc 1 80 5 is_stmt 1
+ 561              	.LVL60:
+  81:src/string.cpp ****     const char *av = "0123456789ABCDEF";
+ 562              		.loc 1 81 5
+  80:src/string.cpp ****     int i = 98;
+ 563              		.loc 1 80 9 is_stmt 0
+ 564 0380 13072006 		li	a4,98
+ 565 0384 6F004004 		j	.L43
+ 566              	.LVL61:
+ 567              	.L45:
+  71:src/string.cpp ****         return buffer;
+ 568              		.loc 1 71 9 is_stmt 1
+  71:src/string.cpp ****         return buffer;
+ 569              		.loc 1 71 19 is_stmt 0
+ 570 0388 23800500 		sb	zero,0(a1)
+  72:src/string.cpp ****     }
+ 571              		.loc 1 72 9 is_stmt 1
+  72:src/string.cpp ****     }
+ 572              		.loc 1 72 16 is_stmt 0
+ 573 038c 6F008005 		j	.L40
+GAS LISTING /tmp/ccIcpaEL.s 			page 13
+
+
+ 574              	.LVL62:
+ 575              	.L46:
+  75:src/string.cpp ****         buffer[1] = 0;
+ 576              		.loc 1 75 9 is_stmt 1
+  75:src/string.cpp ****         buffer[1] = 0;
+ 577              		.loc 1 75 19 is_stmt 0
+ 578 0390 93070003 		li	a5,48
+ 579 0394 2380F500 		sb	a5,0(a1)
+  76:src/string.cpp ****         return buffer;
+ 580              		.loc 1 76 9 is_stmt 1
+  76:src/string.cpp ****         return buffer;
+ 581              		.loc 1 76 19 is_stmt 0
+ 582 0398 A3800500 		sb	zero,1(a1)
+  77:src/string.cpp ****     }
+ 583              		.loc 1 77 9 is_stmt 1
+  77:src/string.cpp ****     }
+ 584              		.loc 1 77 16 is_stmt 0
+ 585 039c 6F008004 		j	.L40
+ 586              	.LVL63:
+ 587              	.L47:
+  82:src/string.cpp ****     while (number > 0) {
+  83:src/string.cpp ****         digits[i--] = av[(number % radix)];
+ 588              		.loc 1 83 9 is_stmt 1
+ 589              		.loc 1 83 34 is_stmt 0
+ 590 03a0 B377C502 		remu	a5,a0,a2
+ 591              	.LVL64:
+ 592              		.loc 1 83 42
+ 593 03a4 97060000 		lla	a3,.LC0
+ 593      93860600 
+ 594 03ac B387D700 		add	a5,a5,a3
+ 595 03b0 83C60700 		lbu	a3,0(a5)
+ 596              		.loc 1 83 21
+ 597 03b4 930704FE 		addi	a5,s0,-32
+ 598 03b8 B387E700 		add	a5,a5,a4
+ 599 03bc 238CD7F8 		sb	a3,-104(a5)
+  84:src/string.cpp ****         number /= radix;
+ 600              		.loc 1 84 9 is_stmt 1
+ 601              		.loc 1 84 16 is_stmt 0
+ 602 03c0 3355C502 		divu	a0,a0,a2
+ 603              	.LVL65:
+  83:src/string.cpp ****         number /= radix;
+ 604              		.loc 1 83 17
+ 605 03c4 1B07F7FF 		addiw	a4,a4,-1
+ 606              	.LVL66:
+ 607              	.L43:
+  82:src/string.cpp ****     while (number > 0) {
+ 608              		.loc 1 82 5 is_stmt 1
+  82:src/string.cpp ****     while (number > 0) {
+ 609              		.loc 1 82 19
+ 610 03c8 E31C05FC 		bnez	a0,.L47
+  85:src/string.cpp ****     }
+  86:src/string.cpp ****     strcpy(&digits[++i], buffer);
+ 611              		.loc 1 86 5
+ 612              		.loc 1 86 11 is_stmt 0
+ 613 03cc 1B071700 		addiw	a4,a4,1
+ 614              	.LVL67:
+ 615 03d0 93850400 		mv	a1,s1
+GAS LISTING /tmp/ccIcpaEL.s 			page 14
+
+
+ 616 03d4 130584F7 		addi	a0,s0,-136
+ 617              	.LVL68:
+ 618 03d8 3305E500 		add	a0,a0,a4
+ 619 03dc 97000000 		call	_ZN3stm6strcpyEPKcPc
+ 619      E7800000 
+ 620              	.LVL69:
+ 621              	.L40:
+  87:src/string.cpp ****     return buffer;
+  88:src/string.cpp **** }
+ 622              		.loc 1 88 1
+ 623 03e4 13850400 		mv	a0,s1
+ 624 03e8 83308108 		ld	ra,136(sp)
+ 625              		.cfi_restore 1
+ 626 03ec 03340108 		ld	s0,128(sp)
+ 627              		.cfi_restore 8
+ 628              		.cfi_def_cfa 2, 144
+ 629 03f0 83348107 		ld	s1,120(sp)
+ 630              		.cfi_restore 9
+ 631              	.LVL70:
+ 632 03f4 13010109 		addi	sp,sp,144
+ 633              		.cfi_def_cfa_offset 0
+ 634 03f8 67800000 		jr	ra
+ 635              		.cfi_endproc
+ 636              	.LFE23:
+ 638              		.align	2
+ 639              		.globl	_ZN3stm6string4copyERKS0_
+ 641              	_ZN3stm6string4copyERKS0_:
+ 642              	.LFB24:
+  89:src/string.cpp **** 
+  90:src/string.cpp **** void stm::string::copy(const stm::string &string) {
+ 643              		.loc 1 90 51 is_stmt 1
+ 644              		.cfi_startproc
+ 645              	.LVL71:
+ 646 03fc 130101FE 		addi	sp,sp,-32
+ 647              		.cfi_def_cfa_offset 32
+ 648 0400 233C1100 		sd	ra,24(sp)
+ 649 0404 23388100 		sd	s0,16(sp)
+ 650 0408 23349100 		sd	s1,8(sp)
+ 651 040c 23302101 		sd	s2,0(sp)
+ 652              		.cfi_offset 1, -8
+ 653              		.cfi_offset 8, -16
+ 654              		.cfi_offset 9, -24
+ 655              		.cfi_offset 18, -32
+ 656 0410 13040102 		addi	s0,sp,32
+ 657              		.cfi_def_cfa 8, 0
+ 658 0414 93040500 		mv	s1,a0
+ 659 0418 13890500 		mv	s2,a1
+  91:src/string.cpp ****     cout << 101;
+ 660              		.loc 1 91 5
+ 661              		.loc 1 91 13 is_stmt 0
+ 662 041c 93055006 		li	a1,101
+ 663              	.LVL72:
+ 664 0420 17050000 		la	a0,_ZN3stm4coutE
+ 664      03350500 
+ 665              	.LVL73:
+ 666 0428 97000000 		call	_ZNK3stm7istreamlsEi@plt
+ 666      E7800000 
+GAS LISTING /tmp/ccIcpaEL.s 			page 15
+
+
+ 667              	.LVL74:
+  92:src/string.cpp ****     this->size = string.size;
+ 668              		.loc 1 92 5 is_stmt 1
+ 669              		.loc 1 92 25 is_stmt 0
+ 670 0430 03250900 		lw	a0,0(s2)
+ 671              		.loc 1 92 16
+ 672 0434 23A0A400 		sw	a0,0(s1)
+  93:src/string.cpp ****     this->actual_string = this->size > string::SMALL_SIZE ? new char[this->size] : this->small_stri
+ 673              		.loc 1 93 5 is_stmt 1
+ 674              		.loc 1 93 59 is_stmt 0
+ 675 0438 9307E001 		li	a5,30
+ 676 043c 63C8A702 		bgt	a0,a5,.L52
+ 677              		.loc 1 93 59 discriminator 2
+ 678 0440 93850401 		addi	a1,s1,16
+ 679              	.L50:
+ 680              		.loc 1 93 25 discriminator 4
+ 681 0444 23B4B400 		sd	a1,8(s1)
+  94:src/string.cpp ****     strcpy(string.actual_string, this->actual_string);
+ 682              		.loc 1 94 5 is_stmt 1 discriminator 4
+ 683              		.loc 1 94 11 is_stmt 0 discriminator 4
+ 684 0448 03358900 		ld	a0,8(s2)
+ 685 044c 97000000 		call	_ZN3stm6strcpyEPKcPc
+ 685      E7800000 
+ 686              	.LVL75:
+  95:src/string.cpp **** }
+ 687              		.loc 1 95 1 discriminator 4
+ 688 0454 83308101 		ld	ra,24(sp)
+ 689              		.cfi_remember_state
+ 690              		.cfi_restore 1
+ 691 0458 03340101 		ld	s0,16(sp)
+ 692              		.cfi_restore 8
+ 693              		.cfi_def_cfa 2, 32
+ 694 045c 83348100 		ld	s1,8(sp)
+ 695              		.cfi_restore 9
+ 696              	.LVL76:
+ 697 0460 03390100 		ld	s2,0(sp)
+ 698              		.cfi_restore 18
+ 699              	.LVL77:
+ 700 0464 13010102 		addi	sp,sp,32
+ 701              		.cfi_def_cfa_offset 0
+ 702 0468 67800000 		jr	ra
+ 703              	.LVL78:
+ 704              	.L52:
+ 705              		.cfi_restore_state
+  93:src/string.cpp ****     this->actual_string = this->size > string::SMALL_SIZE ? new char[this->size] : this->small_stri
+ 706              		.loc 1 93 80 discriminator 1
+ 707 046c 97000000 		call	_Znam@plt
+ 707      E7800000 
+ 708              	.LVL79:
+ 709 0474 93050500 		mv	a1,a0
+ 710 0478 6FF0DFFC 		j	.L50
+ 711              		.cfi_endproc
+ 712              	.LFE24:
+ 714              		.align	2
+ 715              		.globl	_ZN3stm6string4moveERS0_
+ 717              	_ZN3stm6string4moveERS0_:
+ 718              	.LFB25:
+GAS LISTING /tmp/ccIcpaEL.s 			page 16
+
+
+  96:src/string.cpp **** 
+  97:src/string.cpp **** void stm::string::move(stm::string &string) {
+ 719              		.loc 1 97 45 is_stmt 1
+ 720              		.cfi_startproc
+ 721              	.LVL80:
+ 722 047c 130101FE 		addi	sp,sp,-32
+ 723              		.cfi_def_cfa_offset 32
+ 724 0480 233C1100 		sd	ra,24(sp)
+ 725 0484 23388100 		sd	s0,16(sp)
+ 726 0488 23349100 		sd	s1,8(sp)
+ 727 048c 23302101 		sd	s2,0(sp)
+ 728              		.cfi_offset 1, -8
+ 729              		.cfi_offset 8, -16
+ 730              		.cfi_offset 9, -24
+ 731              		.cfi_offset 18, -32
+ 732 0490 13040102 		addi	s0,sp,32
+ 733              		.cfi_def_cfa 8, 0
+ 734 0494 13090500 		mv	s2,a0
+ 735 0498 93840500 		mv	s1,a1
+  98:src/string.cpp ****     this->size = string.size;
+ 736              		.loc 1 98 5
+ 737              		.loc 1 98 25 is_stmt 0
+ 738 049c 83A70500 		lw	a5,0(a1)
+ 739              		.loc 1 98 16
+ 740 04a0 2320F500 		sw	a5,0(a0)
+  99:src/string.cpp ****     if(this->size > string::SMALL_SIZE)
+ 741              		.loc 1 99 5 is_stmt 1
+ 742 04a4 1307E001 		li	a4,30
+ 743 04a8 6354F702 		ble	a5,a4,.L54
+ 100:src/string.cpp ****         this->actual_string = string.actual_string;
+ 744              		.loc 1 100 9
+ 745              		.loc 1 100 38 is_stmt 0
+ 746 04ac 83B78500 		ld	a5,8(a1)
+ 747              		.loc 1 100 29
+ 748 04b0 2334F500 		sd	a5,8(a0)
+ 749              	.LVL81:
+ 750              	.L55:
+ 101:src/string.cpp ****     else
+ 102:src/string.cpp ****         this->actual_string = strcpy(string.actual_string, this->small_string);
+ 103:src/string.cpp ****     string.actual_string = nullptr;
+ 751              		.loc 1 103 5 is_stmt 1
+ 752              		.loc 1 103 26 is_stmt 0
+ 753 04b4 23B40400 		sd	zero,8(s1)
+ 104:src/string.cpp **** }
+ 754              		.loc 1 104 1
+ 755 04b8 83308101 		ld	ra,24(sp)
+ 756              		.cfi_remember_state
+ 757              		.cfi_restore 1
+ 758 04bc 03340101 		ld	s0,16(sp)
+ 759              		.cfi_restore 8
+ 760              		.cfi_def_cfa 2, 32
+ 761 04c0 83348100 		ld	s1,8(sp)
+ 762              		.cfi_restore 9
+ 763              	.LVL82:
+ 764 04c4 03390100 		ld	s2,0(sp)
+ 765              		.cfi_restore 18
+ 766              	.LVL83:
+GAS LISTING /tmp/ccIcpaEL.s 			page 17
+
+
+ 767 04c8 13010102 		addi	sp,sp,32
+ 768              		.cfi_def_cfa_offset 0
+ 769 04cc 67800000 		jr	ra
+ 770              	.LVL84:
+ 771              	.L54:
+ 772              		.cfi_restore_state
+ 102:src/string.cpp ****     string.actual_string = nullptr;
+ 773              		.loc 1 102 9 is_stmt 1
+ 102:src/string.cpp ****     string.actual_string = nullptr;
+ 774              		.loc 1 102 37 is_stmt 0
+ 775 04d0 93050501 		addi	a1,a0,16
+ 776 04d4 03B58400 		ld	a0,8(s1)
+ 777              	.LVL85:
+ 778 04d8 97000000 		call	_ZN3stm6strcpyEPKcPc
+ 778      E7800000 
+ 779              	.LVL86:
+ 102:src/string.cpp ****     string.actual_string = nullptr;
+ 780              		.loc 1 102 29
+ 781 04e0 2334A900 		sd	a0,8(s2)
+ 782 04e4 6FF01FFD 		j	.L55
+ 783              		.cfi_endproc
+ 784              	.LFE25:
+ 786              		.align	2
+ 787              		.globl	_ZN3stm6stringC2Ec
+ 789              	_ZN3stm6stringC2Ec:
+ 790              	.LFB30:
+ 105:src/string.cpp **** 
+ 106:src/string.cpp **** stm::string::string(const char *string) {
+ 107:src/string.cpp ****     this->size = string::write_and_count(string, this->small_string, SMALL_SIZE);
+ 108:src/string.cpp ****     if (this->size != -1) {
+ 109:src/string.cpp ****         this->actual_string = this->small_string;
+ 110:src/string.cpp ****         return;
+ 111:src/string.cpp ****     }
+ 112:src/string.cpp ****     this->size = strlen(string);
+ 113:src/string.cpp ****     this->actual_string = new char[this->size + 1];
+ 114:src/string.cpp ****     strcpy(string, this->actual_string);
+ 115:src/string.cpp **** }
+ 116:src/string.cpp **** 
+ 117:src/string.cpp **** stm::string::string(char c) {
+ 791              		.loc 1 117 1 is_stmt 1
+ 792              		.cfi_startproc
+ 793              	.LVL87:
+ 794 04e8 130101FF 		addi	sp,sp,-16
+ 795              		.cfi_def_cfa_offset 16
+ 796 04ec 23348100 		sd	s0,8(sp)
+ 797              		.cfi_offset 8, -8
+ 798 04f0 13040101 		addi	s0,sp,16
+ 799              		.cfi_def_cfa 8, 0
+ 800              	.LBB9:
+ 118:src/string.cpp ****     this->size = 1;
+ 801              		.loc 1 118 5
+ 802              		.loc 1 118 16 is_stmt 0
+ 803 04f4 93071000 		li	a5,1
+ 804 04f8 2320F500 		sw	a5,0(a0)
+ 119:src/string.cpp ****     this->actual_string = this->small_string;
+ 805              		.loc 1 119 5 is_stmt 1
+ 806              		.loc 1 119 33 is_stmt 0
+GAS LISTING /tmp/ccIcpaEL.s 			page 18
+
+
+ 807 04fc 93070501 		addi	a5,a0,16
+ 808              		.loc 1 119 25
+ 809 0500 2334F500 		sd	a5,8(a0)
+ 120:src/string.cpp ****     this->actual_string[0] = c;
+ 810              		.loc 1 120 5 is_stmt 1
+ 811              		.loc 1 120 28 is_stmt 0
+ 812 0504 2308B500 		sb	a1,16(a0)
+ 121:src/string.cpp ****     this->actual_string[1] = 0;
+ 813              		.loc 1 121 5 is_stmt 1
+ 814              		.loc 1 121 28 is_stmt 0
+ 815 0508 A3080500 		sb	zero,17(a0)
+ 816              	.LBE9:
+ 122:src/string.cpp **** }
+ 817              		.loc 1 122 1
+ 818 050c 03348100 		ld	s0,8(sp)
+ 819              		.cfi_restore 8
+ 820              		.cfi_def_cfa 2, 16
+ 821 0510 13010101 		addi	sp,sp,16
+ 822              		.cfi_def_cfa_offset 0
+ 823 0514 67800000 		jr	ra
+ 824              		.cfi_endproc
+ 825              	.LFE30:
+ 827              		.globl	_ZN3stm6stringC1Ec
+ 828              		.set	_ZN3stm6stringC1Ec,_ZN3stm6stringC2Ec
+ 829              		.align	2
+ 830              		.globl	_ZN3stm6stringC2Ex
+ 832              	_ZN3stm6stringC2Ex:
+ 833              	.LFB33:
+ 123:src/string.cpp **** 
+ 124:src/string.cpp **** stm::string::string(long long number) {
+ 834              		.loc 1 124 1 is_stmt 1
+ 835              		.cfi_startproc
+ 836              	.LVL88:
+ 837 0518 130101FE 		addi	sp,sp,-32
+ 838              		.cfi_def_cfa_offset 32
+ 839 051c 233C1100 		sd	ra,24(sp)
+ 840 0520 23388100 		sd	s0,16(sp)
+ 841 0524 23349100 		sd	s1,8(sp)
+ 842              		.cfi_offset 1, -8
+ 843              		.cfi_offset 8, -16
+ 844              		.cfi_offset 9, -24
+ 845 0528 13040102 		addi	s0,sp,32
+ 846              		.cfi_def_cfa 8, 0
+ 847 052c 93040500 		mv	s1,a0
+ 848 0530 13850500 		mv	a0,a1
+ 849              	.LVL89:
+ 850              	.LBB10:
+ 125:src/string.cpp ****     this->actual_string = ntos(number, this->small_string, 10);
+ 851              		.loc 1 125 5
+ 852              		.loc 1 125 31 is_stmt 0
+ 853 0534 1306A000 		li	a2,10
+ 854 0538 93850401 		addi	a1,s1,16
+ 855              	.LVL90:
+ 856 053c 97000000 		call	_ZN3stm4ntosExPci
+ 856      E7800000 
+ 857              	.LVL91:
+ 858              		.loc 1 125 25
+GAS LISTING /tmp/ccIcpaEL.s 			page 19
+
+
+ 859 0544 23B4A400 		sd	a0,8(s1)
+ 126:src/string.cpp ****     this->size = strlen(this->actual_string);
+ 860              		.loc 1 126 5 is_stmt 1
+ 861              		.loc 1 126 24 is_stmt 0
+ 862 0548 97000000 		call	_ZN3stm6strlenEPKc
+ 862      E7800000 
+ 863              	.LVL92:
+ 864              		.loc 1 126 16
+ 865 0550 23A0A400 		sw	a0,0(s1)
+ 866              	.LBE10:
+ 127:src/string.cpp **** }
+ 867              		.loc 1 127 1
+ 868 0554 83308101 		ld	ra,24(sp)
+ 869              		.cfi_restore 1
+ 870 0558 03340101 		ld	s0,16(sp)
+ 871              		.cfi_restore 8
+ 872              		.cfi_def_cfa 2, 32
+ 873 055c 83348100 		ld	s1,8(sp)
+ 874              		.cfi_restore 9
+ 875              	.LVL93:
+ 876 0560 13010102 		addi	sp,sp,32
+ 877              		.cfi_def_cfa_offset 0
+ 878 0564 67800000 		jr	ra
+ 879              		.cfi_endproc
+ 880              	.LFE33:
+ 882              		.globl	_ZN3stm6stringC1Ex
+ 883              		.set	_ZN3stm6stringC1Ex,_ZN3stm6stringC2Ex
+ 884              		.align	2
+ 885              		.globl	_ZN3stm6stringC2Ei
+ 887              	_ZN3stm6stringC2Ei:
+ 888              	.LFB36:
+ 128:src/string.cpp **** 
+ 129:src/string.cpp **** stm::string::string(int number) : string((long long) number) {}
+ 889              		.loc 1 129 1 is_stmt 1
+ 890              		.cfi_startproc
+ 891              	.LVL94:
+ 892 0568 130101FF 		addi	sp,sp,-16
+ 893              		.cfi_def_cfa_offset 16
+ 894 056c 23341100 		sd	ra,8(sp)
+ 895 0570 23308100 		sd	s0,0(sp)
+ 896              		.cfi_offset 1, -8
+ 897              		.cfi_offset 8, -16
+ 898 0574 13040101 		addi	s0,sp,16
+ 899              		.cfi_def_cfa 8, 0
+ 900              	.LBB11:
+ 901              		.loc 1 129 60 is_stmt 0
+ 902 0578 97000000 		call	_ZN3stm6stringC1Ex
+ 902      E7800000 
+ 903              	.LVL95:
+ 904              	.LBE11:
+ 905              		.loc 1 129 63
+ 906 0580 83308100 		ld	ra,8(sp)
+ 907              		.cfi_restore 1
+ 908 0584 03340100 		ld	s0,0(sp)
+ 909              		.cfi_restore 8
+ 910              		.cfi_def_cfa 2, 16
+ 911 0588 13010101 		addi	sp,sp,16
+GAS LISTING /tmp/ccIcpaEL.s 			page 20
+
+
+ 912              		.cfi_def_cfa_offset 0
+ 913 058c 67800000 		jr	ra
+ 914              		.cfi_endproc
+ 915              	.LFE36:
+ 917              		.globl	_ZN3stm6stringC1Ei
+ 918              		.set	_ZN3stm6stringC1Ei,_ZN3stm6stringC2Ei
+ 919              		.align	2
+ 920              		.globl	_ZN3stm6stringC2Em
+ 922              	_ZN3stm6stringC2Em:
+ 923              	.LFB39:
+ 130:src/string.cpp **** 
+ 131:src/string.cpp **** stm::string::string(uint64 number) {
+ 924              		.loc 1 131 1 is_stmt 1
+ 925              		.cfi_startproc
+ 926              	.LVL96:
+ 927 0590 130101FE 		addi	sp,sp,-32
+ 928              		.cfi_def_cfa_offset 32
+ 929 0594 233C1100 		sd	ra,24(sp)
+ 930 0598 23388100 		sd	s0,16(sp)
+ 931 059c 23349100 		sd	s1,8(sp)
+ 932              		.cfi_offset 1, -8
+ 933              		.cfi_offset 8, -16
+ 934              		.cfi_offset 9, -24
+ 935 05a0 13040102 		addi	s0,sp,32
+ 936              		.cfi_def_cfa 8, 0
+ 937 05a4 93040500 		mv	s1,a0
+ 938 05a8 13850500 		mv	a0,a1
+ 939              	.LVL97:
+ 940              	.LBB12:
+ 132:src/string.cpp ****     this->actual_string = utos(number, this->small_string, 10);
+ 941              		.loc 1 132 5
+ 942              		.loc 1 132 31 is_stmt 0
+ 943 05ac 1306A000 		li	a2,10
+ 944 05b0 93850401 		addi	a1,s1,16
+ 945              	.LVL98:
+ 946 05b4 97000000 		call	_ZN3stm4utosEmPci
+ 946      E7800000 
+ 947              	.LVL99:
+ 948              		.loc 1 132 25
+ 949 05bc 23B4A400 		sd	a0,8(s1)
+ 133:src/string.cpp ****     this->size = strlen(this->actual_string);
+ 950              		.loc 1 133 5 is_stmt 1
+ 951              		.loc 1 133 24 is_stmt 0
+ 952 05c0 97000000 		call	_ZN3stm6strlenEPKc
+ 952      E7800000 
+ 953              	.LVL100:
+ 954              		.loc 1 133 16
+ 955 05c8 23A0A400 		sw	a0,0(s1)
+ 956              	.LBE12:
+ 134:src/string.cpp **** }
+ 957              		.loc 1 134 1
+ 958 05cc 83308101 		ld	ra,24(sp)
+ 959              		.cfi_restore 1
+ 960 05d0 03340101 		ld	s0,16(sp)
+ 961              		.cfi_restore 8
+ 962              		.cfi_def_cfa 2, 32
+ 963 05d4 83348100 		ld	s1,8(sp)
+GAS LISTING /tmp/ccIcpaEL.s 			page 21
+
+
+ 964              		.cfi_restore 9
+ 965              	.LVL101:
+ 966 05d8 13010102 		addi	sp,sp,32
+ 967              		.cfi_def_cfa_offset 0
+ 968 05dc 67800000 		jr	ra
+ 969              		.cfi_endproc
+ 970              	.LFE39:
+ 972              		.globl	_ZN3stm6stringC1Em
+ 973              		.set	_ZN3stm6stringC1Em,_ZN3stm6stringC2Em
+ 974              		.align	2
+ 975              		.globl	_ZN3stm6stringaSERKS0_
+ 977              	_ZN3stm6stringaSERKS0_:
+ 978              	.LFB41:
+ 135:src/string.cpp **** 
+ 136:src/string.cpp **** stm::string &stm::string::operator=(const stm::string &string) {
+ 979              		.loc 1 136 64 is_stmt 1
+ 980              		.cfi_startproc
+ 981              	.LVL102:
+ 982 05e0 130101FE 		addi	sp,sp,-32
+ 983              		.cfi_def_cfa_offset 32
+ 984 05e4 233C1100 		sd	ra,24(sp)
+ 985 05e8 23388100 		sd	s0,16(sp)
+ 986 05ec 23349100 		sd	s1,8(sp)
+ 987 05f0 23302101 		sd	s2,0(sp)
+ 988              		.cfi_offset 1, -8
+ 989              		.cfi_offset 8, -16
+ 990              		.cfi_offset 9, -24
+ 991              		.cfi_offset 18, -32
+ 992 05f4 13040102 		addi	s0,sp,32
+ 993              		.cfi_def_cfa 8, 0
+ 994 05f8 93040500 		mv	s1,a0
+ 137:src/string.cpp ****     if (this == &string) return *this;
+ 995              		.loc 1 137 5
+ 996 05fc 6304B502 		beq	a0,a1,.L66
+ 997 0600 13890500 		mv	s2,a1
+ 138:src/string.cpp ****     this->unexist();
+ 998              		.loc 1 138 5
+ 999              	.LVL103:
+ 1000              	.LBB13:
+ 1001              	.LBB14:
+ 1002              		.file 2 "src/../h/string.hpp"
+   1:src/../h/string.hpp **** #ifndef PROJECT_BASE_STRING_HPP
+   2:src/../h/string.hpp **** #define PROJECT_BASE_STRING_HPP
+   3:src/../h/string.hpp **** 
+   4:src/../h/string.hpp **** 
+   5:src/../h/string.hpp **** #include "../lib/hw.h"
+   6:src/../h/string.hpp **** 
+   7:src/../h/string.hpp **** namespace stm {
+   8:src/../h/string.hpp **** 
+   9:src/../h/string.hpp ****     int strlen(const char *string);
+  10:src/../h/string.hpp **** 
+  11:src/../h/string.hpp ****     char *strcpy(const char *src, char *dst);
+  12:src/../h/string.hpp **** 
+  13:src/../h/string.hpp ****     void strncpy(char *src, char *dst, int max_len);
+  14:src/../h/string.hpp **** 
+  15:src/../h/string.hpp ****     char *strcat(const char *base, const char *tail);
+  16:src/../h/string.hpp **** 
+GAS LISTING /tmp/ccIcpaEL.s 			page 22
+
+
+  17:src/../h/string.hpp ****     int strcmp(const char *str1, const char *str2);
+  18:src/../h/string.hpp **** 
+  19:src/../h/string.hpp ****     char *ntos(long long number, char *buffer, int radix);
+  20:src/../h/string.hpp **** 
+  21:src/../h/string.hpp ****     char *utos(uint64 number, char *buffer, int radix);
+  22:src/../h/string.hpp **** 
+  23:src/../h/string.hpp ****     class string;
+  24:src/../h/string.hpp **** 
+  25:src/../h/string.hpp ****     string &operator+(const string &string1, const string &string2);
+  26:src/../h/string.hpp **** 
+  27:src/../h/string.hpp ****     bool operator==(const string &string1, const string &string2);
+  28:src/../h/string.hpp **** 
+  29:src/../h/string.hpp ****     bool operator<(const string &string1, const string &string2);
+  30:src/../h/string.hpp **** 
+  31:src/../h/string.hpp ****     bool operator!=(const string &string1, const string &string2);
+  32:src/../h/string.hpp **** 
+  33:src/../h/string.hpp ****     bool operator>(const string &string1, const string &string2);
+  34:src/../h/string.hpp **** 
+  35:src/../h/string.hpp ****     bool operator<=(const string &string1, const string &string2);
+  36:src/../h/string.hpp **** 
+  37:src/../h/string.hpp ****     bool operator>=(const string &string1, const string &string2);
+  38:src/../h/string.hpp **** 
+  39:src/../h/string.hpp ****     class string final {
+  40:src/../h/string.hpp ****     public:
+  41:src/../h/string.hpp ****         string() = default;
+  42:src/../h/string.hpp **** 
+  43:src/../h/string.hpp ****         string(const char *);
+  44:src/../h/string.hpp **** 
+  45:src/../h/string.hpp ****         string(char);
+  46:src/../h/string.hpp **** 
+  47:src/../h/string.hpp ****         explicit string(long long);
+  48:src/../h/string.hpp **** 
+  49:src/../h/string.hpp ****         explicit string(int);
+  50:src/../h/string.hpp **** 
+  51:src/../h/string.hpp ****         explicit string(uint64);
+  52:src/../h/string.hpp **** 
+  53:src/../h/string.hpp ****         string(const string &string) { this->copy(string); }
+  54:src/../h/string.hpp **** 
+  55:src/../h/string.hpp ****         string(string &&string) { this->move(string); }
+  56:src/../h/string.hpp **** 
+  57:src/../h/string.hpp ****         string &operator=(const string &);
+  58:src/../h/string.hpp **** 
+  59:src/../h/string.hpp ****         string &operator=(string &&) noexcept;
+  60:src/../h/string.hpp **** 
+  61:src/../h/string.hpp ****         int length() const { return this->size; }
+  62:src/../h/string.hpp **** 
+  63:src/../h/string.hpp ****         char &operator[](int i) {
+  64:src/../h/string.hpp ****             return this->actual_string[i];
+  65:src/../h/string.hpp ****         }
+  66:src/../h/string.hpp **** 
+  67:src/../h/string.hpp ****         const char &operator[](int i) const{
+  68:src/../h/string.hpp ****             return this->actual_string[i];
+  69:src/../h/string.hpp ****         }
+  70:src/../h/string.hpp **** 
+  71:src/../h/string.hpp ****         friend string &operator+(const string &string1, const string &string2);
+  72:src/../h/string.hpp **** 
+  73:src/../h/string.hpp ****         string &operator+=(const string &string);
+GAS LISTING /tmp/ccIcpaEL.s 			page 23
+
+
+  74:src/../h/string.hpp **** 
+  75:src/../h/string.hpp ****         friend bool operator==(const string &string1, const string &string2);
+  76:src/../h/string.hpp **** 
+  77:src/../h/string.hpp ****         friend bool operator<(const string &string1, const string &string2);
+  78:src/../h/string.hpp **** 
+  79:src/../h/string.hpp ****         friend bool operator!=(const string &string1, const string &string2) { return !(string1 == 
+  80:src/../h/string.hpp **** 
+  81:src/../h/string.hpp ****         friend bool operator>(const string &string1, const string &string2) {
+  82:src/../h/string.hpp ****             return string1 != string2 && !(string1 < string2);
+  83:src/../h/string.hpp ****         }
+  84:src/../h/string.hpp **** 
+  85:src/../h/string.hpp ****         friend bool operator<=(const string &string1, const string &string2) { return !(string1 > s
+  86:src/../h/string.hpp **** 
+  87:src/../h/string.hpp ****         friend bool operator>=(const string &string1, const string &string2) { return !(string1 < s
+  88:src/../h/string.hpp **** 
+  89:src/../h/string.hpp ****         ~string() { this->unexist(); }
+  90:src/../h/string.hpp **** 
+  91:src/../h/string.hpp ****     private:
+  92:src/../h/string.hpp ****         void copy(const string &);
+  93:src/../h/string.hpp **** 
+  94:src/../h/string.hpp ****         void move(string &);
+  95:src/../h/string.hpp **** 
+  96:src/../h/string.hpp ****         void unexist() { delete[] this->actual_string; }
+ 1003              		.loc 2 96 26
+ 1004              		.loc 2 96 41 is_stmt 0
+ 1005 0604 03358500 		ld	a0,8(a0)
+ 1006              	.LVL104:
+ 1007              		.loc 2 96 54
+ 1008 0608 63060500 		beqz	a0,.L67
+ 1009              		.loc 2 96 41
+ 1010 060c 97000000 		call	_ZdaPv@plt
+ 1010      E7800000 
+ 1011              	.LVL105:
+ 1012              	.L67:
+ 1013              	.LBE14:
+ 1014              	.LBE13:
+ 139:src/string.cpp ****     this->copy(string);
+ 1015              		.loc 1 139 5 is_stmt 1
+ 1016              		.loc 1 139 15 is_stmt 0
+ 1017 0614 93050900 		mv	a1,s2
+ 1018 0618 13850400 		mv	a0,s1
+ 1019 061c 97000000 		call	_ZN3stm6string4copyERKS0_
+ 1019      E7800000 
+ 1020              	.LVL106:
+ 140:src/string.cpp ****     return *this;
+ 1021              		.loc 1 140 5 is_stmt 1
+ 1022              	.L66:
+ 141:src/string.cpp **** }
+ 1023              		.loc 1 141 1 is_stmt 0
+ 1024 0624 13850400 		mv	a0,s1
+ 1025 0628 83308101 		ld	ra,24(sp)
+ 1026              		.cfi_restore 1
+ 1027 062c 03340101 		ld	s0,16(sp)
+ 1028              		.cfi_restore 8
+ 1029              		.cfi_def_cfa 2, 32
+ 1030 0630 83348100 		ld	s1,8(sp)
+ 1031              		.cfi_restore 9
+GAS LISTING /tmp/ccIcpaEL.s 			page 24
+
+
+ 1032              	.LVL107:
+ 1033 0634 03390100 		ld	s2,0(sp)
+ 1034              		.cfi_restore 18
+ 1035 0638 13010102 		addi	sp,sp,32
+ 1036              		.cfi_def_cfa_offset 0
+ 1037 063c 67800000 		jr	ra
+ 1038              		.cfi_endproc
+ 1039              	.LFE41:
+ 1041              		.align	2
+ 1042              		.globl	_ZN3stm6stringaSEOS0_
+ 1044              	_ZN3stm6stringaSEOS0_:
+ 1045              	.LFB42:
+ 142:src/string.cpp **** 
+ 143:src/string.cpp **** stm::string &stm::string::operator=(stm::string &&string) noexcept {
+ 1046              		.loc 1 143 68 is_stmt 1
+ 1047              		.cfi_startproc
+ 1048              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
+ 1049              		.cfi_lsda 0x1b,.LLSDA42
+ 1050              	.LVL108:
+ 1051 0640 130101FE 		addi	sp,sp,-32
+ 1052              		.cfi_def_cfa_offset 32
+ 1053 0644 233C1100 		sd	ra,24(sp)
+ 1054 0648 23388100 		sd	s0,16(sp)
+ 1055 064c 23349100 		sd	s1,8(sp)
+ 1056 0650 23302101 		sd	s2,0(sp)
+ 1057              		.cfi_offset 1, -8
+ 1058              		.cfi_offset 8, -16
+ 1059              		.cfi_offset 9, -24
+ 1060              		.cfi_offset 18, -32
+ 1061 0654 13040102 		addi	s0,sp,32
+ 1062              		.cfi_def_cfa 8, 0
+ 1063 0658 93040500 		mv	s1,a0
+ 144:src/string.cpp ****     if (this == &string) return *this;
+ 1064              		.loc 1 144 5
+ 1065 065c 6304B502 		beq	a0,a1,.L70
+ 1066 0660 13890500 		mv	s2,a1
+ 145:src/string.cpp ****     this->unexist();
+ 1067              		.loc 1 145 5
+ 1068              	.LVL109:
+ 1069              	.LBB15:
+ 1070              	.LBB16:
+ 1071              		.loc 2 96 26
+ 1072              		.loc 2 96 41 is_stmt 0
+ 1073 0664 03358500 		ld	a0,8(a0)
+ 1074              	.LVL110:
+ 1075              		.loc 2 96 54
+ 1076 0668 63060500 		beqz	a0,.L71
+ 1077              		.loc 2 96 41
+ 1078 066c 97000000 		call	_ZdaPv@plt
+ 1078      E7800000 
+ 1079              	.LVL111:
+ 1080              	.L71:
+ 1081              	.LBE16:
+ 1082              	.LBE15:
+ 146:src/string.cpp ****     this->move(string);
+ 1083              		.loc 1 146 5 is_stmt 1
+ 1084              		.loc 1 146 15 is_stmt 0
+GAS LISTING /tmp/ccIcpaEL.s 			page 25
+
+
+ 1085 0674 93050900 		mv	a1,s2
+ 1086 0678 13850400 		mv	a0,s1
+ 1087 067c 97000000 		call	_ZN3stm6string4moveERS0_
+ 1087      E7800000 
+ 1088              	.LVL112:
+ 147:src/string.cpp ****     return *this;
+ 1089              		.loc 1 147 5 is_stmt 1
+ 1090              	.L70:
+ 148:src/string.cpp **** }
+ 1091              		.loc 1 148 1 is_stmt 0
+ 1092 0684 13850400 		mv	a0,s1
+ 1093 0688 83308101 		ld	ra,24(sp)
+ 1094              		.cfi_restore 1
+ 1095 068c 03340101 		ld	s0,16(sp)
+ 1096              		.cfi_restore 8
+ 1097              		.cfi_def_cfa 2, 32
+ 1098 0690 83348100 		ld	s1,8(sp)
+ 1099              		.cfi_restore 9
+ 1100              	.LVL113:
+ 1101 0694 03390100 		ld	s2,0(sp)
+ 1102              		.cfi_restore 18
+ 1103 0698 13010102 		addi	sp,sp,32
+ 1104              		.cfi_def_cfa_offset 0
+ 1105 069c 67800000 		jr	ra
+ 1106              		.cfi_endproc
+ 1107              	.LFE42:
+ 1108              		.globl	__gxx_personality_v0
+ 1109              		.section	.gcc_except_table,"a",@progbits
+ 1110              	.LLSDA42:
+ 1111 0000 FF       		.byte	0xff
+ 1112 0001 FF       		.byte	0xff
+ 1113 0002 03       		.byte	0x3
+ 1114 0003 00       		.byte	0
+ 1115              		.text
+ 1117              		.align	2
+ 1118              		.globl	_ZN3stm6string15write_and_countEPKcPci
+ 1120              	_ZN3stm6string15write_and_countEPKcPci:
+ 1121              	.LFB47:
+ 149:src/string.cpp **** 
+ 150:src/string.cpp **** stm::string &stm::string::operator+=(const stm::string &string) {
+ 151:src/string.cpp ****     *this = *this + string;
+ 152:src/string.cpp ****     return *this;
+ 153:src/string.cpp **** }
+ 154:src/string.cpp **** 
+ 155:src/string.cpp **** stm::string &stm::operator+(const stm::string &string1, const stm::string &string2) {
+ 156:src/string.cpp ****     return *(new stm::string(stm::strcat(string1.actual_string, string2.actual_string)));
+ 157:src/string.cpp **** }
+ 158:src/string.cpp **** 
+ 159:src/string.cpp **** inline bool stm::operator==(const stm::string &string1, const stm::string &string2) {
+ 160:src/string.cpp ****     return !stm::strcmp(string1.actual_string, string2.actual_string);
+ 161:src/string.cpp **** }
+ 162:src/string.cpp **** 
+ 163:src/string.cpp **** inline bool stm::operator<(const stm::string &string1, const stm::string &string2) {
+ 164:src/string.cpp ****     return stm::strcmp(string1.actual_string, string2.actual_string) < 0;
+ 165:src/string.cpp **** }
+ 166:src/string.cpp **** 
+ 167:src/string.cpp **** int stm::string::write_and_count(const char *src, char *dst, int n) {
+GAS LISTING /tmp/ccIcpaEL.s 			page 26
+
+
+ 1122              		.loc 1 167 69 is_stmt 1
+ 1123              		.cfi_startproc
+ 1124              	.LVL114:
+ 1125 06a0 130101FF 		addi	sp,sp,-16
+ 1126              		.cfi_def_cfa_offset 16
+ 1127 06a4 23348100 		sd	s0,8(sp)
+ 1128              		.cfi_offset 8, -8
+ 1129 06a8 13040101 		addi	s0,sp,16
+ 1130              		.cfi_def_cfa 8, 0
+ 1131 06ac 93060500 		mv	a3,a0
+ 168:src/string.cpp ****     int i;
+ 1132              		.loc 1 168 5
+ 169:src/string.cpp ****     for (i = 0; src[i]; i++) {
+ 1133              		.loc 1 169 5
+ 1134              	.LVL115:
+ 1135              		.loc 1 169 12 is_stmt 0
+ 1136 06b0 13050000 		li	a0,0
+ 1137              	.LVL116:
+ 1138              	.L76:
+ 1139              		.loc 1 169 22 is_stmt 1 discriminator 1
+ 1140 06b4 3387A600 		add	a4,a3,a0
+ 1141 06b8 03470700 		lbu	a4,0(a4)
+ 1142 06bc 630C0700 		beqz	a4,.L74
+ 170:src/string.cpp ****         if (i >= n) return -1;
+ 1143              		.loc 1 170 9
+ 1144 06c0 6354C502 		bge	a0,a2,.L77
+ 171:src/string.cpp ****         dst[i] = src[i];
+ 1145              		.loc 1 171 9 discriminator 2
+ 1146              		.loc 1 171 14 is_stmt 0 discriminator 2
+ 1147 06c4 B387A500 		add	a5,a1,a0
+ 1148              		.loc 1 171 16 discriminator 2
+ 1149 06c8 2380E700 		sb	a4,0(a5)
+ 169:src/string.cpp ****     for (i = 0; src[i]; i++) {
+ 1150              		.loc 1 169 5 is_stmt 1 discriminator 2
+ 1151 06cc 1B051500 		addiw	a0,a0,1
+ 1152              	.LVL117:
+ 1153 06d0 6FF05FFE 		j	.L76
+ 1154              	.LVL118:
+ 1155              	.L74:
+ 172:src/string.cpp ****     }
+ 173:src/string.cpp ****     dst[i] = src[i];
+ 1156              		.loc 1 173 5
+ 1157              		.loc 1 173 10 is_stmt 0
+ 1158 06d4 B387A500 		add	a5,a1,a0
+ 1159              		.loc 1 173 12
+ 1160 06d8 2380E700 		sb	a4,0(a5)
+ 174:src/string.cpp ****     return i;
+ 1161              		.loc 1 174 5 is_stmt 1
+ 1162              	.LVL119:
+ 1163              	.L75:
+ 175:src/string.cpp **** }...
+ 1164              		.loc 1 175 1 is_stmt 0
+ 1165 06dc 03348100 		ld	s0,8(sp)
+ 1166              		.cfi_remember_state
+ 1167              		.cfi_restore 8
+ 1168              		.cfi_def_cfa 2, 16
+ 1169 06e0 13010101 		addi	sp,sp,16
+GAS LISTING /tmp/ccIcpaEL.s 			page 27
+
+
+ 1170              		.cfi_def_cfa_offset 0
+ 1171 06e4 67800000 		jr	ra
+ 1172              	.LVL120:
+ 1173              	.L77:
+ 1174              		.cfi_restore_state
+ 170:src/string.cpp ****         if (i >= n) return -1;
+ 1175              		.loc 1 170 29
+ 1176 06e8 1305F0FF 		li	a0,-1
+ 1177              	.LVL121:
+ 1178 06ec 6FF01FFF 		j	.L75
+ 1179              		.cfi_endproc
+ 1180              	.LFE47:
+ 1182              		.align	2
+ 1183              		.globl	_ZN3stm6stringC2EPKc
+ 1185              	_ZN3stm6stringC2EPKc:
+ 1186              	.LFB27:
+ 106:src/string.cpp **** stm::string::string(const char *string) {
+ 1187              		.loc 1 106 1 is_stmt 1
+ 1188              		.cfi_startproc
+ 1189              	.LVL122:
+ 1190 06f0 130101FD 		addi	sp,sp,-48
+ 1191              		.cfi_def_cfa_offset 48
+ 1192 06f4 23341102 		sd	ra,40(sp)
+ 1193 06f8 23308102 		sd	s0,32(sp)
+ 1194 06fc 233C9100 		sd	s1,24(sp)
+ 1195 0700 23382101 		sd	s2,16(sp)
+ 1196 0704 23343101 		sd	s3,8(sp)
+ 1197              		.cfi_offset 1, -8
+ 1198              		.cfi_offset 8, -16
+ 1199              		.cfi_offset 9, -24
+ 1200              		.cfi_offset 18, -32
+ 1201              		.cfi_offset 19, -40
+ 1202 0708 13040103 		addi	s0,sp,48
+ 1203              		.cfi_def_cfa 8, 0
+ 1204 070c 93040500 		mv	s1,a0
+ 1205 0710 13890500 		mv	s2,a1
+ 1206              	.LBB17:
+ 107:src/string.cpp ****     this->size = string::write_and_count(string, this->small_string, SMALL_SIZE);
+ 1207              		.loc 1 107 5
+ 107:src/string.cpp ****     this->size = string::write_and_count(string, this->small_string, SMALL_SIZE);
+ 1208              		.loc 1 107 56 is_stmt 0
+ 1209 0714 93090501 		addi	s3,a0,16
+ 107:src/string.cpp ****     this->size = string::write_and_count(string, this->small_string, SMALL_SIZE);
+ 1210              		.loc 1 107 41
+ 1211 0718 1306E001 		li	a2,30
+ 1212 071c 93850900 		mv	a1,s3
+ 1213              	.LVL123:
+ 1214 0720 13050900 		mv	a0,s2
+ 1215              	.LVL124:
+ 1216 0724 97000000 		call	_ZN3stm6string15write_and_countEPKcPci
+ 1216      E7800000 
+ 1217              	.LVL125:
+ 107:src/string.cpp ****     this->size = string::write_and_count(string, this->small_string, SMALL_SIZE);
+ 1218              		.loc 1 107 16
+ 1219 072c 23A0A400 		sw	a0,0(s1)
+ 108:src/string.cpp ****     if (this->size != -1) {
+ 1220              		.loc 1 108 5 is_stmt 1
+GAS LISTING /tmp/ccIcpaEL.s 			page 28
+
+
+ 1221 0730 9307F0FF 		li	a5,-1
+ 1222 0734 6302F502 		beq	a0,a5,.L80
+ 109:src/string.cpp ****         this->actual_string = this->small_string;
+ 1223              		.loc 1 109 9
+ 109:src/string.cpp ****         this->actual_string = this->small_string;
+ 1224              		.loc 1 109 29 is_stmt 0
+ 1225 0738 23B43401 		sd	s3,8(s1)
+ 110:src/string.cpp ****         return;
+ 1226              		.loc 1 110 9 is_stmt 1
+ 1227              	.L79:
+ 1228              	.LBE17:
+ 115:src/string.cpp **** }
+ 1229              		.loc 1 115 1 is_stmt 0
+ 1230 073c 83308102 		ld	ra,40(sp)
+ 1231              		.cfi_remember_state
+ 1232              		.cfi_restore 1
+ 1233 0740 03340102 		ld	s0,32(sp)
+ 1234              		.cfi_restore 8
+ 1235              		.cfi_def_cfa 2, 48
+ 1236 0744 83348101 		ld	s1,24(sp)
+ 1237              		.cfi_restore 9
+ 1238              	.LVL126:
+ 1239 0748 03390101 		ld	s2,16(sp)
+ 1240              		.cfi_restore 18
+ 1241              	.LVL127:
+ 1242 074c 83398100 		ld	s3,8(sp)
+ 1243              		.cfi_restore 19
+ 1244              	.LVL128:
+ 1245 0750 13010103 		addi	sp,sp,48
+ 1246              		.cfi_def_cfa_offset 0
+ 1247 0754 67800000 		jr	ra
+ 1248              	.LVL129:
+ 1249              	.L80:
+ 1250              		.cfi_restore_state
+ 1251              	.LBB18:
+ 112:src/string.cpp ****     this->size = strlen(string);
+ 1252              		.loc 1 112 5 is_stmt 1
+ 112:src/string.cpp ****     this->size = strlen(string);
+ 1253              		.loc 1 112 24 is_stmt 0
+ 1254 0758 13050900 		mv	a0,s2
+ 1255 075c 97000000 		call	_ZN3stm6strlenEPKc
+ 1255      E7800000 
+ 1256              	.LVL130:
+ 112:src/string.cpp ****     this->size = strlen(string);
+ 1257              		.loc 1 112 16
+ 1258 0764 23A0A400 		sw	a0,0(s1)
+ 113:src/string.cpp ****     this->actual_string = new char[this->size + 1];
+ 1259              		.loc 1 113 5 is_stmt 1
+ 113:src/string.cpp ****     this->actual_string = new char[this->size + 1];
+ 1260              		.loc 1 113 50 is_stmt 0
+ 1261 0768 1B051500 		addiw	a0,a0,1
+ 1262 076c 97000000 		call	_Znam@plt
+ 1262      E7800000 
+ 1263              	.LVL131:
+ 1264 0774 93050500 		mv	a1,a0
+ 113:src/string.cpp ****     this->actual_string = new char[this->size + 1];
+ 1265              		.loc 1 113 25
+GAS LISTING /tmp/ccIcpaEL.s 			page 29
+
+
+ 1266 0778 23B4A400 		sd	a0,8(s1)
+ 114:src/string.cpp ****     strcpy(string, this->actual_string);
+ 1267              		.loc 1 114 5 is_stmt 1
+ 114:src/string.cpp ****     strcpy(string, this->actual_string);
+ 1268              		.loc 1 114 11 is_stmt 0
+ 1269 077c 13050900 		mv	a0,s2
+ 1270 0780 97000000 		call	_ZN3stm6strcpyEPKcPc
+ 1270      E7800000 
+ 1271              	.LVL132:
+ 1272 0788 6FF05FFB 		j	.L79
+ 1273              	.LBE18:
+ 1274              		.cfi_endproc
+ 1275              	.LFE27:
+ 1277              		.globl	_ZN3stm6stringC1EPKc
+ 1278              		.set	_ZN3stm6stringC1EPKc,_ZN3stm6stringC2EPKc
+ 1279              		.align	2
+ 1280              		.globl	_ZN3stmplERKNS_6stringES2_
+ 1282              	_ZN3stmplERKNS_6stringES2_:
+ 1283              	.LFB44:
+ 155:src/string.cpp **** stm::string &stm::operator+(const stm::string &string1, const stm::string &string2) {
+ 1284              		.loc 1 155 85 is_stmt 1
+ 1285              		.cfi_startproc
+ 1286              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
+ 1287              		.cfi_lsda 0x1b,.LLSDA44
+ 1288              	.LVL133:
+ 1289 078c 130101FE 		addi	sp,sp,-32
+ 1290              		.cfi_def_cfa_offset 32
+ 1291 0790 233C1100 		sd	ra,24(sp)
+ 1292 0794 23388100 		sd	s0,16(sp)
+ 1293 0798 23349100 		sd	s1,8(sp)
+ 1294 079c 23302101 		sd	s2,0(sp)
+ 1295              		.cfi_offset 1, -8
+ 1296              		.cfi_offset 8, -16
+ 1297              		.cfi_offset 9, -24
+ 1298              		.cfi_offset 18, -32
+ 1299 07a0 13040102 		addi	s0,sp,32
+ 1300              		.cfi_def_cfa 8, 0
+ 156:src/string.cpp ****     return *(new stm::string(stm::strcat(string1.actual_string, string2.actual_string)));
+ 1301              		.loc 1 156 5
+ 156:src/string.cpp ****     return *(new stm::string(stm::strcat(string1.actual_string, string2.actual_string)));
+ 1302              		.loc 1 156 41 is_stmt 0
+ 1303 07a4 83B58500 		ld	a1,8(a1)
+ 1304              	.LVL134:
+ 1305 07a8 03358500 		ld	a0,8(a0)
+ 1306              	.LVL135:
+ 1307              	.LEHB0:
+ 1308 07ac 97000000 		call	_ZN3stm6strcatEPKcS1_
+ 1308      E7800000 
+ 1309              	.LVL136:
+ 1310 07b4 13090500 		mv	s2,a0
+ 156:src/string.cpp ****     return *(new stm::string(stm::strcat(string1.actual_string, string2.actual_string)));
+ 1311              		.loc 1 156 87
+ 1312 07b8 13050003 		li	a0,48
+ 1313 07bc 97000000 		call	_Znwm@plt
+ 1313      E7800000 
+ 1314              	.LVL137:
+ 1315              	.LEHE0:
+GAS LISTING /tmp/ccIcpaEL.s 			page 30
+
+
+ 1316 07c4 93040500 		mv	s1,a0
+ 1317 07c8 93050900 		mv	a1,s2
+ 1318              	.LEHB1:
+ 1319 07cc 97000000 		call	_ZN3stm6stringC1EPKc
+ 1319      E7800000 
+ 1320              	.LVL138:
+ 1321              	.LEHE1:
+ 1322 07d4 6F000002 		j	.L88
+ 1323              	.L85:
+ 1324 07d8 13090500 		mv	s2,a0
+ 1325 07dc 13850400 		mv	a0,s1
+ 1326 07e0 97000000 		call	_ZdlPv@plt
+ 1326      E7800000 
+ 1327              	.LVL139:
+ 1328 07e8 13050900 		mv	a0,s2
+ 1329              	.LEHB2:
+ 1330 07ec 97000000 		call	_Unwind_Resume@plt
+ 1330      E7800000 
+ 1331              	.LVL140:
+ 1332              	.LEHE2:
+ 1333              	.L88:
+ 157:src/string.cpp **** }
+ 1334              		.loc 1 157 1
+ 1335 07f4 13850400 		mv	a0,s1
+ 1336 07f8 83308101 		ld	ra,24(sp)
+ 1337              		.cfi_restore 1
+ 1338 07fc 03340101 		ld	s0,16(sp)
+ 1339              		.cfi_restore 8
+ 1340              		.cfi_def_cfa 2, 32
+ 1341 0800 83348100 		ld	s1,8(sp)
+ 1342              		.cfi_restore 9
+ 1343 0804 03390100 		ld	s2,0(sp)
+ 1344              		.cfi_restore 18
+ 1345 0808 13010102 		addi	sp,sp,32
+ 1346              		.cfi_def_cfa_offset 0
+ 1347 080c 67800000 		jr	ra
+ 1348              		.cfi_endproc
+ 1349              	.LFE44:
+ 1350              		.section	.gcc_except_table
+ 1351              	.LLSDA44:
+ 1352 0004 FF       		.byte	0xff
+ 1353 0005 FF       		.byte	0xff
+ 1354 0006 03       		.byte	0x3
+ 1355 0007 27       		.byte	0x27
+ 1356 0008 00000000 		.4byte	.LEHB0-.LFB44
+ 1357 000c 00000000 		.4byte	.LEHE0-.LEHB0
+ 1358 0010 00000000 		.4byte	0
+ 1359 0014 00       		.byte	0
+ 1360 0015 00000000 		.4byte	.LEHB1-.LFB44
+ 1361 0019 00000000 		.4byte	.LEHE1-.LEHB1
+ 1362 001d 00000000 		.4byte	.L85-.LFB44
+ 1363 0021 00       		.byte	0
+ 1364 0022 00000000 		.4byte	.LEHB2-.LFB44
+ 1365 0026 00000000 		.4byte	.LEHE2-.LEHB2
+ 1366 002a 00000000 		.4byte	0
+ 1367 002e 00       		.byte	0
+ 1368              		.text
+GAS LISTING /tmp/ccIcpaEL.s 			page 31
+
+
+ 1370              		.align	2
+ 1371              		.globl	_ZN3stm6stringpLERKS0_
+ 1373              	_ZN3stm6stringpLERKS0_:
+ 1374              	.LFB43:
+ 150:src/string.cpp **** stm::string &stm::string::operator+=(const stm::string &string) {
+ 1375              		.loc 1 150 65 is_stmt 1
+ 1376              		.cfi_startproc
+ 1377              	.LVL141:
+ 1378 0810 130101FE 		addi	sp,sp,-32
+ 1379              		.cfi_def_cfa_offset 32
+ 1380 0814 233C1100 		sd	ra,24(sp)
+ 1381 0818 23388100 		sd	s0,16(sp)
+ 1382 081c 23349100 		sd	s1,8(sp)
+ 1383              		.cfi_offset 1, -8
+ 1384              		.cfi_offset 8, -16
+ 1385              		.cfi_offset 9, -24
+ 1386 0820 13040102 		addi	s0,sp,32
+ 1387              		.cfi_def_cfa 8, 0
+ 1388 0824 93040500 		mv	s1,a0
+ 151:src/string.cpp ****     *this = *this + string;
+ 1389              		.loc 1 151 5
+ 151:src/string.cpp ****     *this = *this + string;
+ 1390              		.loc 1 151 21 is_stmt 0
+ 1391 0828 97000000 		call	_ZN3stmplERKNS_6stringES2_
+ 1391      E7800000 
+ 1392              	.LVL142:
+ 1393 0830 93050500 		mv	a1,a0
+ 1394 0834 13850400 		mv	a0,s1
+ 1395 0838 97000000 		call	_ZN3stm6stringaSERKS0_
+ 1395      E7800000 
+ 1396              	.LVL143:
+ 152:src/string.cpp ****     return *this;
+ 1397              		.loc 1 152 5 is_stmt 1
+ 153:src/string.cpp **** }
+ 1398              		.loc 1 153 1 is_stmt 0
+ 1399 0840 13850400 		mv	a0,s1
+ 1400 0844 83308101 		ld	ra,24(sp)
+ 1401              		.cfi_restore 1
+ 1402 0848 03340101 		ld	s0,16(sp)
+ 1403              		.cfi_restore 8
+ 1404              		.cfi_def_cfa 2, 32
+ 1405 084c 83348100 		ld	s1,8(sp)
+ 1406              		.cfi_restore 9
+ 1407              	.LVL144:
+ 1408 0850 13010102 		addi	sp,sp,32
+ 1409              		.cfi_def_cfa_offset 0
+ 1410 0854 67800000 		jr	ra
+ 1411              		.cfi_endproc
+ 1412              	.LFE43:
+ 1414              	.Letext0:
+ 1415              		.file 3 "src/../h/../lib/hw.h"
+ 1416              		.file 4 "src/../h/iostream.hpp"
+ 1417              		.file 5 "src/../h/syscall_c.hpp"
+ 1418              		.file 6 "src/../h/c_memory.hpp"
+ 5337              		.align	3
+ 5340              	DW.ref.__gxx_personality_v0:
+ 5341 0000 00000000 		.dword	__gxx_personality_v0
+GAS LISTING /tmp/ccIcpaEL.s 			page 32
+
+
+ 5341      00000000 
+ 5342              		.ident	"GCC: (Ubuntu 9.4.0-1ubuntu1~20.04) 9.4.0"
+ 5343              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/ccIcpaEL.s 			page 33
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 string.cpp
+     /tmp/ccIcpaEL.s:9      .text:0000000000000000 _ZN3stm6strlenEPKc
+     /tmp/ccIcpaEL.s:13     .text:0000000000000000 .L0 
+     /tmp/ccIcpaEL.s:15     .text:0000000000000000 .L0 
+     /tmp/ccIcpaEL.s:16     .text:0000000000000004 .L0 
+     /tmp/ccIcpaEL.s:18     .text:0000000000000008 .L0 
+     /tmp/ccIcpaEL.s:20     .text:000000000000000c .L0 
+     /tmp/ccIcpaEL.s:23     .text:0000000000000010 .L0 
+     /tmp/ccIcpaEL.s:25     .text:0000000000000010 .L0 
+     /tmp/ccIcpaEL.s:26     .text:0000000000000010 .L0 
+     /tmp/ccIcpaEL.s:30     .text:0000000000000014 .L0 
+     /tmp/ccIcpaEL.s:34     .text:0000000000000020 .L0 
+     /tmp/ccIcpaEL.s:40     .text:0000000000000028 .L0 
+     /tmp/ccIcpaEL.s:41     .text:0000000000000028 .L0 
+     /tmp/ccIcpaEL.s:42     .text:000000000000002c .L0 
+     /tmp/ccIcpaEL.s:43     .text:000000000000002c .L0 
+     /tmp/ccIcpaEL.s:45     .text:0000000000000030 .L0 
+     /tmp/ccIcpaEL.s:47     .text:0000000000000034 .L0 
+     /tmp/ccIcpaEL.s:53     .text:0000000000000034 _ZN3stm6strcpyEPKcPc
+     /tmp/ccIcpaEL.s:56     .text:0000000000000034 .L0 
+     /tmp/ccIcpaEL.s:58     .text:0000000000000034 .L0 
+     /tmp/ccIcpaEL.s:59     .text:0000000000000038 .L0 
+     /tmp/ccIcpaEL.s:64     .text:0000000000000048 .L0 
+     /tmp/ccIcpaEL.s:65     .text:0000000000000048 .L0 
+     /tmp/ccIcpaEL.s:66     .text:0000000000000048 .L0 
+     /tmp/ccIcpaEL.s:67     .text:0000000000000048 .L0 
+     /tmp/ccIcpaEL.s:69     .text:000000000000004c .L0 
+     /tmp/ccIcpaEL.s:73     .text:0000000000000054 .L0 
+     /tmp/ccIcpaEL.s:74     .text:0000000000000054 .L0 
+     /tmp/ccIcpaEL.s:77     .text:000000000000005c .L0 
+     /tmp/ccIcpaEL.s:83     .text:0000000000000070 .L0 
+     /tmp/ccIcpaEL.s:84     .text:0000000000000070 .L0 
+     /tmp/ccIcpaEL.s:86     .text:0000000000000078 .L0 
+     /tmp/ccIcpaEL.s:88     .text:000000000000007c .L0 
+     /tmp/ccIcpaEL.s:89     .text:000000000000007c .L0 
+     /tmp/ccIcpaEL.s:91     .text:0000000000000080 .L0 
+     /tmp/ccIcpaEL.s:94     .text:0000000000000084 .L0 
+     /tmp/ccIcpaEL.s:97     .text:0000000000000088 .L0 
+     /tmp/ccIcpaEL.s:99     .text:000000000000008c .L0 
+     /tmp/ccIcpaEL.s:105    .text:000000000000008c _ZN3stm7strncpyEPcS0_i
+     /tmp/ccIcpaEL.s:108    .text:000000000000008c .L0 
+     /tmp/ccIcpaEL.s:110    .text:000000000000008c .L0 
+     /tmp/ccIcpaEL.s:111    .text:0000000000000090 .L0 
+     /tmp/ccIcpaEL.s:118    .text:00000000000000a8 .L0 
+     /tmp/ccIcpaEL.s:119    .text:00000000000000a8 .L0 
+     /tmp/ccIcpaEL.s:120    .text:00000000000000a8 .L0 
+     /tmp/ccIcpaEL.s:121    .text:00000000000000a8 .L0 
+     /tmp/ccIcpaEL.s:122    .text:00000000000000a8 .L0 
+     /tmp/ccIcpaEL.s:123    .text:00000000000000a8 .L0 
+     /tmp/ccIcpaEL.s:125    .text:00000000000000ac .L0 
+     /tmp/ccIcpaEL.s:132    .text:00000000000000b8 .L0 
+     /tmp/ccIcpaEL.s:133    .text:00000000000000b8 .L0 
+     /tmp/ccIcpaEL.s:137    .text:00000000000000bc .L0 
+     /tmp/ccIcpaEL.s:138    .text:00000000000000bc .L0 
+     /tmp/ccIcpaEL.s:142    .text:00000000000000c8 .L0 
+     /tmp/ccIcpaEL.s:144    .text:00000000000000cc .L0 
+GAS LISTING /tmp/ccIcpaEL.s 			page 34
+
+
+     /tmp/ccIcpaEL.s:146    .text:00000000000000d0 .L0 
+     /tmp/ccIcpaEL.s:147    .text:00000000000000d0 .L0 
+     /tmp/ccIcpaEL.s:149    .text:00000000000000d4 .L0 
+     /tmp/ccIcpaEL.s:152    .text:00000000000000dc .L0 
+     /tmp/ccIcpaEL.s:154    .text:00000000000000e0 .L0 
+     /tmp/ccIcpaEL.s:160    .text:00000000000000e8 .L0 
+     /tmp/ccIcpaEL.s:161    .text:00000000000000e8 .L0 
+     /tmp/ccIcpaEL.s:164    .text:00000000000000ec .L0 
+     /tmp/ccIcpaEL.s:168    .text:00000000000000f0 .L0 
+     /tmp/ccIcpaEL.s:169    .text:00000000000000f0 .L0 
+     /tmp/ccIcpaEL.s:170    .text:00000000000000f4 .L0 
+     /tmp/ccIcpaEL.s:172    .text:00000000000000f8 .L0 
+     /tmp/ccIcpaEL.s:173    .text:00000000000000f8 .L0 
+     /tmp/ccIcpaEL.s:175    .text:00000000000000fc .L0 
+     /tmp/ccIcpaEL.s:177    .text:0000000000000100 .L0 
+     /tmp/ccIcpaEL.s:180    .text:0000000000000104 .L0 
+     /tmp/ccIcpaEL.s:183    .text:0000000000000108 .L0 
+     /tmp/ccIcpaEL.s:185    .text:000000000000010c .L0 
+     /tmp/ccIcpaEL.s:187    .text:0000000000000110 .L0 
+     /tmp/ccIcpaEL.s:193    .text:0000000000000110 _ZN3stm6strcatEPKcS1_
+     /tmp/ccIcpaEL.s:196    .text:0000000000000110 .L0 
+     /tmp/ccIcpaEL.s:198    .text:0000000000000110 .L0 
+     /tmp/ccIcpaEL.s:199    .text:0000000000000114 .L0 
+     /tmp/ccIcpaEL.s:206    .text:000000000000012c .L0 
+     /tmp/ccIcpaEL.s:207    .text:000000000000012c .L0 
+     /tmp/ccIcpaEL.s:208    .text:000000000000012c .L0 
+     /tmp/ccIcpaEL.s:209    .text:000000000000012c .L0 
+     /tmp/ccIcpaEL.s:210    .text:000000000000012c .L0 
+     /tmp/ccIcpaEL.s:211    .text:000000000000012c .L0 
+     /tmp/ccIcpaEL.s:213    .text:0000000000000130 .L0 
+     /tmp/ccIcpaEL.s:217    .text:0000000000000138 .L0 
+     /tmp/ccIcpaEL.s:218    .text:0000000000000138 .L0 
+     /tmp/ccIcpaEL.s:223    .text:0000000000000144 .L0 
+     /tmp/ccIcpaEL.s:224    .text:0000000000000144 .L0 
+     /tmp/ccIcpaEL.s:228    .text:0000000000000150 .L0 
+     /tmp/ccIcpaEL.s:230    .text:0000000000000154 .L0 
+     /tmp/ccIcpaEL.s:236    .text:0000000000000164 .L0 
+     /tmp/ccIcpaEL.s:237    .text:0000000000000164 .L0 
+     /tmp/ccIcpaEL.s:242    .text:0000000000000174 .L0 
+     /tmp/ccIcpaEL.s:243    .text:0000000000000174 .L0 
+     /tmp/ccIcpaEL.s:248    .text:0000000000000184 .L0 
+     /tmp/ccIcpaEL.s:249    .text:0000000000000184 .L0 
+     /tmp/ccIcpaEL.s:251    .text:000000000000018c .L0 
+     /tmp/ccIcpaEL.s:253    .text:0000000000000190 .L0 
+     /tmp/ccIcpaEL.s:254    .text:0000000000000190 .L0 
+     /tmp/ccIcpaEL.s:256    .text:0000000000000194 .L0 
+     /tmp/ccIcpaEL.s:259    .text:0000000000000198 .L0 
+     /tmp/ccIcpaEL.s:262    .text:000000000000019c .L0 
+     /tmp/ccIcpaEL.s:265    .text:00000000000001a0 .L0 
+     /tmp/ccIcpaEL.s:268    .text:00000000000001a4 .L0 
+     /tmp/ccIcpaEL.s:270    .text:00000000000001a8 .L0 
+     /tmp/ccIcpaEL.s:276    .text:00000000000001a8 _ZN3stm6strcmpEPKcS1_
+     /tmp/ccIcpaEL.s:279    .text:00000000000001a8 .L0 
+     /tmp/ccIcpaEL.s:281    .text:00000000000001a8 .L0 
+     /tmp/ccIcpaEL.s:282    .text:00000000000001ac .L0 
+     /tmp/ccIcpaEL.s:284    .text:00000000000001b0 .L0 
+     /tmp/ccIcpaEL.s:286    .text:00000000000001b4 .L0 
+GAS LISTING /tmp/ccIcpaEL.s 			page 35
+
+
+     /tmp/ccIcpaEL.s:289    .text:00000000000001b8 .L0 
+     /tmp/ccIcpaEL.s:292    .text:00000000000001b8 .L0 
+     /tmp/ccIcpaEL.s:293    .text:00000000000001b8 .L0 
+     /tmp/ccIcpaEL.s:298    .text:00000000000001c0 .L0 
+     /tmp/ccIcpaEL.s:302    .text:00000000000001c4 .L0 
+     /tmp/ccIcpaEL.s:303    .text:00000000000001c4 .L0 
+     /tmp/ccIcpaEL.s:305    .text:00000000000001c8 .L0 
+     /tmp/ccIcpaEL.s:308    .text:00000000000001d0 .L0 
+     /tmp/ccIcpaEL.s:310    .text:00000000000001d4 .L0 
+     /tmp/ccIcpaEL.s:313    .text:00000000000001dc .L0 
+     /tmp/ccIcpaEL.s:316    .text:00000000000001e0 .L0 
+     /tmp/ccIcpaEL.s:317    .text:00000000000001e0 .L0 
+     /tmp/ccIcpaEL.s:320    .text:00000000000001e4 .L0 
+     /tmp/ccIcpaEL.s:327    .text:00000000000001ec .L0 
+     /tmp/ccIcpaEL.s:329    .text:00000000000001f0 .L0 
+     /tmp/ccIcpaEL.s:334    .text:00000000000001f8 .L0 
+     /tmp/ccIcpaEL.s:337    .text:00000000000001fc .L0 
+     /tmp/ccIcpaEL.s:339    .text:0000000000000200 .L0 
+     /tmp/ccIcpaEL.s:342    .text:0000000000000204 .L0 
+     /tmp/ccIcpaEL.s:343    .text:0000000000000208 .L0 
+     /tmp/ccIcpaEL.s:344    .text:0000000000000208 .L0 
+     /tmp/ccIcpaEL.s:345    .text:0000000000000208 .L0 
+     /tmp/ccIcpaEL.s:347    .text:000000000000020c .L0 
+     /tmp/ccIcpaEL.s:350    .text:0000000000000210 .L0 
+     /tmp/ccIcpaEL.s:352    .text:0000000000000210 .L0 
+     /tmp/ccIcpaEL.s:356    .text:0000000000000218 .L0 
+     /tmp/ccIcpaEL.s:358    .text:0000000000000220 .L0 
+     /tmp/ccIcpaEL.s:369    .text:0000000000000220 _ZN3stm4ntosExPci
+     /tmp/ccIcpaEL.s:372    .text:0000000000000220 .L0 
+     /tmp/ccIcpaEL.s:374    .text:0000000000000220 .L0 
+     /tmp/ccIcpaEL.s:375    .text:0000000000000224 .L0 
+     /tmp/ccIcpaEL.s:379    .text:0000000000000230 .L0 
+     /tmp/ccIcpaEL.s:380    .text:0000000000000230 .L0 
+     /tmp/ccIcpaEL.s:381    .text:0000000000000230 .L0 
+     /tmp/ccIcpaEL.s:383    .text:0000000000000234 .L0 
+     /tmp/ccIcpaEL.s:386    .text:0000000000000238 .L0 
+     /tmp/ccIcpaEL.s:387    .text:0000000000000238 .L0 
+     /tmp/ccIcpaEL.s:389    .text:000000000000023c .L0 
+     /tmp/ccIcpaEL.s:392    .text:0000000000000244 .L0 
+     /tmp/ccIcpaEL.s:394    .text:0000000000000248 .L0 
+     /tmp/ccIcpaEL.s:395    .text:0000000000000248 .L0 
+     /tmp/ccIcpaEL.s:410    .text:000000000000027c .L0 
+     /tmp/ccIcpaEL.s:411    .text:000000000000027c .L0 
+     /tmp/ccIcpaEL.s:412    .text:000000000000027c .L0 
+     /tmp/ccIcpaEL.s:420    .text:0000000000000288 .L0 
+     /tmp/ccIcpaEL.s:421    .text:0000000000000288 .L0 
+     /tmp/ccIcpaEL.s:423    .text:000000000000028c .L0 
+     /tmp/ccIcpaEL.s:424    .text:000000000000028c .L0 
+     /tmp/ccIcpaEL.s:427    .text:0000000000000290 .L0 
+     /tmp/ccIcpaEL.s:431    .text:00000000000002a0 .L0 
+     /tmp/ccIcpaEL.s:435    .text:00000000000002ac .L0 
+     /tmp/ccIcpaEL.s:436    .text:00000000000002ac .L0 
+     /tmp/ccIcpaEL.s:439    .text:00000000000002b0 .L0 
+     /tmp/ccIcpaEL.s:442    .text:00000000000002b4 .L0 
+     /tmp/ccIcpaEL.s:446    .text:00000000000002b8 .L0 
+     /tmp/ccIcpaEL.s:447    .text:00000000000002b8 .L0 
+     /tmp/ccIcpaEL.s:449    .text:00000000000002bc .L0 
+GAS LISTING /tmp/ccIcpaEL.s 			page 36
+
+
+     /tmp/ccIcpaEL.s:450    .text:00000000000002bc .L0 
+     /tmp/ccIcpaEL.s:454    .text:00000000000002c0 .L0 
+     /tmp/ccIcpaEL.s:455    .text:00000000000002c0 .L0 
+     /tmp/ccIcpaEL.s:458    .text:00000000000002c8 .L0 
+     /tmp/ccIcpaEL.s:459    .text:00000000000002c8 .L0 
+     /tmp/ccIcpaEL.s:461    .text:00000000000002cc .L0 
+     /tmp/ccIcpaEL.s:462    .text:00000000000002cc .L0 
+     /tmp/ccIcpaEL.s:466    .text:00000000000002d0 .L0 
+     /tmp/ccIcpaEL.s:467    .text:00000000000002d0 .L0 
+     /tmp/ccIcpaEL.s:473    .text:00000000000002d8 .L0 
+     /tmp/ccIcpaEL.s:477    .text:00000000000002dc .L0 
+     /tmp/ccIcpaEL.s:478    .text:00000000000002dc .L0 
+     /tmp/ccIcpaEL.s:488    .text:00000000000002f4 .L0 
+     /tmp/ccIcpaEL.s:490    .text:00000000000002fc .L0 
+     /tmp/ccIcpaEL.s:491    .text:00000000000002fc .L0 
+     /tmp/ccIcpaEL.s:493    .text:0000000000000300 .L0 
+     /tmp/ccIcpaEL.s:494    .text:0000000000000300 .L0 
+     /tmp/ccIcpaEL.s:496    .text:0000000000000304 .L0 
+     /tmp/ccIcpaEL.s:499    .text:0000000000000308 .L0 
+     /tmp/ccIcpaEL.s:503    .text:000000000000030c .L0 
+     /tmp/ccIcpaEL.s:505    .text:000000000000030c .L0 
+     /tmp/ccIcpaEL.s:506    .text:000000000000030c .L0 
+     /tmp/ccIcpaEL.s:512    .text:000000000000031c .L0 
+     /tmp/ccIcpaEL.s:515    .text:0000000000000324 .L0 
+     /tmp/ccIcpaEL.s:521    .text:0000000000000324 _ZN3stm4utosEmPci
+     /tmp/ccIcpaEL.s:524    .text:0000000000000324 .L0 
+     /tmp/ccIcpaEL.s:526    .text:0000000000000324 .L0 
+     /tmp/ccIcpaEL.s:527    .text:0000000000000328 .L0 
+     /tmp/ccIcpaEL.s:531    .text:0000000000000334 .L0 
+     /tmp/ccIcpaEL.s:532    .text:0000000000000334 .L0 
+     /tmp/ccIcpaEL.s:533    .text:0000000000000334 .L0 
+     /tmp/ccIcpaEL.s:535    .text:0000000000000338 .L0 
+     /tmp/ccIcpaEL.s:538    .text:000000000000033c .L0 
+     /tmp/ccIcpaEL.s:539    .text:000000000000033c .L0 
+     /tmp/ccIcpaEL.s:541    .text:0000000000000340 .L0 
+     /tmp/ccIcpaEL.s:544    .text:0000000000000348 .L0 
+     /tmp/ccIcpaEL.s:546    .text:000000000000034c .L0 
+     /tmp/ccIcpaEL.s:547    .text:000000000000034c .L0 
+     /tmp/ccIcpaEL.s:562    .text:0000000000000380 .L0 
+     /tmp/ccIcpaEL.s:563    .text:0000000000000380 .L0 
+     /tmp/ccIcpaEL.s:564    .text:0000000000000380 .L0 
+     /tmp/ccIcpaEL.s:569    .text:0000000000000388 .L0 
+     /tmp/ccIcpaEL.s:570    .text:0000000000000388 .L0 
+     /tmp/ccIcpaEL.s:572    .text:000000000000038c .L0 
+     /tmp/ccIcpaEL.s:573    .text:000000000000038c .L0 
+     /tmp/ccIcpaEL.s:577    .text:0000000000000390 .L0 
+     /tmp/ccIcpaEL.s:578    .text:0000000000000390 .L0 
+     /tmp/ccIcpaEL.s:581    .text:0000000000000398 .L0 
+     /tmp/ccIcpaEL.s:582    .text:0000000000000398 .L0 
+     /tmp/ccIcpaEL.s:584    .text:000000000000039c .L0 
+     /tmp/ccIcpaEL.s:585    .text:000000000000039c .L0 
+     /tmp/ccIcpaEL.s:589    .text:00000000000003a0 .L0 
+     /tmp/ccIcpaEL.s:590    .text:00000000000003a0 .L0 
+     /tmp/ccIcpaEL.s:593    .text:00000000000003a4 .L0 
+     /tmp/ccIcpaEL.s:597    .text:00000000000003b4 .L0 
+     /tmp/ccIcpaEL.s:601    .text:00000000000003c0 .L0 
+     /tmp/ccIcpaEL.s:602    .text:00000000000003c0 .L0 
+GAS LISTING /tmp/ccIcpaEL.s 			page 37
+
+
+     /tmp/ccIcpaEL.s:605    .text:00000000000003c4 .L0 
+     /tmp/ccIcpaEL.s:609    .text:00000000000003c8 .L0 
+     /tmp/ccIcpaEL.s:610    .text:00000000000003c8 .L0 
+     /tmp/ccIcpaEL.s:612    .text:00000000000003cc .L0 
+     /tmp/ccIcpaEL.s:613    .text:00000000000003cc .L0 
+     /tmp/ccIcpaEL.s:623    .text:00000000000003e4 .L0 
+     /tmp/ccIcpaEL.s:625    .text:00000000000003ec .L0 
+     /tmp/ccIcpaEL.s:627    .text:00000000000003f0 .L0 
+     /tmp/ccIcpaEL.s:628    .text:00000000000003f0 .L0 
+     /tmp/ccIcpaEL.s:630    .text:00000000000003f4 .L0 
+     /tmp/ccIcpaEL.s:633    .text:00000000000003f8 .L0 
+     /tmp/ccIcpaEL.s:635    .text:00000000000003fc .L0 
+     /tmp/ccIcpaEL.s:641    .text:00000000000003fc _ZN3stm6string4copyERKS0_
+     /tmp/ccIcpaEL.s:644    .text:00000000000003fc .L0 
+     /tmp/ccIcpaEL.s:646    .text:00000000000003fc .L0 
+     /tmp/ccIcpaEL.s:647    .text:0000000000000400 .L0 
+     /tmp/ccIcpaEL.s:652    .text:0000000000000410 .L0 
+     /tmp/ccIcpaEL.s:653    .text:0000000000000410 .L0 
+     /tmp/ccIcpaEL.s:654    .text:0000000000000410 .L0 
+     /tmp/ccIcpaEL.s:655    .text:0000000000000410 .L0 
+     /tmp/ccIcpaEL.s:657    .text:0000000000000414 .L0 
+     /tmp/ccIcpaEL.s:661    .text:000000000000041c .L0 
+     /tmp/ccIcpaEL.s:662    .text:000000000000041c .L0 
+     /tmp/ccIcpaEL.s:669    .text:0000000000000430 .L0 
+     /tmp/ccIcpaEL.s:670    .text:0000000000000430 .L0 
+     /tmp/ccIcpaEL.s:672    .text:0000000000000434 .L0 
+     /tmp/ccIcpaEL.s:674    .text:0000000000000438 .L0 
+     /tmp/ccIcpaEL.s:675    .text:0000000000000438 .L0 
+     /tmp/ccIcpaEL.s:678    .text:0000000000000440 .L0 
+     /tmp/ccIcpaEL.s:681    .text:0000000000000444 .L0 
+     /tmp/ccIcpaEL.s:683    .text:0000000000000448 .L0 
+     /tmp/ccIcpaEL.s:684    .text:0000000000000448 .L0 
+     /tmp/ccIcpaEL.s:688    .text:0000000000000454 .L0 
+     /tmp/ccIcpaEL.s:689    .text:0000000000000458 .L0 
+     /tmp/ccIcpaEL.s:690    .text:0000000000000458 .L0 
+     /tmp/ccIcpaEL.s:692    .text:000000000000045c .L0 
+     /tmp/ccIcpaEL.s:693    .text:000000000000045c .L0 
+     /tmp/ccIcpaEL.s:695    .text:0000000000000460 .L0 
+     /tmp/ccIcpaEL.s:698    .text:0000000000000464 .L0 
+     /tmp/ccIcpaEL.s:701    .text:0000000000000468 .L0 
+     /tmp/ccIcpaEL.s:705    .text:000000000000046c .L0 
+     /tmp/ccIcpaEL.s:707    .text:000000000000046c .L0 
+     /tmp/ccIcpaEL.s:711    .text:000000000000047c .L0 
+     /tmp/ccIcpaEL.s:717    .text:000000000000047c _ZN3stm6string4moveERS0_
+     /tmp/ccIcpaEL.s:720    .text:000000000000047c .L0 
+     /tmp/ccIcpaEL.s:722    .text:000000000000047c .L0 
+     /tmp/ccIcpaEL.s:723    .text:0000000000000480 .L0 
+     /tmp/ccIcpaEL.s:728    .text:0000000000000490 .L0 
+     /tmp/ccIcpaEL.s:729    .text:0000000000000490 .L0 
+     /tmp/ccIcpaEL.s:730    .text:0000000000000490 .L0 
+     /tmp/ccIcpaEL.s:731    .text:0000000000000490 .L0 
+     /tmp/ccIcpaEL.s:733    .text:0000000000000494 .L0 
+     /tmp/ccIcpaEL.s:737    .text:000000000000049c .L0 
+     /tmp/ccIcpaEL.s:738    .text:000000000000049c .L0 
+     /tmp/ccIcpaEL.s:740    .text:00000000000004a0 .L0 
+     /tmp/ccIcpaEL.s:742    .text:00000000000004a4 .L0 
+     /tmp/ccIcpaEL.s:745    .text:00000000000004ac .L0 
+GAS LISTING /tmp/ccIcpaEL.s 			page 38
+
+
+     /tmp/ccIcpaEL.s:746    .text:00000000000004ac .L0 
+     /tmp/ccIcpaEL.s:748    .text:00000000000004b0 .L0 
+     /tmp/ccIcpaEL.s:752    .text:00000000000004b4 .L0 
+     /tmp/ccIcpaEL.s:753    .text:00000000000004b4 .L0 
+     /tmp/ccIcpaEL.s:755    .text:00000000000004b8 .L0 
+     /tmp/ccIcpaEL.s:756    .text:00000000000004bc .L0 
+     /tmp/ccIcpaEL.s:757    .text:00000000000004bc .L0 
+     /tmp/ccIcpaEL.s:759    .text:00000000000004c0 .L0 
+     /tmp/ccIcpaEL.s:760    .text:00000000000004c0 .L0 
+     /tmp/ccIcpaEL.s:762    .text:00000000000004c4 .L0 
+     /tmp/ccIcpaEL.s:765    .text:00000000000004c8 .L0 
+     /tmp/ccIcpaEL.s:768    .text:00000000000004cc .L0 
+     /tmp/ccIcpaEL.s:772    .text:00000000000004d0 .L0 
+     /tmp/ccIcpaEL.s:774    .text:00000000000004d0 .L0 
+     /tmp/ccIcpaEL.s:775    .text:00000000000004d0 .L0 
+     /tmp/ccIcpaEL.s:781    .text:00000000000004e0 .L0 
+     /tmp/ccIcpaEL.s:783    .text:00000000000004e8 .L0 
+     /tmp/ccIcpaEL.s:789    .text:00000000000004e8 _ZN3stm6stringC2Ec
+     /tmp/ccIcpaEL.s:792    .text:00000000000004e8 .L0 
+     /tmp/ccIcpaEL.s:794    .text:00000000000004e8 .L0 
+     /tmp/ccIcpaEL.s:795    .text:00000000000004ec .L0 
+     /tmp/ccIcpaEL.s:797    .text:00000000000004f0 .L0 
+     /tmp/ccIcpaEL.s:799    .text:00000000000004f4 .L0 
+     /tmp/ccIcpaEL.s:802    .text:00000000000004f4 .L0 
+     /tmp/ccIcpaEL.s:803    .text:00000000000004f4 .L0 
+     /tmp/ccIcpaEL.s:806    .text:00000000000004fc .L0 
+     /tmp/ccIcpaEL.s:807    .text:00000000000004fc .L0 
+     /tmp/ccIcpaEL.s:809    .text:0000000000000500 .L0 
+     /tmp/ccIcpaEL.s:811    .text:0000000000000504 .L0 
+     /tmp/ccIcpaEL.s:812    .text:0000000000000504 .L0 
+     /tmp/ccIcpaEL.s:814    .text:0000000000000508 .L0 
+     /tmp/ccIcpaEL.s:815    .text:0000000000000508 .L0 
+     /tmp/ccIcpaEL.s:818    .text:000000000000050c .L0 
+     /tmp/ccIcpaEL.s:819    .text:0000000000000510 .L0 
+     /tmp/ccIcpaEL.s:820    .text:0000000000000510 .L0 
+     /tmp/ccIcpaEL.s:822    .text:0000000000000514 .L0 
+     /tmp/ccIcpaEL.s:824    .text:0000000000000518 .L0 
+     /tmp/ccIcpaEL.s:789    .text:00000000000004e8 _ZN3stm6stringC1Ec
+     /tmp/ccIcpaEL.s:832    .text:0000000000000518 _ZN3stm6stringC2Ex
+     /tmp/ccIcpaEL.s:835    .text:0000000000000518 .L0 
+     /tmp/ccIcpaEL.s:837    .text:0000000000000518 .L0 
+     /tmp/ccIcpaEL.s:838    .text:000000000000051c .L0 
+     /tmp/ccIcpaEL.s:842    .text:0000000000000528 .L0 
+     /tmp/ccIcpaEL.s:843    .text:0000000000000528 .L0 
+     /tmp/ccIcpaEL.s:844    .text:0000000000000528 .L0 
+     /tmp/ccIcpaEL.s:846    .text:000000000000052c .L0 
+     /tmp/ccIcpaEL.s:852    .text:0000000000000534 .L0 
+     /tmp/ccIcpaEL.s:853    .text:0000000000000534 .L0 
+     /tmp/ccIcpaEL.s:859    .text:0000000000000544 .L0 
+     /tmp/ccIcpaEL.s:861    .text:0000000000000548 .L0 
+     /tmp/ccIcpaEL.s:862    .text:0000000000000548 .L0 
+     /tmp/ccIcpaEL.s:865    .text:0000000000000550 .L0 
+     /tmp/ccIcpaEL.s:868    .text:0000000000000554 .L0 
+     /tmp/ccIcpaEL.s:869    .text:0000000000000558 .L0 
+     /tmp/ccIcpaEL.s:871    .text:000000000000055c .L0 
+     /tmp/ccIcpaEL.s:872    .text:000000000000055c .L0 
+     /tmp/ccIcpaEL.s:874    .text:0000000000000560 .L0 
+GAS LISTING /tmp/ccIcpaEL.s 			page 39
+
+
+     /tmp/ccIcpaEL.s:877    .text:0000000000000564 .L0 
+     /tmp/ccIcpaEL.s:879    .text:0000000000000568 .L0 
+     /tmp/ccIcpaEL.s:832    .text:0000000000000518 _ZN3stm6stringC1Ex
+     /tmp/ccIcpaEL.s:887    .text:0000000000000568 _ZN3stm6stringC2Ei
+     /tmp/ccIcpaEL.s:890    .text:0000000000000568 .L0 
+     /tmp/ccIcpaEL.s:892    .text:0000000000000568 .L0 
+     /tmp/ccIcpaEL.s:893    .text:000000000000056c .L0 
+     /tmp/ccIcpaEL.s:896    .text:0000000000000574 .L0 
+     /tmp/ccIcpaEL.s:897    .text:0000000000000574 .L0 
+     /tmp/ccIcpaEL.s:899    .text:0000000000000578 .L0 
+     /tmp/ccIcpaEL.s:902    .text:0000000000000578 .L0 
+     /tmp/ccIcpaEL.s:906    .text:0000000000000580 .L0 
+     /tmp/ccIcpaEL.s:907    .text:0000000000000584 .L0 
+     /tmp/ccIcpaEL.s:909    .text:0000000000000588 .L0 
+     /tmp/ccIcpaEL.s:910    .text:0000000000000588 .L0 
+     /tmp/ccIcpaEL.s:912    .text:000000000000058c .L0 
+     /tmp/ccIcpaEL.s:914    .text:0000000000000590 .L0 
+     /tmp/ccIcpaEL.s:887    .text:0000000000000568 _ZN3stm6stringC1Ei
+     /tmp/ccIcpaEL.s:922    .text:0000000000000590 _ZN3stm6stringC2Em
+     /tmp/ccIcpaEL.s:925    .text:0000000000000590 .L0 
+     /tmp/ccIcpaEL.s:927    .text:0000000000000590 .L0 
+     /tmp/ccIcpaEL.s:928    .text:0000000000000594 .L0 
+     /tmp/ccIcpaEL.s:932    .text:00000000000005a0 .L0 
+     /tmp/ccIcpaEL.s:933    .text:00000000000005a0 .L0 
+     /tmp/ccIcpaEL.s:934    .text:00000000000005a0 .L0 
+     /tmp/ccIcpaEL.s:936    .text:00000000000005a4 .L0 
+     /tmp/ccIcpaEL.s:942    .text:00000000000005ac .L0 
+     /tmp/ccIcpaEL.s:943    .text:00000000000005ac .L0 
+     /tmp/ccIcpaEL.s:949    .text:00000000000005bc .L0 
+     /tmp/ccIcpaEL.s:951    .text:00000000000005c0 .L0 
+     /tmp/ccIcpaEL.s:952    .text:00000000000005c0 .L0 
+     /tmp/ccIcpaEL.s:955    .text:00000000000005c8 .L0 
+     /tmp/ccIcpaEL.s:958    .text:00000000000005cc .L0 
+     /tmp/ccIcpaEL.s:959    .text:00000000000005d0 .L0 
+     /tmp/ccIcpaEL.s:961    .text:00000000000005d4 .L0 
+     /tmp/ccIcpaEL.s:962    .text:00000000000005d4 .L0 
+     /tmp/ccIcpaEL.s:964    .text:00000000000005d8 .L0 
+     /tmp/ccIcpaEL.s:967    .text:00000000000005dc .L0 
+     /tmp/ccIcpaEL.s:969    .text:00000000000005e0 .L0 
+     /tmp/ccIcpaEL.s:922    .text:0000000000000590 _ZN3stm6stringC1Em
+     /tmp/ccIcpaEL.s:977    .text:00000000000005e0 _ZN3stm6stringaSERKS0_
+     /tmp/ccIcpaEL.s:980    .text:00000000000005e0 .L0 
+     /tmp/ccIcpaEL.s:982    .text:00000000000005e0 .L0 
+     /tmp/ccIcpaEL.s:983    .text:00000000000005e4 .L0 
+     /tmp/ccIcpaEL.s:988    .text:00000000000005f4 .L0 
+     /tmp/ccIcpaEL.s:989    .text:00000000000005f4 .L0 
+     /tmp/ccIcpaEL.s:990    .text:00000000000005f4 .L0 
+     /tmp/ccIcpaEL.s:991    .text:00000000000005f4 .L0 
+     /tmp/ccIcpaEL.s:993    .text:00000000000005f8 .L0 
+     /tmp/ccIcpaEL.s:996    .text:00000000000005fc .L0 
+     /tmp/ccIcpaEL.s:1003   .text:0000000000000604 .L0 
+     /tmp/ccIcpaEL.s:1004   .text:0000000000000604 .L0 
+     /tmp/ccIcpaEL.s:1005   .text:0000000000000604 .L0 
+     /tmp/ccIcpaEL.s:1008   .text:0000000000000608 .L0 
+     /tmp/ccIcpaEL.s:1010   .text:000000000000060c .L0 
+     /tmp/ccIcpaEL.s:1016   .text:0000000000000614 .L0 
+     /tmp/ccIcpaEL.s:1017   .text:0000000000000614 .L0 
+GAS LISTING /tmp/ccIcpaEL.s 			page 40
+
+
+     /tmp/ccIcpaEL.s:1023   .text:0000000000000624 .L0 
+     /tmp/ccIcpaEL.s:1024   .text:0000000000000624 .L0 
+     /tmp/ccIcpaEL.s:1026   .text:000000000000062c .L0 
+     /tmp/ccIcpaEL.s:1028   .text:0000000000000630 .L0 
+     /tmp/ccIcpaEL.s:1029   .text:0000000000000630 .L0 
+     /tmp/ccIcpaEL.s:1031   .text:0000000000000634 .L0 
+     /tmp/ccIcpaEL.s:1034   .text:0000000000000638 .L0 
+     /tmp/ccIcpaEL.s:1036   .text:000000000000063c .L0 
+     /tmp/ccIcpaEL.s:1038   .text:0000000000000640 .L0 
+     /tmp/ccIcpaEL.s:1044   .text:0000000000000640 _ZN3stm6stringaSEOS0_
+     /tmp/ccIcpaEL.s:1047   .text:0000000000000640 .L0 
+     /tmp/ccIcpaEL.s:5340   .data.rel.local.DW.ref.__gxx_personality_v0:0000000000000000 DW.ref.__gxx_personality_v0
+     /tmp/ccIcpaEL.s:1051   .text:0000000000000640 .L0 
+     /tmp/ccIcpaEL.s:1052   .text:0000000000000644 .L0 
+     /tmp/ccIcpaEL.s:1057   .text:0000000000000654 .L0 
+     /tmp/ccIcpaEL.s:1058   .text:0000000000000654 .L0 
+     /tmp/ccIcpaEL.s:1059   .text:0000000000000654 .L0 
+     /tmp/ccIcpaEL.s:1060   .text:0000000000000654 .L0 
+     /tmp/ccIcpaEL.s:1062   .text:0000000000000658 .L0 
+     /tmp/ccIcpaEL.s:1065   .text:000000000000065c .L0 
+     /tmp/ccIcpaEL.s:1071   .text:0000000000000664 .L0 
+     /tmp/ccIcpaEL.s:1072   .text:0000000000000664 .L0 
+     /tmp/ccIcpaEL.s:1073   .text:0000000000000664 .L0 
+     /tmp/ccIcpaEL.s:1076   .text:0000000000000668 .L0 
+     /tmp/ccIcpaEL.s:1078   .text:000000000000066c .L0 
+     /tmp/ccIcpaEL.s:1084   .text:0000000000000674 .L0 
+     /tmp/ccIcpaEL.s:1085   .text:0000000000000674 .L0 
+     /tmp/ccIcpaEL.s:1091   .text:0000000000000684 .L0 
+     /tmp/ccIcpaEL.s:1092   .text:0000000000000684 .L0 
+     /tmp/ccIcpaEL.s:1094   .text:000000000000068c .L0 
+     /tmp/ccIcpaEL.s:1096   .text:0000000000000690 .L0 
+     /tmp/ccIcpaEL.s:1097   .text:0000000000000690 .L0 
+     /tmp/ccIcpaEL.s:1099   .text:0000000000000694 .L0 
+     /tmp/ccIcpaEL.s:1102   .text:0000000000000698 .L0 
+     /tmp/ccIcpaEL.s:1104   .text:000000000000069c .L0 
+     /tmp/ccIcpaEL.s:1106   .text:00000000000006a0 .L0 
+     /tmp/ccIcpaEL.s:1120   .text:00000000000006a0 _ZN3stm6string15write_and_countEPKcPci
+     /tmp/ccIcpaEL.s:1123   .text:00000000000006a0 .L0 
+     /tmp/ccIcpaEL.s:1125   .text:00000000000006a0 .L0 
+     /tmp/ccIcpaEL.s:1126   .text:00000000000006a4 .L0 
+     /tmp/ccIcpaEL.s:1128   .text:00000000000006a8 .L0 
+     /tmp/ccIcpaEL.s:1130   .text:00000000000006ac .L0 
+     /tmp/ccIcpaEL.s:1133   .text:00000000000006b0 .L0 
+     /tmp/ccIcpaEL.s:1135   .text:00000000000006b0 .L0 
+     /tmp/ccIcpaEL.s:1136   .text:00000000000006b0 .L0 
+     /tmp/ccIcpaEL.s:1140   .text:00000000000006b4 .L0 
+     /tmp/ccIcpaEL.s:1144   .text:00000000000006c0 .L0 
+     /tmp/ccIcpaEL.s:1146   .text:00000000000006c4 .L0 
+     /tmp/ccIcpaEL.s:1147   .text:00000000000006c4 .L0 
+     /tmp/ccIcpaEL.s:1149   .text:00000000000006c8 .L0 
+     /tmp/ccIcpaEL.s:1151   .text:00000000000006cc .L0 
+     /tmp/ccIcpaEL.s:1157   .text:00000000000006d4 .L0 
+     /tmp/ccIcpaEL.s:1158   .text:00000000000006d4 .L0 
+     /tmp/ccIcpaEL.s:1160   .text:00000000000006d8 .L0 
+     /tmp/ccIcpaEL.s:1164   .text:00000000000006dc .L0 
+     /tmp/ccIcpaEL.s:1165   .text:00000000000006dc .L0 
+     /tmp/ccIcpaEL.s:1166   .text:00000000000006e0 .L0 
+GAS LISTING /tmp/ccIcpaEL.s 			page 41
+
+
+     /tmp/ccIcpaEL.s:1167   .text:00000000000006e0 .L0 
+     /tmp/ccIcpaEL.s:1168   .text:00000000000006e0 .L0 
+     /tmp/ccIcpaEL.s:1170   .text:00000000000006e4 .L0 
+     /tmp/ccIcpaEL.s:1174   .text:00000000000006e8 .L0 
+     /tmp/ccIcpaEL.s:1176   .text:00000000000006e8 .L0 
+     /tmp/ccIcpaEL.s:1179   .text:00000000000006f0 .L0 
+     /tmp/ccIcpaEL.s:1185   .text:00000000000006f0 _ZN3stm6stringC2EPKc
+     /tmp/ccIcpaEL.s:1188   .text:00000000000006f0 .L0 
+     /tmp/ccIcpaEL.s:1190   .text:00000000000006f0 .L0 
+     /tmp/ccIcpaEL.s:1191   .text:00000000000006f4 .L0 
+     /tmp/ccIcpaEL.s:1197   .text:0000000000000708 .L0 
+     /tmp/ccIcpaEL.s:1198   .text:0000000000000708 .L0 
+     /tmp/ccIcpaEL.s:1199   .text:0000000000000708 .L0 
+     /tmp/ccIcpaEL.s:1200   .text:0000000000000708 .L0 
+     /tmp/ccIcpaEL.s:1201   .text:0000000000000708 .L0 
+     /tmp/ccIcpaEL.s:1203   .text:000000000000070c .L0 
+     /tmp/ccIcpaEL.s:1208   .text:0000000000000714 .L0 
+     /tmp/ccIcpaEL.s:1209   .text:0000000000000714 .L0 
+     /tmp/ccIcpaEL.s:1211   .text:0000000000000718 .L0 
+     /tmp/ccIcpaEL.s:1219   .text:000000000000072c .L0 
+     /tmp/ccIcpaEL.s:1221   .text:0000000000000730 .L0 
+     /tmp/ccIcpaEL.s:1224   .text:0000000000000738 .L0 
+     /tmp/ccIcpaEL.s:1225   .text:0000000000000738 .L0 
+     /tmp/ccIcpaEL.s:1229   .text:000000000000073c .L0 
+     /tmp/ccIcpaEL.s:1230   .text:000000000000073c .L0 
+     /tmp/ccIcpaEL.s:1231   .text:0000000000000740 .L0 
+     /tmp/ccIcpaEL.s:1232   .text:0000000000000740 .L0 
+     /tmp/ccIcpaEL.s:1234   .text:0000000000000744 .L0 
+     /tmp/ccIcpaEL.s:1235   .text:0000000000000744 .L0 
+     /tmp/ccIcpaEL.s:1237   .text:0000000000000748 .L0 
+     /tmp/ccIcpaEL.s:1240   .text:000000000000074c .L0 
+     /tmp/ccIcpaEL.s:1243   .text:0000000000000750 .L0 
+     /tmp/ccIcpaEL.s:1246   .text:0000000000000754 .L0 
+     /tmp/ccIcpaEL.s:1250   .text:0000000000000758 .L0 
+     /tmp/ccIcpaEL.s:1253   .text:0000000000000758 .L0 
+     /tmp/ccIcpaEL.s:1254   .text:0000000000000758 .L0 
+     /tmp/ccIcpaEL.s:1258   .text:0000000000000764 .L0 
+     /tmp/ccIcpaEL.s:1260   .text:0000000000000768 .L0 
+     /tmp/ccIcpaEL.s:1261   .text:0000000000000768 .L0 
+     /tmp/ccIcpaEL.s:1266   .text:0000000000000778 .L0 
+     /tmp/ccIcpaEL.s:1268   .text:000000000000077c .L0 
+     /tmp/ccIcpaEL.s:1269   .text:000000000000077c .L0 
+     /tmp/ccIcpaEL.s:1274   .text:000000000000078c .L0 
+     /tmp/ccIcpaEL.s:1185   .text:00000000000006f0 _ZN3stm6stringC1EPKc
+     /tmp/ccIcpaEL.s:1282   .text:000000000000078c _ZN3stmplERKNS_6stringES2_
+     /tmp/ccIcpaEL.s:1285   .text:000000000000078c .L0 
+     /tmp/ccIcpaEL.s:1289   .text:000000000000078c .L0 
+     /tmp/ccIcpaEL.s:1290   .text:0000000000000790 .L0 
+     /tmp/ccIcpaEL.s:1295   .text:00000000000007a0 .L0 
+     /tmp/ccIcpaEL.s:1296   .text:00000000000007a0 .L0 
+     /tmp/ccIcpaEL.s:1297   .text:00000000000007a0 .L0 
+     /tmp/ccIcpaEL.s:1298   .text:00000000000007a0 .L0 
+     /tmp/ccIcpaEL.s:1300   .text:00000000000007a4 .L0 
+     /tmp/ccIcpaEL.s:1302   .text:00000000000007a4 .L0 
+     /tmp/ccIcpaEL.s:1303   .text:00000000000007a4 .L0 
+     /tmp/ccIcpaEL.s:1312   .text:00000000000007b8 .L0 
+     /tmp/ccIcpaEL.s:1335   .text:00000000000007f4 .L0 
+GAS LISTING /tmp/ccIcpaEL.s 			page 42
+
+
+     /tmp/ccIcpaEL.s:1337   .text:00000000000007fc .L0 
+     /tmp/ccIcpaEL.s:1339   .text:0000000000000800 .L0 
+     /tmp/ccIcpaEL.s:1340   .text:0000000000000800 .L0 
+     /tmp/ccIcpaEL.s:1342   .text:0000000000000804 .L0 
+     /tmp/ccIcpaEL.s:1344   .text:0000000000000808 .L0 
+     /tmp/ccIcpaEL.s:1346   .text:000000000000080c .L0 
+     /tmp/ccIcpaEL.s:1348   .text:0000000000000810 .L0 
+     /tmp/ccIcpaEL.s:1373   .text:0000000000000810 _ZN3stm6stringpLERKS0_
+     /tmp/ccIcpaEL.s:1376   .text:0000000000000810 .L0 
+     /tmp/ccIcpaEL.s:1378   .text:0000000000000810 .L0 
+     /tmp/ccIcpaEL.s:1379   .text:0000000000000814 .L0 
+     /tmp/ccIcpaEL.s:1383   .text:0000000000000820 .L0 
+     /tmp/ccIcpaEL.s:1384   .text:0000000000000820 .L0 
+     /tmp/ccIcpaEL.s:1385   .text:0000000000000820 .L0 
+     /tmp/ccIcpaEL.s:1387   .text:0000000000000824 .L0 
+     /tmp/ccIcpaEL.s:1390   .text:0000000000000828 .L0 
+     /tmp/ccIcpaEL.s:1391   .text:0000000000000828 .L0 
+     /tmp/ccIcpaEL.s:1398   .text:0000000000000840 .L0 
+     /tmp/ccIcpaEL.s:1399   .text:0000000000000840 .L0 
+     /tmp/ccIcpaEL.s:1401   .text:0000000000000848 .L0 
+     /tmp/ccIcpaEL.s:1403   .text:000000000000084c .L0 
+     /tmp/ccIcpaEL.s:1404   .text:000000000000084c .L0 
+     /tmp/ccIcpaEL.s:1406   .text:0000000000000850 .L0 
+     /tmp/ccIcpaEL.s:1409   .text:0000000000000854 .L0 
+     /tmp/ccIcpaEL.s:1411   .text:0000000000000858 .L0 
+     /tmp/ccIcpaEL.s:1419   .text:0000000000000858 .L0 
+     /tmp/ccIcpaEL.s:363    .rodata.str1.8:0000000000000000 .LC0
+     /tmp/ccIcpaEL.s:427    .text:0000000000000290 .L0 
+     /tmp/ccIcpaEL.s:593    .text:00000000000003a4 .L0 
+     /tmp/ccIcpaEL.s:664    .text:0000000000000420 .L0 
+     /tmp/ccIcpaEL.s:38     .text:0000000000000028 .L2
+     /tmp/ccIcpaEL.s:28     .text:0000000000000014 .L3
+     /tmp/ccIcpaEL.s:166    .text:00000000000000f0 .L7
+     /tmp/ccIcpaEL.s:158    .text:00000000000000e8 .L12
+     /tmp/ccIcpaEL.s:135    .text:00000000000000bc .L10
+     /tmp/ccIcpaEL.s:300    .text:00000000000001c4 .L18
+     /tmp/ccIcpaEL.s:323    .text:00000000000001ec .L16
+     /tmp/ccIcpaEL.s:296    .text:00000000000001c0 .L23
+     /tmp/ccIcpaEL.s:340    .text:0000000000000204 .L17
+     /tmp/ccIcpaEL.s:335    .text:00000000000001fc .L19
+     /tmp/ccIcpaEL.s:349    .text:0000000000000210 .L20
+     /tmp/ccIcpaEL.s:354    .text:0000000000000218 .L21
+     /tmp/ccIcpaEL.s:444    .text:00000000000002b8 .L34
+     /tmp/ccIcpaEL.s:452    .text:00000000000002c0 .L35
+     /tmp/ccIcpaEL.s:464    .text:00000000000002d0 .L36
+     /tmp/ccIcpaEL.s:471    .text:00000000000002d8 .L29
+     /tmp/ccIcpaEL.s:418    .text:0000000000000288 .L30
+     /tmp/ccIcpaEL.s:486    .text:00000000000002f4 .L26
+     /tmp/ccIcpaEL.s:415    .text:0000000000000284 .L28
+     /tmp/ccIcpaEL.s:502    .text:000000000000030c .L37
+     /tmp/ccIcpaEL.s:475    .text:00000000000002dc .L31
+     /tmp/ccIcpaEL.s:567    .text:0000000000000388 .L45
+     /tmp/ccIcpaEL.s:575    .text:0000000000000390 .L46
+     /tmp/ccIcpaEL.s:607    .text:00000000000003c8 .L43
+     /tmp/ccIcpaEL.s:621    .text:00000000000003e4 .L40
+     /tmp/ccIcpaEL.s:587    .text:00000000000003a0 .L47
+     /tmp/ccIcpaEL.s:704    .text:000000000000046c .L52
+GAS LISTING /tmp/ccIcpaEL.s 			page 43
+
+
+     /tmp/ccIcpaEL.s:679    .text:0000000000000444 .L50
+     /tmp/ccIcpaEL.s:771    .text:00000000000004d0 .L54
+     /tmp/ccIcpaEL.s:750    .text:00000000000004b4 .L55
+     /tmp/ccIcpaEL.s:1022   .text:0000000000000624 .L66
+     /tmp/ccIcpaEL.s:1012   .text:0000000000000614 .L67
+     /tmp/ccIcpaEL.s:1090   .text:0000000000000684 .L70
+     /tmp/ccIcpaEL.s:1080   .text:0000000000000674 .L71
+     /tmp/ccIcpaEL.s:1155   .text:00000000000006d4 .L74
+     /tmp/ccIcpaEL.s:1173   .text:00000000000006e8 .L77
+     /tmp/ccIcpaEL.s:1138   .text:00000000000006b4 .L76
+     /tmp/ccIcpaEL.s:1163   .text:00000000000006dc .L75
+     /tmp/ccIcpaEL.s:1249   .text:0000000000000758 .L80
+     /tmp/ccIcpaEL.s:1227   .text:000000000000073c .L79
+     /tmp/ccIcpaEL.s:1333   .text:00000000000007f4 .L88
+     /tmp/ccIcpaEL.s:1307   .text:00000000000007ac .LEHB0
+     /tmp/ccIcpaEL.s:1283   .text:000000000000078c .LFB44
+     /tmp/ccIcpaEL.s:1315   .text:00000000000007c4 .LEHE0
+     /tmp/ccIcpaEL.s:1318   .text:00000000000007cc .LEHB1
+     /tmp/ccIcpaEL.s:1321   .text:00000000000007d4 .LEHE1
+     /tmp/ccIcpaEL.s:1323   .text:00000000000007d8 .L85
+     /tmp/ccIcpaEL.s:1329   .text:00000000000007ec .LEHB2
+     /tmp/ccIcpaEL.s:1332   .text:00000000000007f4 .LEHE2
+     /tmp/ccIcpaEL.s:3254   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccIcpaEL.s:5278   .debug_str:000000000000051c .LASF114
+     /tmp/ccIcpaEL.s:5272   .debug_str:00000000000004f2 .LASF115
+     /tmp/ccIcpaEL.s:5162   .debug_str:00000000000001d8 .LASF116
+     /tmp/ccIcpaEL.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccIcpaEL.s:1414   .text:0000000000000858 .Letext0
+     /tmp/ccIcpaEL.s:5090   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccIcpaEL.s:5218   .debug_str:0000000000000392 .LASF0
+     /tmp/ccIcpaEL.s:5226   .debug_str:00000000000003c8 .LASF1
+     /tmp/ccIcpaEL.s:5208   .debug_str:0000000000000332 .LASF2
+     /tmp/ccIcpaEL.s:5188   .debug_str:00000000000002ac .LASF4
+     /tmp/ccIcpaEL.s:5262   .debug_str:00000000000004ab .LASF3
+     /tmp/ccIcpaEL.s:5112   .debug_str:000000000000009d .LASF5
+     /tmp/ccIcpaEL.s:5228   .debug_str:00000000000003db .LASF6
+     /tmp/ccIcpaEL.s:5216   .debug_str:000000000000037f .LASF7
+     /tmp/ccIcpaEL.s:5294   .debug_str:0000000000000640 .LASF8
+     /tmp/ccIcpaEL.s:5174   .debug_str:000000000000025e .LASF9
+     /tmp/ccIcpaEL.s:5240   .debug_str:0000000000000428 .LASF10
+     /tmp/ccIcpaEL.s:5282   .debug_str:00000000000005f6 .LASF11
+     /tmp/ccIcpaEL.s:5114   .debug_str:00000000000000a4 .LASF12
+     /tmp/ccIcpaEL.s:5098   .debug_str:000000000000002f .LASF13
+     /tmp/ccIcpaEL.s:5122   .debug_str:00000000000000db .LASF14
+     /tmp/ccIcpaEL.s:5252   .debug_str:000000000000045a .LASF15
+     /tmp/ccIcpaEL.s:5138   .debug_str:0000000000000130 .LASF16
+     /tmp/ccIcpaEL.s:5186   .debug_str:00000000000002a5 .LASF17
+     /tmp/ccIcpaEL.s:5172   .debug_str:000000000000024b .LASF20
+     /tmp/ccIcpaEL.s:5144   .debug_str:0000000000000161 .LASF18
+     /tmp/ccIcpaEL.s:5150   .debug_str:0000000000000189 .LASF19
+     /tmp/ccIcpaEL.s:5176   .debug_str:000000000000026c .LASF21
+     /tmp/ccIcpaEL.s:5156   .debug_str:00000000000001b7 .LASF22
+     /tmp/ccIcpaEL.s:5254   .debug_str:0000000000000470 .LASF23
+     /tmp/ccIcpaEL.s:5308   .debug_str:00000000000006a8 .LASF24
+     /tmp/ccIcpaEL.s:5128   .debug_str:00000000000000f3 .LASF25
+     /tmp/ccIcpaEL.s:5214   .debug_str:0000000000000375 .LASF26
+     /tmp/ccIcpaEL.s:5104   .debug_str:0000000000000052 .LASF27
+GAS LISTING /tmp/ccIcpaEL.s 			page 44
+
+
+     /tmp/ccIcpaEL.s:5274   .debug_str:0000000000000501 .LASF28
+     /tmp/ccIcpaEL.s:5202   .debug_str:0000000000000313 .LASF29
+     /tmp/ccIcpaEL.s:5194   .debug_str:00000000000002db .LASF30
+     /tmp/ccIcpaEL.s:5232   .debug_str:0000000000000409 .LASF31
+     /tmp/ccIcpaEL.s:5152   .debug_str:000000000000019c .LASF32
+     /tmp/ccIcpaEL.s:5142   .debug_str:000000000000014d .LASF33
+     /tmp/ccIcpaEL.s:5248   .debug_str:0000000000000448 .LASF34
+     /tmp/ccIcpaEL.s:5306   .debug_str:0000000000000691 .LASF35
+     /tmp/ccIcpaEL.s:5304   .debug_str:0000000000000689 .LASF36
+     /tmp/ccIcpaEL.s:5222   .debug_str:00000000000003af .LASF37
+     /tmp/ccIcpaEL.s:5290   .debug_str:0000000000000628 .LASF38
+     /tmp/ccIcpaEL.s:5314   .debug_str:00000000000006e7 .LASF40
+     /tmp/ccIcpaEL.s:5320   .debug_str:0000000000000721 .LASF39
+     /tmp/ccIcpaEL.s:5318   .debug_str:0000000000000708 .LASF41
+     /tmp/ccIcpaEL.s:5154   .debug_str:00000000000001af .LASF42
+     /tmp/ccIcpaEL.s:5164   .debug_str:00000000000001f6 .LASF43
+     /tmp/ccIcpaEL.s:5220   .debug_str:000000000000039f .LASF44
+     /tmp/ccIcpaEL.s:5330   .debug_str:0000000000000779 .LASF45
+     /tmp/ccIcpaEL.s:5102   .debug_str:0000000000000047 .LASF117
+     /tmp/ccIcpaEL.s:5276   .debug_str:0000000000000517 .LASF46
+     /tmp/ccIcpaEL.s:5298   .debug_str:0000000000000661 .LASF47
+     /tmp/ccIcpaEL.s:5256   .debug_str:0000000000000483 .LASF48
+     /tmp/ccIcpaEL.s:5146   .debug_str:0000000000000176 .LASF118
+     /tmp/ccIcpaEL.s:5100   .debug_str:000000000000003f .LASF49
+     /tmp/ccIcpaEL.s:5148   .debug_str:000000000000017e .LASF50
+     /tmp/ccIcpaEL.s:5110   .debug_str:0000000000000088 .LASF51
+     /tmp/ccIcpaEL.s:5168   .debug_str:0000000000000224 .LASF52
+     /tmp/ccIcpaEL.s:5326   .debug_str:000000000000074a .LASF53
+     /tmp/ccIcpaEL.s:5284   .debug_str:0000000000000605 .LASF54
+     /tmp/ccIcpaEL.s:5270   .debug_str:00000000000004dd .LASF55
+     /tmp/ccIcpaEL.s:5166   .debug_str:000000000000020f .LASF56
+     /tmp/ccIcpaEL.s:5312   .debug_str:00000000000006d1 .LASF57
+     /tmp/ccIcpaEL.s:5260   .debug_str:0000000000000496 .LASF58
+     /tmp/ccIcpaEL.s:5210   .debug_str:0000000000000340 .LASF59
+     /tmp/ccIcpaEL.s:5130   .debug_str:0000000000000109 .LASF60
+     /tmp/ccIcpaEL.s:5328   .debug_str:000000000000076b .LASF62
+     /tmp/ccIcpaEL.s:5244   .debug_str:000000000000043e .LASF61
+     /tmp/ccIcpaEL.s:5198   .debug_str:00000000000002fb .LASF63
+     /tmp/ccIcpaEL.s:5200   .debug_str:0000000000000309 .LASF64
+     /tmp/ccIcpaEL.s:5230   .debug_str:00000000000003ee .LASF65
+     /tmp/ccIcpaEL.s:5126   .debug_str:00000000000000ee .LASF66
+     /tmp/ccIcpaEL.s:5310   .debug_str:00000000000006bf .LASF67
+     /tmp/ccIcpaEL.s:5286   .debug_str:000000000000061a .LASF68
+     /tmp/ccIcpaEL.s:5092   .debug_str:0000000000000000 .LASF69
+     /tmp/ccIcpaEL.s:5140   .debug_str:0000000000000146 .LASF70
+     /tmp/ccIcpaEL.s:5280   .debug_str:00000000000005e0 .LASF71
+     /tmp/ccIcpaEL.s:5234   .debug_str:0000000000000414 .LASF72
+     /tmp/ccIcpaEL.s:5322   .debug_str:0000000000000726 .LASF73
+     /tmp/ccIcpaEL.s:5096   .debug_str:0000000000000027 .LASF76
+     /tmp/ccIcpaEL.s:5106   .debug_str:0000000000000069 .LASF78
+     /tmp/ccIcpaEL.s:5242   .debug_str:0000000000000437 .LASF74
+     /tmp/ccIcpaEL.s:5094   .debug_str:0000000000000012 .LASF75
+     /tmp/ccIcpaEL.s:5236   .debug_str:000000000000041b .LASF77
+     /tmp/ccIcpaEL.s:5120   .debug_str:00000000000000c8 .LASF79
+     /tmp/ccIcpaEL.s:5180   .debug_str:000000000000028c .LASF80
+     /tmp/ccIcpaEL.s:5324   .debug_str:000000000000073c .LASF81
+     /tmp/ccIcpaEL.s:5158   .debug_str:00000000000001ca .LASF82
+GAS LISTING /tmp/ccIcpaEL.s 			page 45
+
+
+     /tmp/ccIcpaEL.s:1121   .text:00000000000006a0 .LFB47
+     /tmp/ccIcpaEL.s:1180   .text:00000000000006f0 .LFE47
+     /tmp/ccIcpaEL.s:4212   .debug_loc:0000000000000000 .LLST42
+     /tmp/ccIcpaEL.s:4223   .debug_loc:0000000000000036 .LLST43
+     /tmp/ccIcpaEL.s:1349   .text:0000000000000810 .LFE44
+     /tmp/ccIcpaEL.s:5264   .debug_str:00000000000004bd .LASF83
+     /tmp/ccIcpaEL.s:4243   .debug_loc:0000000000000093 .LLST46
+     /tmp/ccIcpaEL.s:5266   .debug_str:00000000000004c5 .LASF84
+     /tmp/ccIcpaEL.s:4257   .debug_loc:00000000000000cc .LLST47
+     /tmp/ccIcpaEL.s:1309   .text:00000000000007b4 .LVL136
+     /tmp/ccIcpaEL.s:1314   .text:00000000000007c4 .LVL137
+     /tmp/ccIcpaEL.s:1320   .text:00000000000007d4 .LVL138
+     /tmp/ccIcpaEL.s:1327   .text:00000000000007e8 .LVL139
+     /tmp/ccIcpaEL.s:1331   .text:00000000000007f4 .LVL140
+     /tmp/ccIcpaEL.s:1374   .text:0000000000000810 .LFB43
+     /tmp/ccIcpaEL.s:1412   .text:0000000000000858 .LFE43
+     /tmp/ccIcpaEL.s:5246   .debug_str:0000000000000443 .LASF85
+     /tmp/ccIcpaEL.s:4271   .debug_loc:0000000000000105 .LLST48
+     /tmp/ccIcpaEL.s:4286   .debug_loc:000000000000014e .LLST49
+     /tmp/ccIcpaEL.s:1392   .text:0000000000000830 .LVL142
+     /tmp/ccIcpaEL.s:1396   .text:0000000000000840 .LVL143
+     /tmp/ccIcpaEL.s:1045   .text:0000000000000640 .LFB42
+     /tmp/ccIcpaEL.s:1107   .text:00000000000006a0 .LFE42
+     /tmp/ccIcpaEL.s:4300   .debug_loc:0000000000000187 .LLST39
+     /tmp/ccIcpaEL.s:4315   .debug_loc:00000000000001d0 .LLST40
+     /tmp/ccIcpaEL.s:1069   .text:0000000000000664 .LBB15
+     /tmp/ccIcpaEL.s:1082   .text:0000000000000674 .LBE15
+     /tmp/ccIcpaEL.s:4333   .debug_loc:000000000000021c .LLST41
+     /tmp/ccIcpaEL.s:1079   .text:0000000000000674 .LVL111
+     /tmp/ccIcpaEL.s:1088   .text:0000000000000684 .LVL112
+     /tmp/ccIcpaEL.s:978    .text:00000000000005e0 .LFB41
+     /tmp/ccIcpaEL.s:1039   .text:0000000000000640 .LFE41
+     /tmp/ccIcpaEL.s:4344   .debug_loc:0000000000000252 .LLST36
+     /tmp/ccIcpaEL.s:4359   .debug_loc:000000000000029b .LLST37
+     /tmp/ccIcpaEL.s:1000   .text:0000000000000604 .LBB13
+     /tmp/ccIcpaEL.s:1014   .text:0000000000000614 .LBE13
+     /tmp/ccIcpaEL.s:4377   .debug_loc:00000000000002e7 .LLST38
+     /tmp/ccIcpaEL.s:1011   .text:0000000000000614 .LVL105
+     /tmp/ccIcpaEL.s:1020   .text:0000000000000624 .LVL106
+     /tmp/ccIcpaEL.s:5302   .debug_str:0000000000000682 .LASF86
+     /tmp/ccIcpaEL.s:5300   .debug_str:000000000000066f .LASF87
+     /tmp/ccIcpaEL.s:923    .text:0000000000000590 .LFB39
+     /tmp/ccIcpaEL.s:970    .text:00000000000005e0 .LFE39
+     /tmp/ccIcpaEL.s:4388   .debug_loc:000000000000031d .LLST34
+     /tmp/ccIcpaEL.s:4406   .debug_loc:0000000000000369 .LLST35
+     /tmp/ccIcpaEL.s:947    .text:00000000000005bc .LVL99
+     /tmp/ccIcpaEL.s:953    .text:00000000000005c8 .LVL100
+     /tmp/ccIcpaEL.s:5212   .debug_str:0000000000000362 .LASF88
+     /tmp/ccIcpaEL.s:888    .text:0000000000000568 .LFB36
+     /tmp/ccIcpaEL.s:915    .text:0000000000000590 .LFE36
+     /tmp/ccIcpaEL.s:4424   .debug_loc:00000000000003b5 .LLST32
+     /tmp/ccIcpaEL.s:4438   .debug_loc:00000000000003ee .LLST33
+     /tmp/ccIcpaEL.s:903    .text:0000000000000580 .LVL95
+     /tmp/ccIcpaEL.s:5292   .debug_str:000000000000062d .LASF89
+     /tmp/ccIcpaEL.s:833    .text:0000000000000518 .LFB33
+     /tmp/ccIcpaEL.s:880    .text:0000000000000568 .LFE33
+     /tmp/ccIcpaEL.s:4452   .debug_loc:0000000000000427 .LLST30
+GAS LISTING /tmp/ccIcpaEL.s 			page 46
+
+
+     /tmp/ccIcpaEL.s:4470   .debug_loc:0000000000000473 .LLST31
+     /tmp/ccIcpaEL.s:857    .text:0000000000000544 .LVL91
+     /tmp/ccIcpaEL.s:863    .text:0000000000000550 .LVL92
+     /tmp/ccIcpaEL.s:5206   .debug_str:000000000000031f .LASF90
+     /tmp/ccIcpaEL.s:790    .text:00000000000004e8 .LFB30
+     /tmp/ccIcpaEL.s:825    .text:0000000000000518 .LFE30
+     /tmp/ccIcpaEL.s:5192   .debug_str:00000000000002c6 .LASF91
+     /tmp/ccIcpaEL.s:1186   .text:00000000000006f0 .LFB27
+     /tmp/ccIcpaEL.s:1275   .text:000000000000078c .LFE27
+     /tmp/ccIcpaEL.s:4488   .debug_loc:00000000000004bf .LLST44
+     /tmp/ccIcpaEL.s:4516   .debug_loc:0000000000000533 .LLST45
+     /tmp/ccIcpaEL.s:1217   .text:000000000000072c .LVL125
+     /tmp/ccIcpaEL.s:1256   .text:0000000000000764 .LVL130
+     /tmp/ccIcpaEL.s:1263   .text:0000000000000774 .LVL131
+     /tmp/ccIcpaEL.s:1271   .text:0000000000000788 .LVL132
+     /tmp/ccIcpaEL.s:718    .text:000000000000047c .LFB25
+     /tmp/ccIcpaEL.s:784    .text:00000000000004e8 .LFE25
+     /tmp/ccIcpaEL.s:4538   .debug_loc:0000000000000592 .LLST28
+     /tmp/ccIcpaEL.s:4564   .debug_loc:0000000000000604 .LLST29
+     /tmp/ccIcpaEL.s:779    .text:00000000000004e0 .LVL86
+     /tmp/ccIcpaEL.s:642    .text:00000000000003fc .LFB24
+     /tmp/ccIcpaEL.s:712    .text:000000000000047c .LFE24
+     /tmp/ccIcpaEL.s:4586   .debug_loc:0000000000000663 .LLST26
+     /tmp/ccIcpaEL.s:4608   .debug_loc:00000000000006c2 .LLST27
+     /tmp/ccIcpaEL.s:667    .text:0000000000000430 .LVL74
+     /tmp/ccIcpaEL.s:686    .text:0000000000000454 .LVL75
+     /tmp/ccIcpaEL.s:708    .text:0000000000000474 .LVL79
+     /tmp/ccIcpaEL.s:522    .text:0000000000000324 .LFB23
+     /tmp/ccIcpaEL.s:636    .text:00000000000003fc .LFE23
+     /tmp/ccIcpaEL.s:4630   .debug_loc:0000000000000721 .LLST21
+     /tmp/ccIcpaEL.s:5250   .debug_str:0000000000000453 .LASF92
+     /tmp/ccIcpaEL.s:4641   .debug_loc:0000000000000757 .LLST22
+     /tmp/ccIcpaEL.s:5224   .debug_str:00000000000003c2 .LASF93
+     /tmp/ccIcpaEL.s:4656   .debug_loc:00000000000007a0 .LLST23
+     /tmp/ccIcpaEL.s:5196   .debug_str:00000000000002f4 .LASF94
+     /tmp/ccIcpaEL.s:4670   .debug_loc:00000000000007d9 .LLST24
+     /tmp/ccIcpaEL.s:4693   .debug_loc:0000000000000839 .LLST25
+     /tmp/ccIcpaEL.s:620    .text:00000000000003e4 .LVL69
+     /tmp/ccIcpaEL.s:370    .text:0000000000000220 .LFB22
+     /tmp/ccIcpaEL.s:516    .text:0000000000000324 .LFE22
+     /tmp/ccIcpaEL.s:4708   .debug_loc:0000000000000881 .LLST16
+     /tmp/ccIcpaEL.s:4731   .debug_loc:00000000000008f0 .LLST17
+     /tmp/ccIcpaEL.s:4750   .debug_loc:000000000000094c .LLST18
+     /tmp/ccIcpaEL.s:4768   .debug_loc:0000000000000998 .LLST19
+     /tmp/ccIcpaEL.s:5288   .debug_str:000000000000061f .LASF95
+     /tmp/ccIcpaEL.s:4803   .debug_loc:0000000000000a22 .LLST20
+     /tmp/ccIcpaEL.s:485    .text:00000000000002f4 .LVL54
+     /tmp/ccIcpaEL.s:277    .text:00000000000001a8 .LFB21
+     /tmp/ccIcpaEL.s:359    .text:0000000000000220 .LFE21
+     /tmp/ccIcpaEL.s:5132   .debug_str:000000000000010e .LASF96
+     /tmp/ccIcpaEL.s:4839   .debug_loc:0000000000000a8f .LLST12
+     /tmp/ccIcpaEL.s:5134   .debug_str:0000000000000113 .LASF97
+     /tmp/ccIcpaEL.s:4850   .debug_loc:0000000000000ac5 .LLST13
+     /tmp/ccIcpaEL.s:4864   .debug_loc:0000000000000afe .LLST14
+     /tmp/ccIcpaEL.s:314    .text:00000000000001e0 .LBB8
+     /tmp/ccIcpaEL.s:324    .text:00000000000001ec .LBE8
+     /tmp/ccIcpaEL.s:5116   .debug_str:00000000000000b4 .LASF98
+GAS LISTING /tmp/ccIcpaEL.s 			page 47
+
+
+     /tmp/ccIcpaEL.s:4876   .debug_loc:0000000000000b35 .LLST15
+     /tmp/ccIcpaEL.s:194    .text:0000000000000110 .LFB20
+     /tmp/ccIcpaEL.s:271    .text:00000000000001a8 .LFE20
+     /tmp/ccIcpaEL.s:5184   .debug_str:00000000000002a0 .LASF99
+     /tmp/ccIcpaEL.s:4897   .debug_loc:0000000000000b75 .LLST8
+     /tmp/ccIcpaEL.s:5204   .debug_str:000000000000031a .LASF100
+     /tmp/ccIcpaEL.s:4915   .debug_loc:0000000000000bc1 .LLST9
+     /tmp/ccIcpaEL.s:5118   .debug_str:00000000000000bf .LASF101
+     /tmp/ccIcpaEL.s:4933   .debug_loc:0000000000000c0d .LLST10
+     /tmp/ccIcpaEL.s:5160   .debug_str:00000000000001cf .LASF102
+     /tmp/ccIcpaEL.s:4940   .debug_loc:0000000000000c30 .LLST11
+     /tmp/ccIcpaEL.s:219    .text:0000000000000140 .LVL20
+     /tmp/ccIcpaEL.s:226    .text:0000000000000150 .LVL22
+     /tmp/ccIcpaEL.s:232    .text:0000000000000160 .LVL23
+     /tmp/ccIcpaEL.s:240    .text:0000000000000174 .LVL25
+     /tmp/ccIcpaEL.s:246    .text:0000000000000184 .LVL26
+     /tmp/ccIcpaEL.s:106    .text:000000000000008c .LFB19
+     /tmp/ccIcpaEL.s:188    .text:0000000000000110 .LFE19
+     /tmp/ccIcpaEL.s:4951   .debug_loc:0000000000000c66 .LLST4
+     /tmp/ccIcpaEL.s:4969   .debug_loc:0000000000000cb2 .LLST5
+     /tmp/ccIcpaEL.s:5108   .debug_str:0000000000000080 .LASF103
+     /tmp/ccIcpaEL.s:4987   .debug_loc:0000000000000cfe .LLST6
+     /tmp/ccIcpaEL.s:131    .text:00000000000000b8 .LBB6
+     /tmp/ccIcpaEL.s:167    .text:00000000000000f0 .LBE6
+     /tmp/ccIcpaEL.s:5001   .debug_loc:0000000000000d37 .LLST7
+     /tmp/ccIcpaEL.s:140    .text:00000000000000c8 .LVL13
+     /tmp/ccIcpaEL.s:54     .text:0000000000000034 .LFB18
+     /tmp/ccIcpaEL.s:100    .text:000000000000008c .LFE18
+     /tmp/ccIcpaEL.s:5017   .debug_loc:0000000000000d81 .LLST2
+     /tmp/ccIcpaEL.s:5035   .debug_loc:0000000000000dcd .LLST3
+     /tmp/ccIcpaEL.s:75     .text:000000000000005c .LVL6
+     /tmp/ccIcpaEL.s:81     .text:0000000000000070 .LVL7
+     /tmp/ccIcpaEL.s:10     .text:0000000000000000 .LFB17
+     /tmp/ccIcpaEL.s:48     .text:0000000000000034 .LFE17
+     /tmp/ccIcpaEL.s:5050   .debug_loc:0000000000000e16 .LLST0
+     /tmp/ccIcpaEL.s:5061   .debug_loc:0000000000000e4c .LLST1
+     /tmp/ccIcpaEL.s:5258   .debug_str:0000000000000490 .LASF104
+     /tmp/ccIcpaEL.s:5178   .debug_str:000000000000027f .LASF106
+     /tmp/ccIcpaEL.s:5332   .debug_str:00000000000007a0 .LASF105
+     /tmp/ccIcpaEL.s:5268   .debug_str:00000000000004cd .LASF107
+     /tmp/ccIcpaEL.s:5182   .debug_str:0000000000000291 .LASF108
+     /tmp/ccIcpaEL.s:5136   .debug_str:0000000000000118 .LASF109
+     /tmp/ccIcpaEL.s:5316   .debug_str:0000000000000701 .LASF110
+     /tmp/ccIcpaEL.s:5190   .debug_str:00000000000002b3 .LASF111
+     /tmp/ccIcpaEL.s:5238   .debug_str:0000000000000422 .LASF112
+     /tmp/ccIcpaEL.s:5170   .debug_str:000000000000023b .LASF113
+     /tmp/ccIcpaEL.s:5296   .debug_str:0000000000000650 .LASF119
+     /tmp/ccIcpaEL.s:5124   .debug_str:00000000000000e7 .LASF120
+     /tmp/ccIcpaEL.s:1124   .text:00000000000006a0 .LVL114
+     /tmp/ccIcpaEL.s:1137   .text:00000000000006b4 .LVL116
+     /tmp/ccIcpaEL.s:1134   .text:00000000000006b0 .LVL115
+     /tmp/ccIcpaEL.s:1152   .text:00000000000006d0 .LVL117
+     /tmp/ccIcpaEL.s:1154   .text:00000000000006d4 .LVL118
+     /tmp/ccIcpaEL.s:1162   .text:00000000000006dc .LVL119
+     /tmp/ccIcpaEL.s:1172   .text:00000000000006e8 .LVL120
+     /tmp/ccIcpaEL.s:1177   .text:00000000000006ec .LVL121
+     /tmp/ccIcpaEL.s:1288   .text:000000000000078c .LVL133
+GAS LISTING /tmp/ccIcpaEL.s 			page 48
+
+
+     /tmp/ccIcpaEL.s:1306   .text:00000000000007ac .LVL135
+     /tmp/ccIcpaEL.s:1304   .text:00000000000007a8 .LVL134
+     /tmp/ccIcpaEL.s:1377   .text:0000000000000810 .LVL141
+     /tmp/ccIcpaEL.s:1407   .text:0000000000000850 .LVL144
+     /tmp/ccIcpaEL.s:1050   .text:0000000000000640 .LVL108
+     /tmp/ccIcpaEL.s:1074   .text:0000000000000668 .LVL110
+     /tmp/ccIcpaEL.s:1100   .text:0000000000000694 .LVL113
+     /tmp/ccIcpaEL.s:1068   .text:0000000000000664 .LVL109
+     /tmp/ccIcpaEL.s:981    .text:00000000000005e0 .LVL102
+     /tmp/ccIcpaEL.s:1006   .text:0000000000000608 .LVL104
+     /tmp/ccIcpaEL.s:1032   .text:0000000000000634 .LVL107
+     /tmp/ccIcpaEL.s:999    .text:0000000000000604 .LVL103
+     /tmp/ccIcpaEL.s:926    .text:0000000000000590 .LVL96
+     /tmp/ccIcpaEL.s:939    .text:00000000000005ac .LVL97
+     /tmp/ccIcpaEL.s:965    .text:00000000000005d8 .LVL101
+     /tmp/ccIcpaEL.s:945    .text:00000000000005b4 .LVL98
+     /tmp/ccIcpaEL.s:891    .text:0000000000000568 .LVL94
+     /tmp/ccIcpaEL.s:836    .text:0000000000000518 .LVL88
+     /tmp/ccIcpaEL.s:849    .text:0000000000000534 .LVL89
+     /tmp/ccIcpaEL.s:875    .text:0000000000000560 .LVL93
+     /tmp/ccIcpaEL.s:855    .text:000000000000053c .LVL90
+     /tmp/ccIcpaEL.s:1189   .text:00000000000006f0 .LVL122
+     /tmp/ccIcpaEL.s:1215   .text:0000000000000724 .LVL124
+     /tmp/ccIcpaEL.s:1238   .text:0000000000000748 .LVL126
+     /tmp/ccIcpaEL.s:1244   .text:0000000000000750 .LVL128
+     /tmp/ccIcpaEL.s:1248   .text:0000000000000758 .LVL129
+     /tmp/ccIcpaEL.s:1213   .text:0000000000000720 .LVL123
+     /tmp/ccIcpaEL.s:1241   .text:000000000000074c .LVL127
+     /tmp/ccIcpaEL.s:721    .text:000000000000047c .LVL80
+     /tmp/ccIcpaEL.s:749    .text:00000000000004b4 .LVL81
+     /tmp/ccIcpaEL.s:766    .text:00000000000004c8 .LVL83
+     /tmp/ccIcpaEL.s:770    .text:00000000000004d0 .LVL84
+     /tmp/ccIcpaEL.s:777    .text:00000000000004d8 .LVL85
+     /tmp/ccIcpaEL.s:763    .text:00000000000004c4 .LVL82
+     /tmp/ccIcpaEL.s:645    .text:00000000000003fc .LVL71
+     /tmp/ccIcpaEL.s:665    .text:0000000000000428 .LVL73
+     /tmp/ccIcpaEL.s:696    .text:0000000000000460 .LVL76
+     /tmp/ccIcpaEL.s:703    .text:000000000000046c .LVL78
+     /tmp/ccIcpaEL.s:663    .text:0000000000000420 .LVL72
+     /tmp/ccIcpaEL.s:699    .text:0000000000000464 .LVL77
+     /tmp/ccIcpaEL.s:525    .text:0000000000000324 .LVL59
+     /tmp/ccIcpaEL.s:603    .text:00000000000003c4 .LVL65
+     /tmp/ccIcpaEL.s:617    .text:00000000000003d8 .LVL68
+     /tmp/ccIcpaEL.s:574    .text:0000000000000390 .LVL62
+     /tmp/ccIcpaEL.s:631    .text:00000000000003f4 .LVL70
+     /tmp/ccIcpaEL.s:561    .text:0000000000000380 .LVL60
+     /tmp/ccIcpaEL.s:566    .text:0000000000000388 .LVL61
+     /tmp/ccIcpaEL.s:586    .text:00000000000003a0 .LVL63
+     /tmp/ccIcpaEL.s:591    .text:00000000000003a4 .LVL64
+     /tmp/ccIcpaEL.s:606    .text:00000000000003c8 .LVL66
+     /tmp/ccIcpaEL.s:614    .text:00000000000003d0 .LVL67
+     /tmp/ccIcpaEL.s:373    .text:0000000000000220 .LVL39
+     /tmp/ccIcpaEL.s:414    .text:0000000000000284 .LVL41
+     /tmp/ccIcpaEL.s:443    .text:00000000000002b8 .LVL46
+     /tmp/ccIcpaEL.s:468    .text:00000000000002d4 .LVL49
+     /tmp/ccIcpaEL.s:474    .text:00000000000002dc .LVL51
+     /tmp/ccIcpaEL.s:501    .text:000000000000030c .LVL56
+GAS LISTING /tmp/ccIcpaEL.s 			page 49
+
+
+     /tmp/ccIcpaEL.s:507    .text:0000000000000310 .LVL57
+     /tmp/ccIcpaEL.s:451    .text:00000000000002c0 .LVL47
+     /tmp/ccIcpaEL.s:497    .text:0000000000000304 .LVL55
+     /tmp/ccIcpaEL.s:409    .text:000000000000027c .LVL40
+     /tmp/ccIcpaEL.s:417    .text:0000000000000288 .LVL42
+     /tmp/ccIcpaEL.s:425    .text:0000000000000290 .LVL43
+     /tmp/ccIcpaEL.s:440    .text:00000000000002b4 .LVL45
+     /tmp/ccIcpaEL.s:463    .text:00000000000002d0 .LVL48
+     /tmp/ccIcpaEL.s:470    .text:00000000000002d8 .LVL50
+     /tmp/ccIcpaEL.s:479    .text:00000000000002e0 .LVL52
+     /tmp/ccIcpaEL.s:513    .text:0000000000000320 .LVL58
+     /tmp/ccIcpaEL.s:482    .text:00000000000002e8 .LVL53
+     /tmp/ccIcpaEL.s:280    .text:00000000000001a8 .LVL31
+     /tmp/ccIcpaEL.s:295    .text:00000000000001c0 .LVL33
+     /tmp/ccIcpaEL.s:330    .text:00000000000001f4 .LVL37
+     /tmp/ccIcpaEL.s:290    .text:00000000000001b8 .LVL32
+     /tmp/ccIcpaEL.s:332    .text:00000000000001f8 .LVL38
+     /tmp/ccIcpaEL.s:299    .text:00000000000001c4 .LVL34
+     /tmp/ccIcpaEL.s:318    .text:00000000000001e4 .LVL35
+     /tmp/ccIcpaEL.s:322    .text:00000000000001ec .LVL36
+     /tmp/ccIcpaEL.s:197    .text:0000000000000110 .LVL19
+     /tmp/ccIcpaEL.s:266    .text:00000000000001a0 .LVL30
+     /tmp/ccIcpaEL.s:260    .text:0000000000000198 .LVL28
+     /tmp/ccIcpaEL.s:221    .text:0000000000000144 .LVL21
+     /tmp/ccIcpaEL.s:263    .text:000000000000019c .LVL29
+     /tmp/ccIcpaEL.s:234    .text:0000000000000164 .LVL24
+     /tmp/ccIcpaEL.s:257    .text:0000000000000194 .LVL27
+     /tmp/ccIcpaEL.s:109    .text:000000000000008c .LVL10
+     /tmp/ccIcpaEL.s:134    .text:00000000000000bc .LVL12
+     /tmp/ccIcpaEL.s:178    .text:0000000000000100 .LVL17
+     /tmp/ccIcpaEL.s:181    .text:0000000000000104 .LVL18
+     /tmp/ccIcpaEL.s:130    .text:00000000000000b8 .LVL11
+     /tmp/ccIcpaEL.s:155    .text:00000000000000e4 .LVL14
+     /tmp/ccIcpaEL.s:157    .text:00000000000000e8 .LVL15
+     /tmp/ccIcpaEL.s:162    .text:00000000000000ec .LVL16
+     /tmp/ccIcpaEL.s:57     .text:0000000000000034 .LVL5
+     /tmp/ccIcpaEL.s:95     .text:0000000000000084 .LVL9
+     /tmp/ccIcpaEL.s:92     .text:0000000000000080 .LVL8
+     /tmp/ccIcpaEL.s:14     .text:0000000000000000 .LVL0
+     /tmp/ccIcpaEL.s:27     .text:0000000000000014 .LVL2
+     /tmp/ccIcpaEL.s:24     .text:0000000000000010 .LVL1
+     /tmp/ccIcpaEL.s:35     .text:0000000000000024 .LVL3
+     /tmp/ccIcpaEL.s:37     .text:0000000000000028 .LVL4
+     /tmp/ccIcpaEL.s:1420   .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/ccIcpaEL.s:1110   .gcc_except_table:0000000000000000 .LLSDA42
+     /tmp/ccIcpaEL.s:1351   .gcc_except_table:0000000000000004 .LLSDA44
+
+UNDEFINED SYMBOLS
+_Z6memcpyPKvS0_i
+_Znam
+_ZN3stm4coutE
+_ZNK3stm7istreamlsEi
+_ZdaPv
+__gxx_personality_v0
+_Znwm
+_ZdlPv
+_Unwind_Resume
+GAS LISTING /tmp/ccIcpaEL.s 			page 50
+
+
