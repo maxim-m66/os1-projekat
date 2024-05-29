@@ -76,7 +76,7 @@ protected:
 
     virtual void periodicActivation() {}
 
-    virtual void run() override;
+    void run() final;
 
 private:
     time_t period;
