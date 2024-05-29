@@ -91,7 +91,7 @@ int Semaphore::signal_and_wait(Semaphore &sem1, Semaphore &sem2) {
 }
 
 void PeriodicThread::terminate() {
-    Thread::kill(this);
+    this->period = 0;
 }
 
 PeriodicThread::PeriodicThread(time_t period) {
@@ -99,16 +99,16 @@ PeriodicThread::PeriodicThread(time_t period) {
 }
 
 void PeriodicThread::run() {
-    while (true) {
+    while (this->period != 0) {
         Thread::sleep(period);
         this->periodicActivation();
     }
 }
 
 char Console::getc() {
-    return getc();
+    return ::getc();
 }
 
 void Console::putc(char c) {
-    putc(c);
+    ::putc(c);
 }
