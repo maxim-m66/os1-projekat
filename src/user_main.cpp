@@ -53,26 +53,32 @@ public:
 };
 
 int userMain() {
-    dramatic_print("Hello There!! Welcome to my Operating System.\n");
-    Thread *threads[THRD];
-    for (int i = 0; i < THRD; i++) {
-        threads[i] = new FibonacciThread('A' + i);
-        threads[i]->start();
+    if(fork() == 0) {
+        cout << "child" << endl;
+    } else {
+        cout << "parent" << endl;
     }
-    for (auto & thread : threads) {
-        thread->join();
-    }
-    Thread *sleeper1 = new SleeperThread(10), *sleeper2 = new SleeperThread(20), *sleeper4 = new SleeperThread(40);
-    sleeper1->start();
-    sleeper2->start();
-    sleeper4->start();
-    sleeper1->join();
-    sleeper2->join();
-    sleeper4->join();
-    Pthread *pthread = new Pthread(10);
-    pthread->start();
-    time_sleep(100);
-    pthread->terminate();
-    pthread->join();
+//    dramatic_print("Hello There!! Welcome to my Operating System.\n");
+//    Thread *threads[THRD];
+//    for (int i = 0; i < THRD; i++) {
+//        threads[i] = new FibonacciThread('A' + i);
+//        threads[i]->start();
+//    }
+//    for (auto & thread : threads) {
+//        thread->join();
+//    }
+//    Thread *sleeper1 = new SleeperThread(10), *sleeper2 = new SleeperThread(20), *sleeper4 = new SleeperThread(40);
+//    sleeper1->start();
+//    sleeper2->start();
+//    sleeper4->start();
+//    sleeper1->join();
+//    sleeper2->join();
+//    sleeper4->join();
+//    Pthread *pthread = new Pthread(10);
+//    pthread->start();
+//    time_sleep(100);
+//    pthread->terminate();
+//    pthread->join();
+    while (true);
     return 0;
 }

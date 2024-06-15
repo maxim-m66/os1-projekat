@@ -38,7 +38,7 @@ public:
 
     static void context_switch(Context *, Context *);
 
-    static void yield();
+    static void context_inherit(Context*);
 
     static TCB *destroy_thread(TCB *);
 

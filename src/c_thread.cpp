@@ -25,6 +25,7 @@ TCB::TCB(TCB &parent) :
         parent(&parent), context(parent.context), status(RUNNABLE), time_slice(DEFAULT_TIME_SLICE),
         preempted(false), joiner() {
     this->joiner.init();
+    Scheduler::put(this);
 }
 
 int TCB::_thread_create(thread_t *handle, void(*start_routine)(void *), void *arg, void *stack) {
@@ -34,7 +35,7 @@ int TCB::_thread_create(thread_t *handle, void(*start_routine)(void *), void *ar
     return (*handle)->t_id;
 }
 
-void TCB::yield() {
+void TCB::_thread_dispatch() {
     thread_t old = TCB::running;
     if (old->is_runnable() && old != handle_bleya) {
         Scheduler::put(old);
@@ -49,13 +50,10 @@ void TCB::yield() {
         }
         TCB::running = Scheduler::get();
     }
-    TCB::context_switch(&old->context, &TCB::running->context);
-}
-
-void TCB::_thread_dispatch() {
-    Riscv::push();
-    TCB::yield();
-    Riscv::pop();
+    if (riscv::setjump()) {
+        TCB::context_switch(&old->context, &TCB::running->context);
+        riscv::longjump();
+    }
 }
 
 TCB *TCB::destroy_thread(TCB *thread) {
@@ -93,28 +91,16 @@ void TCB::_thread_join_time(thread_t handle, time_t time) {
     TCB::_thread_dispatch();
 }
 
-void TCB::duplicate(TCB *parent, TCB *child) {
-    Riscv::push();
-    memcpy(parent->stack, child->stack, DEFAULT_STACK_SIZE);
-    child->context = parent->context;
-    Riscv::pop();
-}
-
 int TCB::_fork() {
-    int id_parent = TCB::running->t_id;
-    TCB *handle = new TCB(*TCB::running);
-    TCB::duplicate(TCB::running, handle);
-    print(TCB::running->t_id);
-    putc(' ');
-    print(id_parent);
-    putc(' ');
-    print(handle->t_id);
-    putc('\n');
-    if (TCB::running->t_id == id_parent) {
-        Scheduler::put(handle);
-        return handle->t_id;
+
+    TCB *child = new TCB(*TCB::running);
+    int volatile parent_id = TCB::running->t_id;
+    memcpy(TCB::running->stack, child->stack, DEFAULT_STACK_SIZE);
+    context_inherit(&child->context);
+    print_h((uint64)TCB::running);
+    if (TCB::running->t_id == parent_id) {
+        return child->t_id;
     } else {
-        print(TCB::running->t_id);
         return 0;
     }
 }
@@ -128,7 +114,7 @@ int TCB::_kill(TCB *thread) {
 }
 
 void TCB::thread_start() {
-    Riscv::popSppSpie();
+    riscv::popSppSpie();
     TCB::running->_run(TCB::running->arg);
     thread_exit();
 }

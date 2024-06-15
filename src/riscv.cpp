@@ -6,29 +6,29 @@
 #include "../h/c_sleep.hpp"
 #include "../h/scheduler.hpp"
 
-Riscv::syscall_f Riscv::syscall_table[SYSCALL_COUNT] = {
-        reinterpret_cast<Riscv::syscall_f>(Allocator::_mem_alloc),
-        reinterpret_cast<Riscv::syscall_f>(Allocator::_mem_free),
-        reinterpret_cast<Riscv::syscall_f>(TCB::_thread_create),
-        reinterpret_cast<Riscv::syscall_f>(TCB::_thread_exit),
-        reinterpret_cast<Riscv::syscall_f>(TCB::_thread_dispatch),
-        reinterpret_cast<Riscv::syscall_f>(TCB::_thread_join),
-        reinterpret_cast<Riscv::syscall_f>(TCB::_thread_join_time),
-        reinterpret_cast<Riscv::syscall_f>(TCB::_fork),
-        reinterpret_cast<Riscv::syscall_f>(TCB::_kill),
-        reinterpret_cast<Riscv::syscall_f>(Sem::_sem_open),
-        reinterpret_cast<Riscv::syscall_f>(Sem::_sem_close),
-        reinterpret_cast<Riscv::syscall_f>(Sem::_sem_wait),
-        reinterpret_cast<Riscv::syscall_f>(Sem::_sem_signal),
-        reinterpret_cast<Riscv::syscall_f>(Sem::_sem_signal_all),
-        reinterpret_cast<Riscv::syscall_f>(Sem::_sem_signal_wait),
-        reinterpret_cast<Riscv::syscall_f>(Cradle::_time_sleep),
-        reinterpret_cast<Riscv::syscall_f>(Cradle::_thread_wake),
-        reinterpret_cast<Riscv::syscall_f>(IO::_getc),
-        reinterpret_cast<Riscv::syscall_f>(IO::_putc)
+riscv::syscall_f riscv::syscall_table[SYSCALL_COUNT] = {
+        reinterpret_cast<riscv::syscall_f>(Allocator::_mem_alloc),
+        reinterpret_cast<riscv::syscall_f>(Allocator::_mem_free),
+        reinterpret_cast<riscv::syscall_f>(TCB::_thread_create),
+        reinterpret_cast<riscv::syscall_f>(TCB::_thread_exit),
+        reinterpret_cast<riscv::syscall_f>(TCB::_thread_dispatch),
+        reinterpret_cast<riscv::syscall_f>(TCB::_thread_join),
+        reinterpret_cast<riscv::syscall_f>(TCB::_thread_join_time),
+        reinterpret_cast<riscv::syscall_f>(TCB::_fork),
+        reinterpret_cast<riscv::syscall_f>(TCB::_kill),
+        reinterpret_cast<riscv::syscall_f>(Sem::_sem_open),
+        reinterpret_cast<riscv::syscall_f>(Sem::_sem_close),
+        reinterpret_cast<riscv::syscall_f>(Sem::_sem_wait),
+        reinterpret_cast<riscv::syscall_f>(Sem::_sem_signal),
+        reinterpret_cast<riscv::syscall_f>(Sem::_sem_signal_all),
+        reinterpret_cast<riscv::syscall_f>(Sem::_sem_signal_wait),
+        reinterpret_cast<riscv::syscall_f>(Cradle::_time_sleep),
+        reinterpret_cast<riscv::syscall_f>(Cradle::_thread_wake),
+        reinterpret_cast<riscv::syscall_f>(IO::_getc),
+        reinterpret_cast<riscv::syscall_f>(IO::_putc)
 };
 
-void Riscv::handleSupervisorTrap(uint64 code, uint64 arg1, uint64 arg2, uint64 arg3, uint64 arg4) {
+void riscv::handleSupervisorTrap(uint64 code, uint64 arg1, uint64 arg2, uint64 arg3, uint64 arg4) {
     uint64 sstatus = r_sstatus();
     uint64 sepc = r_sepc();
     if (r_scause() == ILLEGAL_INSTRUCTION) {
@@ -41,7 +41,7 @@ void Riscv::handleSupervisorTrap(uint64 code, uint64 arg1, uint64 arg2, uint64 a
 }
 
 
-void Riscv::handleTimerTrap() {
+void riscv::handleTimerTrap() {
     uint64 sstatus = r_sstatus();
     uint64 sepc = r_sepc();
     while ((*((char *) CONSOLE_STATUS) & CONSOLE_TX_STATUS_BIT) && !IO::Output.is_empty()) {
@@ -67,7 +67,7 @@ void Riscv::handleTimerTrap() {
     w_sstatus(sstatus);
 }
 
-void Riscv::handleConsoleTrap() {
+void riscv::handleConsoleTrap() {
     uint64 sepc = r_sepc();
     uint64 sstatuc = r_sstatus();
     if (plic_claim() == CONSOLE_IRQ) {
@@ -81,18 +81,18 @@ void Riscv::handleConsoleTrap() {
     w_sstatus(sstatuc);
 }
 
-void Riscv::popSppSpie() {
-    Riscv::mc_sstatus(Riscv::SSTATUS_SPP);
+void riscv::popSppSpie() {
+    riscv::mc_sstatus(riscv::SSTATUS_SPP);
     __asm__ volatile("csrw sepc, ra");
     __asm__ volatile("sret");
 }
 
-void Riscv::handleReadTrap() {
+void riscv::handleReadTrap() {
     *(volatile char *) CONSOLE_TX_DATA = '!';
     *(volatile char *) CONSOLE_TX_DATA = 'r';
 }
 
-void Riscv::handleWriteTrap() {
+void riscv::handleWriteTrap() {
     *(volatile char *) CONSOLE_TX_DATA = '!';
     *(volatile char *) CONSOLE_TX_DATA = 'w';
 }
