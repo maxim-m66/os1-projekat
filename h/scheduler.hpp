@@ -19,15 +19,16 @@ public:
 
     static TCB *peek();
 
+    static void idle_body();
+
 private:
-    Scheduler() = default;
 
     enum TimeSlice {
         HIGH_PRIORITY = DEFAULT_TIME_SLICE,
         MID_PRIORITY = 2 * DEFAULT_TIME_SLICE,
         LOW_PRIORITY = 4 * DEFAULT_TIME_SLICE
     };
-
+    static TCB* idle_thread;
     static stm::CircularBuffer<TCB *> high_priority;
     static stm::CircularBuffer<TCB *> mid_priority;
     static stm::CircularBuffer<TCB *> low_priority;

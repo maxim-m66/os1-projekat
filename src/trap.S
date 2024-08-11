@@ -1,3 +1,9 @@
+.global caller
+.type caller @function
+caller:
+    ecall
+    ret
+
 .align 4
 .global supervisorTrap
 .type supervisorTrap @function

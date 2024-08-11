@@ -2,6 +2,7 @@
 #define PROJECT_BASE_RISCV_HPP
 
 #include "../lib/hw.h"
+#include "string.hpp"
 
 extern "C" void supervisorTrap();
 
@@ -16,13 +17,17 @@ public:
 
     static void handleWriteTrap();
 
-    static void popSppSpie();
-
     static void handleConsoleTrap();
+
+    static void handleException(const stm::string &message);
+
+    static void popSppSpie();
 
     static int setjump();
 
     static void longjump();
+
+    static uint64 r_sp();
 
     // read register scause
     static uint64 r_scause();
@@ -177,6 +182,12 @@ inline uint64 riscv::r_sstatus() {
 
 inline void riscv::w_sstatus(uint64 sstatus) {
     __asm__ volatile ("csrw sstatus, %[sstatus]" : : [sstatus] "r"(sstatus));
+}
+
+inline uint64 riscv::r_sp() {
+    uint64 volatile ret;
+    __asm__ volatile ("mv %[ret], sp" : [ret] "=r"(ret));
+    return ret;
 }
 
 #endif

@@ -5,6 +5,7 @@
 #include "../h/c_console.hpp"
 #include "../h/c_sleep.hpp"
 #include "../h/scheduler.hpp"
+#include "../h/iostream.hpp"
 
 riscv::syscall_f riscv::syscall_table[SYSCALL_COUNT] = {
         reinterpret_cast<riscv::syscall_f>(Allocator::_mem_alloc),
@@ -28,35 +29,35 @@ riscv::syscall_f riscv::syscall_table[SYSCALL_COUNT] = {
         reinterpret_cast<riscv::syscall_f>(IO::_putc)
 };
 
+void riscv::handleException(const stm::string &message) {
+    stm::cout << "\n" << message << "\n";
+    stm::cout << "sepc:   ";
+    print_h(r_sepc());
+    stm::cout << "\n";
+    stm::cout << "t_id:   " << TCB::running->get_t_id() << "\n";
+    TCB::_thread_exit();
+}
+
 void riscv::handleSupervisorTrap(uint64 code, uint64 arg1, uint64 arg2, uint64 arg3, uint64 arg4) {
-    uint64 sstatus = r_sstatus();
-    uint64 sepc = r_sepc();
-    if (r_scause() == ILLEGAL_INSTRUCTION) {
-        print("\nIllegal Instruction\n");
-        TCB::_thread_exit();
-    }
-    syscall_table[code](arg1, arg2, arg3, arg4);
+    uint64 volatile sstatus = r_sstatus();
+    uint64 volatile sepc = r_sepc();
+    if (r_scause() == ILLEGAL_INSTRUCTION)
+        handleException("Illegal instruction");
+    else
+        syscall_table[code](arg1, arg2, arg3, arg4);
     w_sepc(sepc + 4);
     w_sstatus(sstatus);
 }
 
-
 void riscv::handleTimerTrap() {
-    uint64 sstatus = r_sstatus();
-    uint64 sepc = r_sepc();
+    uint64 volatile sstatus = r_sstatus();
+    uint64 volatile sepc = r_sepc();
     while ((*((char *) CONSOLE_STATUS) & CONSOLE_TX_STATUS_BIT) && !IO::Output.is_empty()) {
         char c = IO::Output.get();
         *(volatile char *) CONSOLE_TX_DATA = c;
     }
     mc_sip(SIP_SSIE);
     Cradle::update();
-    while (!Cradle::is_empty() && Cradle::peak() == 0) {
-        thread_t next = Cradle::remove();
-        if (next->is_joined() || next->is_sleeping()) {
-            next->run();
-            Scheduler::put(next);
-        }
-    }
     TCB::timer_counter++;
     if ((time_t) TCB::timer_counter >= TCB::running->get_time_slice() && !Scheduler::is_empty()) {
         TCB::timer_counter = 0;
@@ -68,8 +69,6 @@ void riscv::handleTimerTrap() {
 }
 
 void riscv::handleConsoleTrap() {
-    uint64 sepc = r_sepc();
-    uint64 sstatuc = r_sstatus();
     if (plic_claim() == CONSOLE_IRQ) {
         if ((*((char *) CONSOLE_STATUS) & CONSOLE_RX_STATUS_BIT)) {
             volatile char c = *(char *) CONSOLE_RX_DATA;
@@ -77,8 +76,6 @@ void riscv::handleConsoleTrap() {
         }
         plic_complete(CONSOLE_IRQ);
     }
-    w_sepc(sepc);
-    w_sstatus(sstatuc);
 }
 
 void riscv::popSppSpie() {
@@ -88,11 +85,9 @@ void riscv::popSppSpie() {
 }
 
 void riscv::handleReadTrap() {
-    *(volatile char *) CONSOLE_TX_DATA = '!';
-    *(volatile char *) CONSOLE_TX_DATA = 'r';
+    handleException("Illegal read address");
 }
 
 void riscv::handleWriteTrap() {
-    *(volatile char *) CONSOLE_TX_DATA = '!';
-    *(volatile char *) CONSOLE_TX_DATA = 'w';
+    handleException("Illegal write address");
 }

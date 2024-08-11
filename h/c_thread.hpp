@@ -20,7 +20,7 @@ enum Status {
 
 class TCB final {
 public:
-    static int _thread_create(thread_t *, void(*)(void *), void *, void *);
+    static int _thread_create(thread_t *, void(*)(void *), void *, char *);
 
     static void _thread_exit();
 
@@ -36,9 +36,11 @@ public:
 
     static void thread_start();
 
+    static void fork_wrapper();
+
     static void context_switch(Context *, Context *);
 
-    static void context_inherit(Context*);
+    static void context_inherit(Context *);
 
     static TCB *destroy_thread(TCB *);
 
@@ -76,11 +78,14 @@ public:
 
     time_t get_time_slice() const { return this->time_slice; }
 
-    void set_time_slice(time_t time) { this->time_slice = time;}
+    void set_time_slice(time_t time) { this->time_slice = time; }
+
+    int get_t_id() { return this->t_id; }
 
     static int ID;
     static time_t timer_counter;
     static TCB *running;
+    uint64 sepc;
 
 private:
 

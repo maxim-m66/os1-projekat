@@ -46,6 +46,13 @@ void Cradle::update() {
     if (!head)
         return;
     head->time_left--;
+    while (!is_empty() && peak() == 0) {
+        thread_t next = remove();
+        if (next->is_joined() || next->is_sleeping()) {
+            next->run();
+            Scheduler::put(next);
+        }
+    }
 }
 
 int Cradle::peak() {

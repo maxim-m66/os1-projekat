@@ -1,11 +1,9 @@
 #include "../h/syscall_c.hpp"
 
+extern "C" uint64 caller();
 
 uint64 syscall(uint64 code, uint64 arg1, uint64 arg2, uint64 arg3, uint64 arg4) {
-    uint64 volatile ret;
-    __asm__ volatile("ecall");
-    __asm__ volatile ("mv %[ret], a0" : [ret] "=r"(ret));
-    return ret;
+    return caller();
 }
 
 void *mem_alloc(size_t size) {

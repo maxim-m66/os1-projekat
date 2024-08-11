@@ -134,7 +134,7 @@ qemu-gdb: ${KERNEL_IMG} .gdbinit
 
 git:
 	git add .
-	git commit -m ${MSG}
+	git commit -m "${MSG}"
 	git push -u origin master
 
 # Prevent deletion of intermediate files, e.g. cat.o, after first build, so

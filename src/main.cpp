@@ -4,13 +4,6 @@
 #include "../h/scheduler.hpp"
 #include "../h/iostream.hpp"
 
-[[noreturn]]
-void bleya_nit(void *) {
-    while (true) {
-    }
-}
-
-thread_t handle_bleya = nullptr;
 OwnedMutex *printer;
 
 int userMain();
@@ -23,9 +16,9 @@ inline void init() {
     IO::init();
     Scheduler::init();
     printer = new OwnedMutex();
-    thread_t handle_main;
+    thread_t handle_main, handle_idle;
     thread_create(&handle_main, nullptr, nullptr);
-    thread_create(&handle_bleya, &bleya_nit, nullptr);
+    thread_create(&handle_idle, reinterpret_cast<void(*)(void*)>(Scheduler::idle_body), nullptr);
     riscv::ms_sstatus(riscv::SSTATUS_SIE);
 }
 
